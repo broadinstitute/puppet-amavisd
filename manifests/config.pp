@@ -20,9 +20,9 @@
 #
 class amavis::config {
 
-    package { $amavis::_package_name:
-        ensure => $amavis::package_ensure,
-        name   => $amavis::_package_name,
-        before => Service[$amavis::_service_name]
-    }
+    #clamd.conf?
+    #amavisd.conf
+    #sender_scores
+    #clamd.d/amavisd.conf
+    #sysconfig, sysconfig/clamd.amavisd?
 }
