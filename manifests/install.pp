@@ -1,7 +1,6 @@
-# == Class: amavis
+# == Class: amavis::install
 #
-# This is the base amavis class that should orchestrate the installation of
-# all the other pieces that make up the software.
+# This class takes care of all necessary package installations
 #
 # === Parameters
 #
@@ -36,23 +35,15 @@
 #
 # Copyright 2016
 #
-class amavis (
-    $manage_clamav  = false,
-    $manage_epel    = undef,
-    $package_ensure = present,
-    $package_name   = undef,
-    $service_enable = true,
-    $service_ensure = running,
-    $service_name   = undef,
-) {
-    include amavis::params
+class amavis::install {
 
-    $_package_name = pick($manage_epel, $amavis::params::manage_epel)
-    $_package_name = pick($package_name, $amavis::params::package_name)
-    $_service_name = pick($package_name, $amavis::params::service_name)
+    if $amavis::manage_clamav {
+        include clamav
+    }
 
-    class { 'amavis::repos': } ->
-    class { 'amavis::install': } ->
-    class { 'amavis::config': } ->
-    class { 'amavis::service': }
+    package { $amavis::_package_name:
+        ensure => $amavis::package_ensure,
+        name   => $amavis::_package_name,
+        before => Service[$amavis::_service_name]
+    }
 }

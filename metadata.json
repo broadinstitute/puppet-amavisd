@@ -8,7 +8,8 @@
   "project_page": "https://github.com/broadinstitute/puppet-amavis",
   "issues_url": "https://github.com/broadinstitute/puppet-amavis/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"stahnma/epel","version_requirement":">= 1.0.2"},
+    {"name":"edestecd/clamav","version_requirement":">= 0.4.0"}
   ]
 }
-
