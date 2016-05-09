@@ -37,6 +37,8 @@
 # Copyright 2016
 #
 class amavis (
+    $config_dir     = undef,
+    $config_file    = undef,
     $manage_clamav  = false,
     $manage_epel    = undef,
     $package_ensure = present,
@@ -47,6 +49,8 @@ class amavis (
 ) {
     include amavis::params
 
+    $_config_dir = pick($config_dir, $amavis::params::config_dir)
+    $_config_file = pick($config_dir, $amavis::params::config_file)
     $_package_name = pick($manage_epel, $amavis::params::manage_epel)
     $_package_name = pick($package_name, $amavis::params::package_name)
     $_service_name = pick($package_name, $amavis::params::service_name)

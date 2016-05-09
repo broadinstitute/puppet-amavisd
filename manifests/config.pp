@@ -20,8 +20,14 @@
 #
 class amavis::config {
 
-    #clamd.conf?
-    #amavisd.conf
+    file { "${amavis::_config_dir}/${amavis::_config_file}":
+        ensure => file,
+        content => template('amavis/amavisd.conf.erb'),
+        owner => 'root',
+        group => $amavis::root_group,
+        mode => '0644'
+    }
+
     #sender_scores
     #clamd.d/amavisd.conf
     #sysconfig, sysconfig/clamd.amavisd?

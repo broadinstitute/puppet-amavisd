@@ -23,8 +23,10 @@
 #
 class amavis::params {
     $config_dir        = '/etc/amavisd'
+    $config_file       = 'amavisd.conf'
     $clamav_config_dir = '/etc/clamd.d'
     $package_name      = 'amavisd-new'
+    $root_group        = 'root'
 
     case $::osfamily {
         'Debian': {
