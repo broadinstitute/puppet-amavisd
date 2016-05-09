@@ -1,0 +1,66 @@
+# ENVELOPE SENDER SOFT-WHITELISTING / SOFT-BLACKLISTING
+
+@score_sender_maps = ({ # a by-recipient hash lookup table,
+                        # results from all matching recipient tables are summed
+
+# ## per-recipient personal tables  (NOTE: positive: black, negative: white)
+# 'user1@example.com'  => [{'bla-mobile.press@example.com' => 10.0}],
+# 'user3@example.com'  => [{'.ebay.com'                 => -3.0}],
+# 'user4@example.com'  => [{'cleargreen@cleargreen.com' => -7.0,
+#                           '.cleargreen.com'           => -5.0}],
+
+  ## site-wide opinions about senders (the '.' matches any recipient)
+  '.' => [  # the _first_ matching sender determines the score boost
+
+   new_RE(  # regexp-type lookup table, just happens to be all soft-blacklist
+    [qr'^(bulkmail|offers|cheapbenefits|earnmoney|foryou)@'i         => 5.0],
+    [qr'^(greatcasino|investments|lose_weight_today|market\.alert)@'i=> 5.0],
+    [qr'^(money2you|MyGreenCard|new\.tld\.registry|opt-out|opt-in)@'i=> 5.0],
+    [qr'^(optin|saveonlsmoking2002k|specialoffer|specialoffers)@'i   => 5.0],
+    [qr'^(stockalert|stopsnoring|wantsome|workathome|yesitsfree)@'i  => 5.0],
+    [qr'^(your_friend|greatoffers)@'i                                => 5.0],
+    [qr'^(inkjetplanet|marketopt|MakeMoney)\d*@'i                    => 5.0],
+   ),
+
+#  read_hash("/var/amavis/sender_scores_sitewide"),
+
+   { # a hash-type lookup table (associative array)
+     'nobody@cert.org'                        => -3.0,
+     'cert-advisory@us-cert.gov'              => -3.0,
+     'owner-alert@iss.net'                    => -3.0,
+     'slashdot@slashdot.org'                  => -3.0,
+     'securityfocus.com'                      => -3.0,
+     'ntbugtraq@listserv.ntbugtraq.com'       => -3.0,
+     'security-alerts@linuxsecurity.com'      => -3.0,
+     'mailman-announce-admin@python.org'      => -3.0,
+     'amavis-user-admin@lists.sourceforge.net'=> -3.0,
+     'amavis-user-bounces@lists.sourceforge.net' => -3.0,
+     'spamassassin.apache.org'                => -3.0,
+     'notification-return@lists.sophos.com'   => -3.0,
+     'owner-postfix-users@postfix.org'        => -3.0,
+     'owner-postfix-announce@postfix.org'     => -3.0,
+     'owner-sendmail-announce@lists.sendmail.org'   => -3.0,
+     'sendmail-announce-request@lists.sendmail.org' => -3.0,
+     'donotreply@sendmail.org'                => -3.0,
+     'ca+envelope@sendmail.org'               => -3.0,
+     'noreply@freshmeat.net'                  => -3.0,
+     'owner-technews@postel.acm.org'          => -3.0,
+     'ietf-123-owner@loki.ietf.org'           => -3.0,
+     'cvs-commits-list-admin@gnome.org'       => -3.0,
+     'rt-users-admin@lists.fsck.com'          => -3.0,
+     'clp-request@comp.nus.edu.sg'            => -3.0,
+     'surveys-errors@lists.nua.ie'            => -3.0,
+     'emailnews@genomeweb.com'                => -5.0,
+     'yahoo-dev-null@yahoo-inc.com'           => -3.0,
+     'returns.groups.yahoo.com'               => -3.0,
+     'clusternews@linuxnetworx.com'           => -3.0,
+     lc('lvs-users-admin@LinuxVirtualServer.org')    => -3.0,
+     lc('owner-textbreakingnews@CNNIMAIL12.CNN.COM') => -5.0,
+
+     # soft-blacklisting (positive score)
+     'sender@example.net'                     =>  3.0,
+     '.example.net'                           =>  1.0,
+
+   },
+  ],  # end of site-wide tables
+});

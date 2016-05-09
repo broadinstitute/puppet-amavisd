@@ -1,0 +1,8 @@
+# REMAINING IMPORTANT VARIABLES ARE LISTED HERE BECAUSE OF LONGER ASSIGNMENTS
+
+@keep_decoded_original_maps = (new_RE(
+  qr'^MAIL$',                # let virus scanner see full original message
+  qr'^MAIL-UNDECIPHERABLE$', # same as ^MAIL$ if mail is undecipherable
+  qr'^(ASCII(?! cpio)|text|uuencoded|xxencoded|binhex)'i,
+# qr'^Zip archive data',     # don't trust Archive::Zip
+));
