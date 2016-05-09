@@ -1,13 +1,13 @@
-# amavis
+# amavisd
 
 #### Table of Contents
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with amavis](#setup)
-    * [What amavis affects](#what-amavis-affects)
+3. [Setup - The basics of getting started with amavisd](#setup)
+    * [What amavisd affects](#what-amavisd-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with amavis](#beginning-with-amavis)
+    * [Beginning with amavisd](#beginning-with-amavisd)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -15,12 +15,12 @@
 
 ## Overview
 
-This module is designed to take care of installing and configuring the Amavis
+This module is designed to take care of installing and configuring the Amavisd
 service.
 
 ## Module Description
 
-This module should correctly setup Amavis on a given host.  This includes:
+This module should correctly setup Amavisd on a given host.  This includes:
 
 * Package installation
 * Service management
@@ -31,7 +31,7 @@ This module should correctly setup Amavis on a given host.  This includes:
 
 ## Setup
 
-### What amavis affects
+### What amavisd affects
 
 * A list of files, packages, services, or operations that the module will alter,
   impact, or execute on the system it's installed on.
@@ -43,7 +43,7 @@ This module should correctly setup Amavis on a given host.  This includes:
 If your module requires anything extra before setting up (pluginsync enabled,
 etc.), mention it here.
 
-### Beginning with amavis
+### Beginning with amavisd
 
 The very basic steps needed for a user to get the module up and running.
 

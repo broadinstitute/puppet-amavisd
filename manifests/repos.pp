@@ -1,4 +1,4 @@
-# == Class: amavis::repos
+# == Class: amavisd::repos
 #
 # This class takes care of all necessary repository installations
 #
@@ -10,12 +10,12 @@
 #
 # Copyright 2016
 #
-class amavis::repos {
+class amavisd::repos {
     if $::osfamily == 'RedHat' {
         if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
-            if ($amavis::manage_epel == true) {
+            if ($amavisd::manage_epel == true) {
                 include 'epel'
-                Class['epel'] -> Package[$amavis::_package_name]
+                Class['epel'] -> Package[$amavisd::_package_name]
             }
         }
     }

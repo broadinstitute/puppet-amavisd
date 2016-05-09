@@ -1,4 +1,4 @@
-# == Class: amavis::install
+# == Class: amavisd::install
 #
 # This class takes care of all necessary package installations
 #
@@ -23,7 +23,7 @@
 #
 # === Examples
 #
-#  class { 'amavis':
+#  class { 'amavisd':
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #  }
 #
@@ -35,15 +35,15 @@
 #
 # Copyright 2016
 #
-class amavis::install {
+class amavisd::install {
 
-    if $amavis::manage_clamav {
+    if $amavisd::manage_clamav {
         include clamav
     }
 
-    package { $amavis::_package_name:
-        ensure => $amavis::package_ensure,
-        name   => $amavis::_package_name,
-        before => Service[$amavis::_service_name]
+    package { $amavisd::_package_name:
+        ensure => $amavisd::package_ensure,
+        name   => $amavisd::_package_name,
+        before => Service[$amavisd::_service_name]
     }
 }

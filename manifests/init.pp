@@ -1,6 +1,6 @@
-# == Class: amavis
+# == Class: amavisd
 #
-# This is the base amavis class that should orchestrate the installation of
+# This is the base amavisd class that should orchestrate the installation of
 # all the other pieces that make up the software.
 #
 # === Parameters
@@ -24,7 +24,7 @@
 #
 # === Examples
 #
-#  class { 'amavis':
+#  class { 'amavisd':
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #  }
 #
@@ -36,7 +36,7 @@
 #
 # Copyright 2016
 #
-class amavis (
+class amavisd (
     $config_dir     = undef,
     $config_file    = undef,
     $manage_clamav  = false,
@@ -47,16 +47,16 @@ class amavis (
     $service_ensure = running,
     $service_name   = undef,
 ) {
-    include amavis::params
+    include amavisd::params
 
-    $_config_dir = pick($config_dir, $amavis::params::config_dir)
-    $_config_file = pick($config_dir, $amavis::params::config_file)
-    $_package_name = pick($manage_epel, $amavis::params::manage_epel)
-    $_package_name = pick($package_name, $amavis::params::package_name)
-    $_service_name = pick($package_name, $amavis::params::service_name)
+    $_config_dir = pick($config_dir, $amavisd::params::config_dir)
+    $_config_file = pick($config_dir, $amavisd::params::config_file)
+    $_package_name = pick($manage_epel, $amavisd::params::manage_epel)
+    $_package_name = pick($package_name, $amavisd::params::package_name)
+    $_service_name = pick($package_name, $amavisd::params::service_name)
 
-    class { 'amavis::repos': } ->
-    class { 'amavis::install': } ->
-    class { 'amavis::config': } ->
-    class { 'amavis::service': }
+    class { 'amavisd::repos': } ->
+    class { 'amavisd::install': } ->
+    class { 'amavisd::config': } ->
+    class { 'amavisd::service': }
 }

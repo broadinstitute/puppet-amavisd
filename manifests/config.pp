@@ -1,4 +1,4 @@
-# == Class: amavis::config
+# == Class: amavisd::config
 #
 # This class takes care of all necessary configuration
 #
@@ -18,13 +18,13 @@
 #
 # Copyright 2016
 #
-class amavis::config {
+class amavisd::config {
 
-    file { "${amavis::_config_dir}/${amavis::_config_file}":
+    file { "${amavisd::_config_dir}/${amavisd::_config_file}":
         ensure => file,
-        content => template('amavis/amavisd.conf.erb'),
+        content => template('amavisd/amavisd.conf.erb'),
         owner => 'root',
-        group => $amavis::root_group,
+        group => $amavisd::root_group,
         mode => '0644'
     }
 

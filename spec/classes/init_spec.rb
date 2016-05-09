@@ -1,7 +1,7 @@
 require 'spec_helper'
-describe 'amavis' do
+describe 'amavisd' do
 
   context 'with defaults for all parameters' do
-    it { should contain_class('amavis') }
+    it { should contain_class('amavisd') }
   end
 end

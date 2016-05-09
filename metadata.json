@@ -1,12 +1,12 @@
 {
-  "name": "puppet-amavis",
+  "name": "puppet-amavisd",
   "version": "0.1.0",
   "author": "Andrew Teixeira <teixeira@broadinstitute.org>",
-  "summary": "Amavis Puppet module",
+  "summary": "Amavisd Puppet module",
   "license": "Apache 2.0",
-  "source": "https://github.com/broadinstitute/puppet-amavis",
-  "project_page": "https://github.com/broadinstitute/puppet-amavis",
-  "issues_url": "https://github.com/broadinstitute/puppet-amavis/issues",
+  "source": "https://github.com/broadinstitute/puppet-amavisd",
+  "project_page": "https://github.com/broadinstitute/puppet-amavisd",
+  "issues_url": "https://github.com/broadinstitute/puppet-amavisd/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"stahnma/epel","version_requirement":">= 1.0.2"},

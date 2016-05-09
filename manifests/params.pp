@@ -1,6 +1,6 @@
-# == Class: amavis::params
+# == Class: amavisd::params
 #
-# The default parameters for the amavis class
+# The default parameters for the amavisd class
 #
 # === Variables
 #
@@ -21,7 +21,7 @@
 #
 # Copyright 2016
 #
-class amavis::params {
+class amavisd::params {
     $config_dir        = '/etc/amavisd'
     $config_file       = 'amavisd.conf'
     $clamav_config_dir = '/etc/clamd.d'
@@ -30,7 +30,7 @@ class amavis::params {
 
     case $::osfamily {
         'Debian': {
-            $service_name      = 'amavis'
+            $service_name      = 'amavisd'
             $snmp_package_name = undef
             $snmp_service_name = undef
         }
