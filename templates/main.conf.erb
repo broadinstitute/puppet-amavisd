@@ -1,24 +1,24 @@
 # COMMONLY ADJUSTED SETTINGS:
 
 <% if @bypass_virus_checks_maps %>@bypass_virus_checks_maps = (
-  <% @bypass_virus_checks_maps.each do |amap| -%><%= amap -%>,<% end %>
+  <% @bypass_virus_checks_maps.each do |amap| %><%= amap %>,<% end %>
 );
 <% end -%>
 <% if @bypass_spam_checks_maps %>@bypass_spam_checks_maps = (
-  <% @bypass_spam_checks_maps.each do |amap| -%><%= amap -%>,<% end %>
+  <% @bypass_spam_checks_maps.each do |amap| %><%= amap %>,<% end %>
 );
 <% end -%>
 <% if @bypass_decode_parts %>@bypass_decode_parts = (
-  <% @bypass_decode_parts.each do |amap| -%><%= amap -%>,<% end %>
+  <% @bypass_decode_parts.each do |amap| %><%= amap %>,<% end %>
 );
 <% end -%>
 <% if @max_servers %>$max_servers = <%= @max_servers %>;
 <% end -%>
-<% if @_daemon_user %>$daemon_user = <%= @_daemon_user %>;
+<% if @_daemon_user %>$daemon_user = '<%= @_daemon_user %>';
 <% end -%>
-<% if @_daemon_group %>$daemon_group = <%= @_daemon_group %>;
+<% if @_daemon_group %>$daemon_group = '<%= @_daemon_group %>';
 <% end -%>
-<% if @mydomain %>$mydomain = <%= @mydomain %>;
+<% if @mydomain %>$mydomain = '<%= @mydomain %>';
 <% end -%>
 <% if @myhome %>$MYHOME = '<%= @myhome %>';
 <% end -%>
@@ -66,13 +66,13 @@ $log_recip_templ = undef;
 <% end -%>
 <% if @enable_dkim_signing %>$enable_dkim_signing = <%= @enable_dkim_signing %>;
 <% end -%>
-<% if @local_domains_maps %>@local_domains_maps = ( [<% @local_domains_maps.each do |domain| -%>"<%= domain -%>",<% end -%>] );
+<% if @local_domains_maps %>@local_domains_maps = ( [<% @local_domains_maps.each do |domain| %>"<%= domain %>",<% end -%>] );
 <% end -%>
-<% if @mynetworks %>@mynetworks = qw( <% @mynetworks.each do |network| -%><%= network -%> <% end -%> );
+<% if @mynetworks %>@mynetworks = qw( <% @mynetworks.each do |network| %><%= network %> <% end -%> );
 <% end -%>
 <% if @_unix_socketname %>$unix_socketname = <%= @_unix_socketname %>;
 <% end -%>
-<% if @inet_socket_port %>$inet_socket_port = [<% @inet_socket_port.each do |port| -%>"<%= port -%>",<% end -%>];
+<% if @inet_socket_port %>$inet_socket_port = [<% @inet_socket_port.each do |port| %>"<%= port %>",<% end -%>];
 <% end -%>
 
 <% if @policy_bank -%>
@@ -111,14 +111,15 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <% if @sa_local_tests_only %>$sa_local_tests_only = <%= @sa_local_tests_only %>;
 <% end -%>
 <% if @lookup_sql_dsn %>@lookup_sql_dsn = (
-  <% @lookup_sql_dsn.each do |dsn| -%>[<%= dsn -%>],<% end -%>
+  <% @lookup_sql_dsn.each do |dsn| %>[<%= dsn %>],
+<% end -%>
 );
 <% end -%>
 <% if @storage_sql_dsn %>@storage_sql_dsn = <%= @storage_sql_dsn %>;
 <% end -%>
 <% if @storage_redis_dsn %>@storage_redis_dsn = (
-<% @storage_redis_dsn.each do |dsn| -%>
-  {<% dsn.each_pair do |dsn_key, dsn_value| -%><%= dsn_key -%>=><%= dsn_value %>,<% end %>},
+<% @storage_redis_dsn.each do |dsn| %>
+  {<% dsn.each_pair do |dsn_key, dsn_value| %><%= dsn_key %>=><%= dsn_value %>,<% end %>},
 <% end -%>
 );
 <% end -%>
@@ -153,19 +154,23 @@ $mailfrom_notify_spamadmin = undef;
 $mailfrom_to_quarantine = '';
 <% end -%>
 <% if @addr_extension_virus_maps %>@addr_extension_virus_maps = (
-  <% @addr_extension_virus_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+  <% @addr_extension_virus_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
 );
 <% end -%>
 <% if @addr_extension_banned_maps %>@addr_extension_banned_maps = (
-  <% @addr_extension_banned_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+  <% @addr_extension_banned_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
 );
 <% end -%>
 <% if @addr_extension_spam_maps %>@addr_extension_spam_maps = (
-  <% @addr_extension_spam_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+  <% @addr_extension_spam_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
 );
 <% end -%>
 <% if @addr_extension_bad_header_maps %>@addr_extension_bad_header_maps = (
-  <% @addr_extension_bad_header_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+  <% @addr_extension_bad_header_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
 );
 <% end -%>
 <% if @recipient_delimiter %>$recipient_delimiter = <%= @recipient_delimiter %>;
@@ -189,7 +194,9 @@ $mailfrom_to_quarantine = '';
 <% if @defang_banned %>$defang_banned = <%= @defang_banned %>;
 <% end -%>
 
-<% if @defang_by_ccat %><% @defang_by_ccat.each do |ccat| -%>$defang_by_ccat{<%= ccat -%>} = 1;
+<% if @defang_by_ccat -%>
+<% @defang_by_ccat.each do |ccat| %>$defang_by_ccat{<%= ccat %>} = 1;
+<% end -%>
 <% end -%>
 
 <% if @myhostname %>$myhostname = '<%= @myhostname %>';
@@ -219,15 +226,6 @@ $mailfrom_to_quarantine = '';
 <% if @warnbadhrecip %>$warnbadhrecip = <%= @warnbadhrecip %>;
 <% end -%>
 
-<%#
-@bypass_banned_checks_maps, @bypass_header_checks_maps,
-
-@virus_lovers_maps, @spam_lovers_maps,
-@banned_files_lovers_maps, @bad_header_lovers_maps,
-
-@blacklist_sender_maps
-%>
-
 <% if @clean_quarantine_method %>$clean_quarantine_method = <%= @clean_quarantine_method %>;
 <% end -%>
 <% if @virus_quarantine_to %>$virus_quarantine_to = <%= @virus_quarantine_to %>;
@@ -244,3 +242,11 @@ $mailfrom_to_quarantine = '';
 <% end -%>
 <% if @defang_spam %>$defang_spam = <%= @defang_spam %>;
 <% end -%>
+<%#
+@bypass_banned_checks_maps, @bypass_header_checks_maps,
+
+@virus_lovers_maps, @spam_lovers_maps,
+@banned_files_lovers_maps, @bad_header_lovers_maps,
+
+@blacklist_sender_maps
+-%>
