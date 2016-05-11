@@ -22,24 +22,32 @@
 # Copyright 2016
 #
 class amavisd::params {
-    $config_dir        = '/etc/amavisd'
-    $config_file       = 'amavisd.conf'
     $clamav_config_dir = '/etc/clamd.d'
+    $daemon_user       = 'amavis'
+    $daemon_group      = 'amavis'
     $package_name      = 'amavisd-new'
     $root_group        = 'root'
 
     case $::osfamily {
         'Debian': {
-            $service_name      = 'amavisd'
+            $config_dir        = '/etc/amavisd/conf.d'
+            $config_file       = '60-user'
+            $manage_epel       = false
+            $service_name      = 'amavis'
             $snmp_package_name = undef
             $snmp_service_name = undef
+            $state_dir         = '/var/run/amavis'
         }
         'RedHat': {
+            $config_dir        = '/etc/amavisd'
+            $config_file       = 'amavisd.conf'
+            $manage_epel       = true
             $service_name      = 'amavisd'
             $snmp_package_name = 'amavisd-new-snmp'
             $snmp_service_name = 'amavisd-snmp'
+            $state_dir         = '/var/run/amavisd'
         }
-        default {
+        default: {
             fail("Unsupported osfamily: ${::osfamily}")
         }
     }

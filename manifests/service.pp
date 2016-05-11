@@ -16,8 +16,8 @@ class amavisd::service {
     }
 
     service { $amavisd::_service_name:
-        enable => $amavisd::service_enable,
         ensure => $amavisd::service_ensure,
+        enable => $amavisd::service_enable,
         name   => $amavisd::_service_name,
     }
 }

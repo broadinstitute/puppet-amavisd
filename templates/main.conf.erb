@@ -1,183 +1,246 @@
 # COMMONLY ADJUSTED SETTINGS:
 
-<% if @bypass_virus_checks_maps %>@bypass_virus_checks_maps = (<%= @bypass_virus_checks_maps %>);<% end -%>
-<% if @bypass_spam_checks_maps %>@bypass_spam_checks_maps = (<%= @bypass_spam_checks_maps %>);<% end -%>
-<% if @bypass_decode_parts %>$bypass_decode_parts = <%= @bypass_decode_parts %>;<% end -%>
-
-<% if @max_servers %>$max_servers = <%= @max_servers %>;<% end -%>
-<% if @daemon_user %>$daemon_user = <%= @daemon_user %>;<% end -%>
-<% if @daemon_group %>$daemon_group = <%= @daemon_group %>;<% end -%>
-
-<% if @mydomain %>$mydomain = <%= @mydomain %>;<% end -%>
-
-<% if @myhome %>$MYHOME = '<%= @myhome %>';<% end -%>
-<% if @tempbase %>$TEMPBASE = "<%= @tempbase %>";<% end -%>
-<% if @tmpdir %>$ENV{TMPDIR} = "<%= @tmpdir %>";<% end -%>
-<% if @quarantinedir %>$QUARANTINEDIR = "<%= @quarantinedir %>";<% end -%>
+<% if @bypass_virus_checks_maps %>@bypass_virus_checks_maps = (
+  <% @bypass_virus_checks_maps.each do |amap| -%><%= amap -%>,<% end %>
+);
+<% end -%>
+<% if @bypass_spam_checks_maps %>@bypass_spam_checks_maps = (
+  <% @bypass_spam_checks_maps.each do |amap| -%><%= amap -%>,<% end %>
+);
+<% end -%>
+<% if @bypass_decode_parts %>@bypass_decode_parts = (
+  <% @bypass_decode_parts.each do |amap| -%><%= amap -%>,<% end %>
+);
+<% end -%>
+<% if @max_servers %>$max_servers = <%= @max_servers %>;
+<% end -%>
+<% if @_daemon_user %>$daemon_user = <%= @_daemon_user %>;
+<% end -%>
+<% if @_daemon_group %>$daemon_group = <%= @_daemon_group %>;
+<% end -%>
+<% if @mydomain %>$mydomain = <%= @mydomain %>;
+<% end -%>
+<% if @myhome %>$MYHOME = '<%= @myhome %>';
+<% end -%>
+<% if @tempbase %>$TEMPBASE = "<%= @tempbase %>";
+<% end -%>
+<% if @tmpdir %>$ENV{TMPDIR} = "<%= @tmpdir %>";
+<% end -%>
+<% if @quarantinedir %>$QUARANTINEDIR = "<%= @quarantinedir %>";
 <% else -%>
 $QUARANTINEDIR = undef;
 <% end -%>
-
-<% if @quarantine_subdir_levels %>$quarantine_subdir_levels = "<%= @quarantine_subdir_levels %>";<% end -%>
-<% if @release_format %>$release_format = "<%= @release_format %>";<% end -%>
-<% if @report_format %>$report_format = "<%= @report_format %>";<% end -%>
-
-<% if @daemon_chroot_dir %>$daemon_chroot_dir = "<%= @daemon_chroot_dir %>";<% end -%>
-
-<% if @db_home %>$db_home = "<%= @db_home %>";<% end -%>
-<% if @helpers_home %>$helpers_home = "<%= @helpers_home %>";<% end -%>
-<% if @lock_file %>$lock_file = "<%= @lock_file %>";<% end -%>
-<% if @pid_file %>$pid_file = "<%= @pid_file %>";<% end -%>
-
-<% if @log_level %>$log_level = <%= @log_level %>;<% end -%>
-<% if @log_recip_templ %>$log_recip_templ = <%= @log_recip_templ %>;<% end -%>
+<% if @quarantine_subdir_levels %>$quarantine_subdir_levels = "<%= @quarantine_subdir_levels %>";
+<% end -%>
+<% if @release_format %>$release_format = "<%= @release_format %>";
+<% end -%>
+<% if @report_format %>$report_format = "<%= @report_format %>";
+<% end -%>
+<% if @daemon_chroot_dir %>$daemon_chroot_dir = "<%= @daemon_chroot_dir %>";
+<% end -%>
+<% if @db_home %>$db_home = "<%= @db_home %>";
+<% end -%>
+<% if @helpers_home %>$helpers_home = "<%= @helpers_home %>";
+<% end -%>
+<% if @_lock_file %>$lock_file = "<%= @_lock_file %>";
+<% end -%>
+<% if @_pid_file %>$pid_file = "<%= @_pid_file %>";
+<% end -%>
+<% if @log_level %>$log_level = <%= @log_level %>;
+<% end -%>
+<% if @log_recip_templ %>$log_recip_templ = <%= @log_recip_templ %>;
 <% else -%>
 $log_recip_templ = undef;
 <% end -%>
-<% if @do_syslog %>$do_syslog = <%= @do_syslog %>;<% end -%>
-<% if @syslog_facility %>$syslog_facility = "<%= @syslog_facility %>";<% end -%>
+<% if @do_syslog %>$do_syslog = <%= @do_syslog %>;
+<% end -%>
+<% if @syslog_facility %>$syslog_facility = "<%= @syslog_facility %>";
+<% end -%>
+<% if @enable_db %>$enable_db = <%= @enable_db %>;
+<% end -%>
+<% if @enable_zmq %>$enable_zmq = <%= @enable_zmq %>;
+<% end -%>
+<% if @nanny_details_level %>$nanny_details_level = <%= @nanny_details_level %>;
+<% end -%>
+<% if @enable_dkim_verification %>$enable_dkim_verification = <%= @enable_dkim_verification %>;
+<% end -%>
+<% if @enable_dkim_signing %>$enable_dkim_signing = <%= @enable_dkim_signing %>;
+<% end -%>
+<% if @local_domains_maps %>@local_domains_maps = ( [<% @local_domains_maps.each do |domain| -%>"<%= domain -%>",<% end -%>] );
+<% end -%>
+<% if @mynetworks %>@mynetworks = qw( <% @mynetworks.each do |network| -%><%= network -%> <% end -%> );
+<% end -%>
+<% if @_unix_socketname %>$unix_socketname = <%= @_unix_socketname %>;
+<% end -%>
+<% if @inet_socket_port %>$inet_socket_port = [<% @inet_socket_port.each do |port| -%>"<%= port -%>",<% end -%>];
+<% end -%>
 
-<% if @enable_db %>$enable_db = <%= @enable_db %>;<% end -%>
-<% if @enable_zmq %>$enable_zmq = <%= @enable_zmq %>;<% end -%>
-<% if @nanny_details_level %>$nanny_details_level = <%= @nanny_details_level %>;<% end -%>
-<% if @enable_dkim_verification %>$enable_dkim_verification = <%= @enable_dkim_verification %>;<% end -%>
-<% if @enable_dkim_signing %>$enable_dkim_signing = <%= @enable_dkim_signing %>;<% end -%>
-
-<% if @local_domains_maps %>@local_domains_maps = ( [<% local_domains_maps.each do |domain| -%>"<%= domain -%>",<% end -%>] );<% end -%>
-
-<% if @mynetworks %>@mynetworks = qw( <% mynetworks.each do |network| -%><%= network -%> <% end -%> );<% end -%>
-
-<% if @unix_socketname %>$unix_socketname = <%= @unix_socketname %>;<% end -%>
-
-<% if @inet_socket_port %>$inet_socket_port = <%= @inet_socket_port %>;<% end -%>
-
-$inet_socket_port = 10024;   # listen on this local TCP port(s)
-# $inet_socket_port = [10024,10026];  # listen on multiple TCP ports
-
-$policy_bank{'MYNETS'} = {   # mail originating from @mynetworks
-  originating => 1,  # is true in MYNETS by default, but let's make it explicit
-  os_fingerprint_method => undef,  # don't query p0f for internal clients
+<% if @policy_bank -%>
+<% @policy_bank.each_pair do |bank_key, bank_hash| -%>
+$policy_bank{'<%= bank_key %>'} = {
+<% bank_hash.each_pair do |bank_hash_key, bank_hash_value| %>  <%= bank_hash_key %> => <%= bank_hash_value %>,
+<% end -%>
 };
 
-# it is up to MTA to re-route mail from authenticated roaming users or
-# from internal hosts to a dedicated TCP port (such as 10026) for filtering
-$interface_policy{'10026'} = 'ORIGINATING';
+<% end -%>
+<% end -%>
+<% @interface_policy.each_pair do |interface_key, interface_value| -%>
+$interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
+<% end -%>
 
-$policy_bank{'ORIGINATING'} = {  # mail supposedly originating from our users
-  originating => 1,  # declare that mail was submitted by our smtp client
-  allow_disclaimers => 1,  # enables disclaimer insertion if available
-  # notify administrator of locally originating malware
-  virus_admin_maps => ["virusalert\@$mydomain"],
-  spam_admin_maps  => ["virusalert\@$mydomain"],
-  warnbadhsender   => 1,
-  # forward to a smtpd service providing DKIM signing service
-  forward_method => 'smtp:[127.0.0.1]:10027',
-  # force MTA conversion to 7-bit (e.g. before DKIM signing)
-  smtpd_discard_ehlo_keywords => ['8BITMIME'],
-  bypass_banned_checks_maps => [1],  # allow sending any file names and types
-  terminate_dsn_on_notify_success => 0,  # don't remove NOTIFY=SUCCESS option
-};
+<% if @sa_tag_level_deflt %>$sa_tag_level_deflt = <%= @sa_tag_level_deflt %>;
+<% end -%>
+<% if @sa_tag2_level_deflt %>$sa_tag2_level_deflt = <%= @sa_tag2_level_deflt %>;
+<% end -%>
+<% if @sa_kill_level_deflt %>$sa_kill_level_deflt = <%= @sa_kill_level_deflt %>;
+<% end -%>
+<% if @sa_dsn_cutoff_level %>$sa_dsn_cutoff_level = <%= @sa_dsn_cutoff_level %>;
+<% end -%>
+<% if @sa_crediblefrom_dsn_cutoff_level %>$sa_crediblefrom_dsn_cutoff_level = <%= @sa_crediblefrom_dsn_cutoff_level %>;
+<% end -%>
+<% if @sa_quarantine_cutoff_level %>$sa_quarantine_cutoff_level = <%= @sa_quarantine_cutoff_level %>;
+<% end -%>
+<% if @penpals_bonus_score %>$penpals_bonus_score = <%= @penpals_bonus_score %>;
+<% end -%>
+<% if @penpals_threshold_high %>$penpals_threshold_high = <%= @penpals_threshold_high %>;
+<% end -%>
+<% if @bounce_killer_score %>$bounce_killer_score = <%= @bounce_killer_score %>;
+<% end -%>
+<% if @sa_mail_body_size_limit %>$sa_mail_body_size_limit = <%= @sa_mail_body_size_limit %>;
+<% end -%>
+<% if @sa_local_tests_only %>$sa_local_tests_only = <%= @sa_local_tests_only %>;
+<% end -%>
+<% if @lookup_sql_dsn %>@lookup_sql_dsn = (
+  <% @lookup_sql_dsn.each do |dsn| -%>[<%= dsn -%>],<% end -%>
+);
+<% end -%>
+<% if @storage_sql_dsn %>@storage_sql_dsn = <%= @storage_sql_dsn %>;
+<% end -%>
+<% if @storage_redis_dsn %>@storage_redis_dsn = (
+<% @storage_redis_dsn.each do |dsn| -%>
+  {<% dsn.each_pair do |dsn_key, dsn_value| -%><%= dsn_key -%>=><%= dsn_value %>,<% end %>},
+<% end -%>
+);
+<% end -%>
+<% if @redis_logging_key %>$redis_logging_key = <%= @redis_logging_key %>;
+<% end -%>
+<% if @redis_logging_queue_size_limit %>$redis_logging_queue_size_limit = <%= @redis_logging_queue_size_limit %>;
+<% end -%>
+<% if @timestamp_fmt_mysql %>$timestamp_fmt_mysql = <%= @timestamp_fmt_mysql %>;
+<% end -%>
+<% if @virus_admin %>$virus_admin = "<%= @virus_admin %>";
+<% else -%>
+$virus_admin = undef;
+<% end -%>
+<% if @virus_admin %>$virus_admin = "<%= @virus_admin %>";
+<% else -%>
+$virus_admin = undef;
+<% end -%>
+<% if @mailfrom_notify_admin %>$mailfrom_notify_admin = "<%= @mailfrom_notify_admin %>";
+<% else -%>
+$mailfrom_notify_admin = undef;
+<% end -%>
+<% if @mailfrom_notify_recip %>$mailfrom_notify_recip = "<%= @mailfrom_notify_recip %>";
+<% else -%>
+$mailfrom_notify_recip = undef;
+<% end -%>
+<% if @mailfrom_notify_spamadmin %>$mailfrom_notify_spamadmin = "<%= @mailfrom_notify_spamadmin %>";
+<% else -%>
+$mailfrom_notify_spamadmin = undef;
+<% end -%>
+<% if @mailfrom_to_quarantine %>$mailfrom_to_quarantine = "<%= @mailfrom_to_quarantine %>";
+<% else -%>
+$mailfrom_to_quarantine = '';
+<% end -%>
+<% if @addr_extension_virus_maps %>@addr_extension_virus_maps = (
+  <% @addr_extension_virus_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+);
+<% end -%>
+<% if @addr_extension_banned_maps %>@addr_extension_banned_maps = (
+  <% @addr_extension_banned_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+);
+<% end -%>
+<% if @addr_extension_spam_maps %>@addr_extension_spam_maps = (
+  <% @addr_extension_spam_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+);
+<% end -%>
+<% if @addr_extension_bad_header_maps %>@addr_extension_bad_header_maps = (
+  <% @addr_extension_bad_header_maps.each do |amap| -%>'<%= amap -%>',<% end -%>
+);
+<% end -%>
+<% if @recipient_delimiter %>$recipient_delimiter = <%= @recipient_delimiter %>;
+<% end -%>
+<% if @path %>$path = '<%= @path %>';
+<% end -%>
+<% if @dspam %>$dspam = '<%= @dspam %>';
+<% end -%>
+<% if @maxlevels %>$MAXLEVELS = <%= @maxlevels %>;
+<% end -%>
+<% if @maxfiles %>$MAXFILES = <%= @maxfiles %>;
+<% end -%>
+<% if @min_expansion_quota %>$MIN_EXPANSION_QUOTA = <%= @min_expansion_quota %>;
+<% end -%>
+<% if @max_expansion_quota %>$MAX_EXPANSION_QUOTA = <%= @max_expansion_quota %>;
+<% end -%>
+<% if @sa_spam_subject_tag %>$sa_spam_subject_tag = '<%= @sa_spam_subject_tag %>';
+<% end -%>
+<% if @defang_virus %>$defang_virus = <%= @defang_virus %>;
+<% end -%>
+<% if @defang_banned %>$defang_banned = <%= @defang_banned %>;
+<% end -%>
 
-$interface_policy{'SOCK'} = 'AM.PDP-SOCK'; # only applies with $unix_socketname
+<% if @defang_by_ccat %><% @defang_by_ccat.each do |ccat| -%>$defang_by_ccat{<%= ccat -%>} = 1;
+<% end -%>
 
-# Use with amavis-release over a socket or with Petr Rehor's amavis-milter.c
-# (with amavis-milter.c from this package or old amavis.c client use 'AM.CL'):
-$policy_bank{'AM.PDP-SOCK'} = {
-  protocol => 'AM.PDP',
-  auth_required_release => 0,  # do not require secret_id for amavisd-release
-};
+<% if @myhostname %>$myhostname = '<%= @myhostname %>';
+<% end -%>
+<% if @notify_method %>$notify_method = '<%= @notify_method %>';
+<% end -%>
+<% if @forward_method %>$forward_method = '<%= @forward_method %>';
+<% end -%>
+<% if @final_virus_destiny %>$final_virus_destiny = <%= @final_virus_destiny %>;
+<% end -%>
+<% if @final_banned_destiny %>$final_banned_destiny = <%= @final_banned_destiny %>;
+<% end -%>
+<% if @final_spam_destiny %>$final_spam_destiny = <%= @final_spam_destiny %>;
+<% end -%>
+<% if @final_bad_header_destiny %>$final_bad_header_destiny = <%= @final_bad_header_destiny %>;
+<% end -%>
+<% if @bad_header_quarantine_method %>$bad_header_quarantine_method = <%= @bad_header_quarantine_method %>;
+<% end -%>
+<% if @os_fingerprint_method %>$os_fingerprint_method = <%= @os_fingerprint_method %>;
+<% end -%>
+<% if @warnbadhsender %>$warnbadhsender = <%= @warnbadhsender %>;
+<% end -%>
+<% if @warnvirusrecip %>$warnvirusrecip = <%= @warnvirusrecip %>;
+<% end -%>
+<% if @warnbannedrecip %>$warnbannedrecip = <%= @warnbannedrecip %>;
+<% end -%>
+<% if @warnbadhrecip %>$warnbadhrecip = <%= @warnbadhrecip %>;
+<% end -%>
 
-$sa_tag_level_deflt  = 2.0;  # add spam info headers if at, or above that level
-$sa_tag2_level_deflt = 6.2;  # add 'spam detected' headers at that level
-$sa_kill_level_deflt = 6.9;  # triggers spam evasive actions (e.g. blocks mail)
-$sa_dsn_cutoff_level = 10;   # spam level beyond which a DSN is not sent
-$sa_crediblefrom_dsn_cutoff_level = 18; # likewise, but for a likely valid From
-# $sa_quarantine_cutoff_level = 25; # spam level beyond which quarantine is off
-$penpals_bonus_score = 8;    # (no effect without a @storage_sql_dsn database)
-$penpals_threshold_high = $sa_kill_level_deflt;  # don't waste time on hi spam
-$bounce_killer_score = 100;  # spam score points to add for joe-jobbed bounces
+<%#
+@bypass_banned_checks_maps, @bypass_header_checks_maps,
 
-$sa_mail_body_size_limit = 400*1024; # don't waste time on SA if mail is larger
-$sa_local_tests_only = 0;    # only tests which do not require internet access?
+@virus_lovers_maps, @spam_lovers_maps,
+@banned_files_lovers_maps, @bad_header_lovers_maps,
 
-# @lookup_sql_dsn =
-#   ( ['DBI:mysql:database=mail;host=127.0.0.1;port=3306', 'user1', 'passwd1'],
-#     ['DBI:mysql:database=mail;host=host2', 'username2', 'password2'],
-#     ["DBI:SQLite:dbname=$MYHOME/sql/mail_prefs.sqlite", '', ''] );
-# @storage_sql_dsn = @lookup_sql_dsn;  # none, same, or separate database
-# @storage_redis_dsn = ( {server=>'127.0.0.1:6379', db_id=>1} );
-# $redis_logging_key = 'amavis-log';
-# $redis_logging_queue_size_limit = 300000;  # about 250 MB / 100000
+@blacklist_sender_maps
+%>
 
-# $timestamp_fmt_mysql = 1; # if using MySQL *and* msgs.time_iso is TIMESTAMP;
-#   defaults to 0, which is good for non-MySQL or if msgs.time_iso is CHAR(16)
-
-$virus_admin               = undef;                    # notifications recip.
-
-$mailfrom_notify_admin     = undef;                    # notifications sender
-$mailfrom_notify_recip     = undef;                    # notifications sender
-$mailfrom_notify_spamadmin = undef;                    # notifications sender
-$mailfrom_to_quarantine = ''; # null return path; uses original sender if undef
-
-@addr_extension_virus_maps      = ('virus');
-@addr_extension_banned_maps     = ('banned');
-@addr_extension_spam_maps       = ('spam');
-@addr_extension_bad_header_maps = ('badh');
-# $recipient_delimiter = '+';  # undef disables address extensions altogether
-# when enabling addr extensions do also Postfix/main.cf: recipient_delimiter=+
-
-$path = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/usr/bin:/bin';
-# $dspam = 'dspam';
-
-$MAXLEVELS = 14;
-$MAXFILES = 3000;
-$MIN_EXPANSION_QUOTA =      100*1024;  # bytes  (default undef, not enforced)
-$MAX_EXPANSION_QUOTA = 500*1024*1024;  # bytes  (default undef, not enforced)
-
-$sa_spam_subject_tag = '***Spam*** ';
-$defang_virus  = 1;  # MIME-wrap passed infected mail
-$defang_banned = 1;  # MIME-wrap passed mail containing banned name
-# for defanging bad headers only turn on certain minor contents categories:
-$defang_by_ccat{CC_BADH.",3"} = 1;  # NUL or CR character in header
-$defang_by_ccat{CC_BADH.",5"} = 1;  # header line longer than 998 characters
-$defang_by_ccat{CC_BADH.",6"} = 1;  # header field syntax error
-
-
-# OTHER MORE COMMON SETTINGS (defaults may suffice):
-
-# $myhostname = 'host.example.com';  # must be a fully-qualified domain name!
-
-# $notify_method  = 'smtp:[127.0.0.1]:10025';
-# $forward_method = 'smtp:[127.0.0.1]:10025';  # set to undef with milter!
-
-$final_virus_destiny      = D_DISCARD;
-$final_banned_destiny     = D_BOUNCE;
-$final_spam_destiny       = D_DISCARD;  #!!!  D_DISCARD / D_REJECT
-$final_bad_header_destiny = D_BOUNCE;
-# $bad_header_quarantine_method = undef;
-
-# $os_fingerprint_method = 'p0f:*:2345';  # to query p0f-analyzer.pl
-
-## hierarchy by which a final setting is chosen:
-##   policy bank (based on port or IP address) -> *_by_ccat
-##   *_by_ccat (based on mail contents) -> *_maps
-##   *_maps (based on recipient address) -> final configuration value
-
-
-# SOME OTHER VARIABLES WORTH CONSIDERING (see amavisd.conf-default for all)
-
-# $warnbadhsender,
-# $warnvirusrecip, $warnbannedrecip, $warnbadhrecip, (or @warn*recip_maps)
-#
-# @bypass_virus_checks_maps, @bypass_spam_checks_maps,
-# @bypass_banned_checks_maps, @bypass_header_checks_maps,
-#
-# @virus_lovers_maps, @spam_lovers_maps,
-# @banned_files_lovers_maps, @bad_header_lovers_maps,
-#
-# @blacklist_sender_maps, @score_sender_maps,
-#
-# $clean_quarantine_method, $virus_quarantine_to, $banned_quarantine_to,
-# $bad_header_quarantine_to, $spam_quarantine_to,
-#
-# $defang_bad_header, $defang_undecipherable, $defang_spam
+<% if @clean_quarantine_method %>$clean_quarantine_method = <%= @clean_quarantine_method %>;
+<% end -%>
+<% if @virus_quarantine_to %>$virus_quarantine_to = <%= @virus_quarantine_to %>;
+<% end -%>
+<% if @banned_quarantine_to %>$banned_quarantine_to = <%= @banned_quarantine_to %>;
+<% end -%>
+<% if @bad_header_quarantine_to %>$bad_header_quarantine_to = <%= @bad_header_quarantine_to %>;
+<% end -%>
+<% if @spam_quarantine_to %>$spam_quarantine_to = <%= @spam_quarantine_to %>;
+<% end -%>
+<% if @defang_bad_header %>$defang_bad_header = <%= @defang_bad_header %>;
+<% end -%>
+<% if @defang_undecipherable %>$defang_undecipherable = <%= @defang_undecipherable %>;
+<% end -%>
+<% if @defang_spam %>$defang_spam = <%= @defang_spam %>;
+<% end -%>

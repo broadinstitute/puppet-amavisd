@@ -39,6 +39,8 @@
 class amavisd (
     $config_dir     = undef,
     $config_file    = undef,
+    $daemon_user    = undef,
+    $daemon_group   = undef,
     $manage_clamav  = false,
     $manage_epel    = undef,
     $package_ensure = present,
@@ -46,17 +48,22 @@ class amavisd (
     $service_enable = true,
     $service_ensure = running,
     $service_name   = undef,
+    $state_dir      = undef,
 ) {
-    include amavisd::params
+    include ::amavisd::params
 
     $_config_dir = pick($config_dir, $amavisd::params::config_dir)
     $_config_file = pick($config_dir, $amavisd::params::config_file)
-    $_package_name = pick($manage_epel, $amavisd::params::manage_epel)
+    $_daemon_user = pick($daemon_user, $amavisd::params::daemon_user)
+    $_daemon_group = pick($daemon_group, $amavisd::params::daemon_group)
+    $_manage_epel = pick($manage_epel, $amavisd::params::manage_epel)
     $_package_name = pick($package_name, $amavisd::params::package_name)
-    $_service_name = pick($package_name, $amavisd::params::service_name)
+    $_service_name = pick($service_name, $amavisd::params::service_name)
+    $_state_dir = pick($state_dir, $amavisd::params::state_dir)
 
     class { 'amavisd::repos': } ->
     class { 'amavisd::install': } ->
-    class { 'amavisd::config': } ->
-    class { 'amavisd::service': }
+    class { 'amavisd::config': }
+    # class { 'amavisd::config': } ->
+    # class { 'amavisd::service': }
 }

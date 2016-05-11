@@ -44,6 +44,7 @@ class amavisd::install {
     package { $amavisd::_package_name:
         ensure => $amavisd::package_ensure,
         name   => $amavisd::_package_name,
-        before => Service[$amavisd::_service_name]
+        # Re-enable after config is done
+        # before => Service[$amavisd::_service_name]
     }
 }
