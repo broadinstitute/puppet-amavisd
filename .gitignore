@@ -1,3 +1,5 @@
 .librarian
 .tmp
 spec/fixtures
+.DS_Store
+*.swp
