@@ -224,42 +224,6 @@ class amavisd::config (
 
     $amavis_conf = "${amavisd::_config_dir}/${amavisd::_config_file}"
 
-    if $_include_keep_decoded_original_maps {
-        $amavis_kdom_template = 'amavisd/keep_decoded_original_maps.conf.erb'
-    } else {
-        $amavis_kdom_template = 'amavisd/blank.erb'
-    }
-
-    if $_include_banned_filename_re {
-        $amavis_bfe_template = 'amavisd/banned_filename_re.conf.erb'
-    } else {
-        $amavis_bfe_template = 'amavisd/blank.erb'
-    }
-
-    if $_include_score_sender_maps {
-        $amavis_ssm_template = 'amavisd/score_sender_maps.conf.erb'
-    } else {
-        $amavis_ssm_template = 'amavisd/blank.erb'
-    }
-
-    if $_include_decoders {
-        $amavis_d_template = 'amavisd/decoders.conf.erb'
-    } else {
-        $amavis_d_template = 'amavisd/blank.erb'
-    }
-
-    if $_include_av_scanners {
-        $amavis_as_template = 'amavisd/av_scanners.conf.erb'
-    } else {
-        $amavis_as_template = 'amavisd/blank.erb'
-    }
-
-    if $_include_av_scanners_backup {
-        $amavis_asb_template = 'amavisd/av_scanners_backup.conf.erb'
-    } else {
-        $amavis_asb_template = 'amavisd/blank.erb'
-    }
-
     concat { $amavis_conf:
         ensure => 'present',
         backup => false,
@@ -280,40 +244,52 @@ class amavisd::config (
         order   => '05'
     }
 
-    concat::fragment { 'amavis_keep_decoded_original_maps':
-        target  => $amavis_conf,
-        content => template($amavis_kdom_template),
-        order   => '10'
+    if $_include_keep_decoded_original_maps {
+        concat::fragment { 'amavis_keep_decoded_original_maps':
+            target  => $amavis_conf,
+            content => template('amavisd/keep_decoded_original_maps.conf.erb'),
+            order   => '10'
+        }
     }
 
-    concat::fragment { 'amavis_banned_filename_re':
-        target  => $amavis_conf,
-        content => template($amavis_bfe_template),
-        order   => '20'
+    if $_include_banned_filename_re {
+        concat::fragment { 'amavis_banned_filename_re':
+            target  => $amavis_conf,
+            content => template('amavisd/banned_filename_re.conf.erb'),
+            order   => '20'
+        }
     }
 
-    concat::fragment { 'amavis_score_sender_maps':
-        target  => $amavis_conf,
-        content => template($amavis_ssm_template),
-        order   => '30'
+    if $_include_score_sender_maps {
+        concat::fragment { 'amavis_score_sender_maps':
+            target  => $amavis_conf,
+            content => template('amavisd/score_sender_maps.conf.erb'),
+            order   => '30'
+        }
     }
 
-    concat::fragment { 'amavis_decoders':
-        target  => $amavis_conf,
-        content => template($amavis_d_template),
-        order   => '40'
+    if $_include_decoders {
+        concat::fragment { 'amavis_decoders':
+            target  => $amavis_conf,
+            content => template('amavisd/decoders.conf.erb'),
+            order   => '40'
+        }
     }
 
-    concat::fragment { 'amavis_av_scanners':
-        target  => $amavis_conf,
-        content => template($amavis_as_template),
-        order   => '50'
+    if $_include_av_scanners {
+        concat::fragment { 'amavis_av_scanners':
+            target  => $amavis_conf,
+            content => template('amavisd/av_scanners.conf.erb'),
+            order   => '50'
+        }
     }
 
-    concat::fragment { 'amavis_av_scanners_backup':
-        target  => $amavis_conf,
-        content => template($amavis_asb_template),
-        order   => '70'
+    if $_include_av_scanners_backup {
+        concat::fragment { 'amavis_av_scanners_backup':
+            target  => $amavis_conf,
+            content => template('amavisd/av_scanners_backup.conf.erb'),
+            order   => '70'
+        }
     }
 
     concat::fragment { 'amavis_footer':

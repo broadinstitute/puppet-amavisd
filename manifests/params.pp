@@ -80,7 +80,7 @@ class amavisd::params {
         'Debian': {
             # Service settings
             $config_dir        = '/etc/amavis/conf.d'
-            $config_file       = '60-user'
+            $config_file       = '60-puppet'
             $manage_epel       = false
             $service_name      = 'amavis'
             $snmp_package_name = undef
