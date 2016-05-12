@@ -19,157 +19,250 @@
 # Copyright 2016
 #
 class amavisd::config (
-    $bypass_virus_checks_maps         = undef,
-    $bypass_spam_checks_maps          = undef,
-    $bypass_decode_parts              = undef,
-    $max_servers                      = 2,
-    $daemon_user                      = undef,
-    $daemon_group                     = undef,
-    $mydomain                         = 'example.com',
-    $myhome                           = '/var/spool/amavisd',
-    $tempbase                         = '$MYHOME/tmp',
-    $tmpdir                           = '$TEMPBASE',
-    $quarantinedir                    = undef,
-    $quarantine_subdir_levels         = undef,
-    $release_format                   = undef,
-    $report_format                    = undef,
-    $daemon_chroot_dir                = undef,
-    $db_home                          = '$MYHOME/db',
-    $helpers_home                     = undef,
-    $lock_file                        = undef,
-    $pid_file                         = undef,
-    $log_level                        = 0,
-    $log_recip_templ                  = undef,
-    $do_syslog                        = 1,
-    $syslog_facility                  = 'mail',
-    $enable_db                        = 1,
-    $enable_zmq                       = undef,
-    $nanny_details_level              = 2,
-    $enable_dkim_verification         = 1,
-    $enable_dkim_signing              = 1,
-    $local_domains_maps               = [ '.$mydomain' ],
-    $unix_socketname                  = undef,
-    $inet_socket_port                 = [ 10024 ],
-    $sa_tag_level_deflt               = '2.0',
-    $sa_tag2_level_deflt              = '6.2',
-    $sa_kill_level_deflt              = '6.9',
-    $sa_dsn_cutoff_level              = '10',
-    $sa_crediblefrom_dsn_cutoff_level = '18',
-    $sa_quarantine_cutoff_level       = undef,
-    $penpals_bonus_score              = '8',
-    $penpals_threshold_high           = '$sa_kill_level_deflt',
-    $bounce_killer_score              = '100',
-    $sa_mail_body_size_limit          = '400*1024',
-    $sa_local_tests_only              = '0',
-    $lookup_sql_dsn                   = undef,
-    $storage_sql_dsn                  = undef,
-    $storage_redis_dsn                = undef,
-    $redis_logging_key                = undef,
-    $redis_logging_queue_size_limit   = undef,
-    $timestamp_fmt_mysql              = undef,
-    $virus_admin                      = undef,
-    $mailfrom_notify_admin            = undef,
-    $mailfrom_notify_recip            = undef,
-    $mailfrom_notify_spamadmin        = undef,
-    $mailfrom_to_quarantine           = undef,
-    $addr_extension_virus_maps        = [ 'virus' ],
-    $addr_extension_banned_maps       = [ 'banned' ],
-    $addr_extension_spam_maps         = [ 'spam' ],
-    $addr_extension_bad_header_maps   = ['badh' ],
-    $recipient_delimiter              = undef,
-    $path                             = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/usr/bin:/bin',
-    $dspam                            = undef,
-    $maxlevels                        = '14',
-    $maxfiles                         = '3000',
-    $min_expansion_quota              = '100*1024',
-    $max_expansion_quota              = '500*1024*1024',
-    $sa_spam_subject_tag              = '***Spam*** ',
-    $defang_virus                     = '1',
-    $defang_banned                    = '1',
-    $myhostname                       = undef,
-    $notify_method                    = undef,
-    $forward_method                   = undef,
-    $final_virus_destiny              = 'D_DISCARD',
-    $final_banned_destiny             = 'D_BOUNCE',
-    $final_spam_destiny               = 'D_DISCARD',
-    $final_bad_header_destiny         = 'D_BOUNCE',
-    $bad_header_quarantine_method     = undef,
-    $os_fingerprint_method            = undef,
-    $warnbadhsender                   = undef,
-    $warnvirusrecip                   = undef,
-    $warnbannedrecip                  = undef,
-    $warnbadhrecip                    = undef,
-    $bypass_banned_checks_maps        = undef,
-    $bypass_header_checks_maps        = undef,
-    $virus_lovers_maps                = undef,
-    $spam_lovers_maps                 = undef,
-    $banned_files_lovers_maps         = undef,
-    $bad_header_lovers_maps           = undef,
-    $blacklist_sender_maps            = undef,
-    $clean_quarantine_method          = undef,
-    $virus_quarantine_to              = undef,
-    $banned_quarantine_to             = undef,
-    $bad_header_quarantine_to         = undef,
-    $spam_quarantine_to               = undef,
-    $defang_bad_header                = undef,
-    $defang_undecipherable            = undef,
-    $defang_spam                      = undef,
-    $mynetworks                       = [
-        '127.0.0.0/8',
-        '[::1]',
-        '[FE80::]/10',
-        '[FEC0::]/10',
-        '10.0.0.0/8',
-        '172.16.0.0/12',
-        '192.168.0.0/16'
-    ],
-    $policy_bank                      = {
-        'MYNETS' => {
-            originating => 1,
-            os_fingerprint_method => 'undef'
-        },
-        'ORIGINATING' => {
-            originating => '1',
-            allow_disclaimers => '1',
-            virus_admin_maps => '["virusalert\@$mydomain"]',
-            spam_admin_maps  => '["virusalert\@$mydomain"]',
-            warnbadhsender   => '1',
-            forward_method => "'smtp:[127.0.0.1]:10027'",
-            smtpd_discard_ehlo_keywords => "['8BITMIME']",
-            bypass_banned_checks_maps => '[1]',
-            terminate_dsn_on_notify_success => '0'
-        },
-        'AM.PDP-SOCK' => {
-            protocol => "'AM.PDP'",
-            auth_required_release => '0',
-        }
-    },
-    $interface_policy                 = {
-        '10026' => 'ORIGINATING',
-        'SOCK' => 'AM.PDP-SOCK',
-    },
-
-    $defang_by_ccat                   = [
-        'CC_BADH.",3"',
-        'CC_BADH.",5"',
-        'CC_BADH.",6"'
-    ],
+    $addr_extension_bad_header_maps     = undef,
+    $addr_extension_banned_maps         = undef,
+    $addr_extension_spam_maps           = undef,
+    $addr_extension_virus_maps          = undef,
+    $bad_header_quarantine_method       = undef,
+    $bad_header_quarantine_to           = undef,
+    $banned_quarantine_to               = undef,
+    $bounce_killer_score                = undef,
+    $bypass_decode_parts                = undef,
+    $bypass_spam_checks_maps            = undef,
+    $bypass_virus_checks_maps           = undef,
+    $clean_quarantine_method            = undef,
+    $daemon_chroot_dir                  = undef,
+    $daemon_group                       = undef,
+    $daemon_user                        = undef,
+    $db_home                            = undef,
+    $defang_bad_header                  = undef,
+    $defang_banned                      = undef,
+    $defang_by_ccat                     = undef,
+    $defang_spam                        = undef,
+    $defang_undecipherable              = undef,
+    $defang_virus                       = undef,
+    $do_syslog                          = undef,
+    $dspam                              = undef,
+    $enable_db                          = undef,
+    $enable_dkim_signing                = undef,
+    $enable_dkim_verification           = undef,
+    $enable_zmq                         = undef,
+    $final_bad_header_destiny           = undef,
+    $final_banned_destiny               = undef,
+    $final_spam_destiny                 = undef,
+    $final_virus_destiny                = undef,
+    $forward_method                     = undef,
+    $helpers_home                       = undef,
+    $include_keep_decoded_original_maps = undef,
+    $include_banned_filename_re         = undef,
+    $include_score_sender_maps          = undef,
+    $include_decoders                   = undef,
+    $include_av_scanners                = undef,
+    $include_av_scanners_backup         = undef,
+    $inet_socket_port                   = undef,
+    $interface_policy                   = undef,
+    $local_domains_maps                 = undef,
+    $lock_file                          = undef,
+    $log_level                          = undef,
+    $log_recip_templ                    = undef,
+    $lookup_sql_dsn                     = undef,
+    $mailfrom_notify_admin              = undef,
+    $mailfrom_notify_recip              = undef,
+    $mailfrom_notify_spamadmin          = undef,
+    $mailfrom_to_quarantine             = undef,
+    $max_expansion_quota                = undef,
+    $max_servers                        = undef,
+    $maxfiles                           = undef,
+    $maxlevels                          = undef,
+    $min_expansion_quota                = undef,
+    $mydomain                           = undef,
+    $myhome                             = undef,
+    $myhostname                         = undef,
+    $mynetworks                         = undef,
+    $nanny_details_level                = undef,
+    $notify_method                      = undef,
+    $os_fingerprint_method              = undef,
+    $path                               = undef,
+    $penpals_bonus_score                = undef,
+    $penpals_threshold_high             = undef,
+    $pid_file                           = undef,
+    $policy_bank                        = undef,
+    $quarantine_subdir_levels           = undef,
+    $quarantinedir                      = undef,
+    $recipient_delimiter                = undef,
+    $redis_logging_key                  = undef,
+    $redis_logging_queue_size_limit     = undef,
+    $release_format                     = undef,
+    $report_format                      = undef,
+    $sa_crediblefrom_dsn_cutoff_level   = undef,
+    $sa_dsn_cutoff_level                = undef,
+    $sa_kill_level_deflt                = undef,
+    $sa_local_tests_only                = undef,
+    $sa_mail_body_size_limit            = undef,
+    $sa_quarantine_cutoff_level         = undef,
+    $sa_spam_subject_tag                = undef,
+    $sa_tag2_level_deflt                = undef,
+    $sa_tag_level_deflt                 = undef,
+    $spam_quarantine_to                 = undef,
+    $storage_redis_dsn                  = undef,
+    $storage_sql_dsn                    = undef,
+    $syslog_facility                    = undef,
+    $tempbase                           = undef,
+    $timestamp_fmt_mysql                = undef,
+    $tmpdir                             = undef,
+    $unix_socketname                    = undef,
+    $virus_admin                        = undef,
+    $virus_quarantine_to                = undef,
+    $warnbadhrecip                      = undef,
+    $warnbadhsender                     = undef,
+    $warnbannedrecip                    = undef,
+    $warnvirusrecip                     = undef,
 ) {
 
     if ! defined(Class['amavisd']) {
         fail('You must include the amavisd base class before using any amavisd defined resources')
     }
 
-    $_daemon_user = pick($daemon_user, $amavisd::_daemon_user)
-    $_daemon_group = pick($daemon_group, $amavisd::_daemon_group)
+    $_addr_extension_bad_header_maps = pick_default($addr_extension_bad_header_maps, $amavisd::params::addr_extension_bad_header_maps)
+    $_addr_extension_banned_maps = pick_default($addr_extension_banned_maps, $amavisd::params::addr_extension_banned_maps)
+    $_addr_extension_spam_maps = pick_default($addr_extension_spam_maps, $amavisd::params::addr_extension_spam_maps)
+    $_addr_extension_virus_maps = pick_default($addr_extension_virus_maps, $amavisd::params::addr_extension_virus_maps)
+    $_bad_header_quarantine_method = pick_default($bad_header_quarantine_method, $amavisd::params::bad_header_quarantine_method)
+    $_bad_header_quarantine_to = pick_default($bad_header_quarantine_to, $amavisd::params::bad_header_quarantine_to)
+    $_banned_quarantine_to = pick_default($banned_quarantine_to, $amavisd::params::banned_quarantine_to)
+    $_bounce_killer_score = pick_default($bounce_killer_score, $amavisd::params::bounce_killer_score)
+    $_bypass_decode_parts = pick_default($bypass_decode_parts, $amavisd::params::bypass_decode_parts)
+    $_bypass_spam_checks_maps = pick_default($bypass_spam_checks_maps, $amavisd::params::bypass_spam_checks_maps)
+    $_bypass_virus_checks_maps = pick_default($bypass_virus_checks_maps, $amavisd::params::bypass_virus_checks_maps)
+    $_clean_quarantine_method = pick_default($clean_quarantine_method, $amavisd::params::clean_quarantine_method)
+    $_daemon_chroot_dir = pick_default($daemon_chroot_dir, $amavisd::params::daemon_chroot_dir)
+    $_daemon_group = pick_default($daemon_group, $amavisd::_daemon_group)
+    $_daemon_user = pick_default($daemon_user, $amavisd::_daemon_user)
+    $_db_home = pick_default($db_home, $amavisd::params::db_home)
+    $_defang_bad_header = pick_default($defang_bad_header, $amavisd::params::defang_bad_header)
+    $_defang_banned = pick_default($defang_banned, $amavisd::params::defang_banned)
+    $_defang_by_ccat = pick_default($defang_by_ccat, $amavisd::params::defang_by_ccat)
+    $_defang_spam = pick_default($defang_spam, $amavisd::params::defang_spam)
+    $_defang_undecipherable = pick_default($defang_undecipherable, $amavisd::params::defang_undecipherable)
+    $_defang_virus = pick_default($defang_virus, $amavisd::params::defang_virus)
+    $_do_syslog = pick_default($do_syslog, $amavisd::params::do_syslog)
+    $_dspam = pick_default($dspam, $amavisd::params::dspam)
+    $_enable_db = pick_default($enable_db, $amavisd::params::enable_db)
+    $_enable_dkim_signing = pick_default($enable_dkim_signing, $amavisd::params::enable_dkim_signing)
+    $_enable_dkim_verification = pick_default($enable_dkim_verification, $amavisd::params::enable_dkim_verification)
+    $_enable_zmq = pick_default($enable_zmq, $amavisd::params::enable_zmq)
+    $_final_bad_header_destiny = pick_default($final_bad_header_destiny, $amavisd::params::final_bad_header_destiny)
+    $_final_banned_destiny = pick_default($final_banned_destiny, $amavisd::params::final_banned_destiny)
+    $_final_spam_destiny = pick_default($final_spam_destiny, $amavisd::params::final_spam_destiny)
+    $_final_virus_destiny = pick_default($final_virus_destiny, $amavisd::params::final_virus_destiny)
+    $_forward_method = pick_default($forward_method, $amavisd::params::forward_method)
+    $_helpers_home = pick_default($helpers_home, $amavisd::params::helpers_home)
+    $_include_keep_decoded_original_maps = pick_default($include_keep_decoded_original_maps, $amavisd::params::include_keep_decoded_original_maps)
+    $_include_banned_filename_re = pick_default($include_banned_filename_re, $amavisd::params::include_banned_filename_re)
+    $_include_score_sender_maps = pick_default($include_score_sender_maps, $amavisd::params::include_score_sender_maps)
+    $_include_decoders = pick_default($include_decoders, $amavisd::params::include_decoders)
+    $_include_av_scanners = pick_default($include_av_scanners, $amavisd::params::include_av_scanners)
+    $_include_av_scanners_backup = pick_default($include_av_scanners_backup, $amavisd::params::include_av_scanners_backup)
+    $_inet_socket_port = pick_default($inet_socket_port, $amavisd::params::inet_socket_port)
+    $_interface_policy = pick_default($interface_policy, $amavisd::params::interface_policy)
+    $_local_domains_maps = pick_default($local_domains_maps, $amavisd::params::local_domains_maps)
     $_lock_file = pick($lock_file, "${amavisd::_state_dir}/${amavisd::_service_name}.lock")
+    $_log_level = pick_default($log_level, $amavisd::params::log_level)
+    $_log_recip_templ = pick_default($log_recip_templ, $amavisd::params::log_recip_templ)
+    $_lookup_sql_dsn = pick_default($lookup_sql_dsn, $amavisd::params::lookup_sql_dsn)
+    $_mailfrom_notify_admin = pick_default($mailfrom_notify_admin, $amavisd::params::mailfrom_notify_admin)
+    $_mailfrom_notify_recip = pick_default($mailfrom_notify_recip, $amavisd::params::mailfrom_notify_recip)
+    $_mailfrom_notify_spamadmin = pick_default($mailfrom_notify_spamadmin, $amavisd::params::mailfrom_notify_spamadmin)
+    $_mailfrom_to_quarantine = pick_default($mailfrom_to_quarantine, $amavisd::params::mailfrom_to_quarantine)
+    $_max_expansion_quota = pick_default($max_expansion_quota, $amavisd::params::max_expansion_quota)
+    $_max_servers = pick_default($max_servers, $amavisd::params::max_servers)
+    $_maxfiles = pick_default($maxfiles, $amavisd::params::maxfiles)
+    $_maxlevels = pick_default($maxlevels, $amavisd::params::maxlevels)
+    $_min_expansion_quota = pick_default($min_expansion_quota, $amavisd::params::min_expansion_quota)
+    $_mydomain = pick_default($mydomain, $amavisd::params::mydomain)
+    $_myhome = pick_default($myhome, $amavisd::params::myhome)
+    $_myhostname = pick_default($myhostname, $amavisd::params::myhostname)
+    $_mynetworks = pick_default($mynetworks, $amavisd::params::mynetworks)
+    $_nanny_details_level = pick_default($nanny_details_level, $amavisd::params::nanny_details_level)
+    $_notify_method = pick_default($notify_method, $amavisd::params::notify_method)
+    $_os_fingerprint_method = pick_default($os_fingerprint_method, $amavisd::params::os_fingerprint_method)
+    $_path = pick_default($path, $amavisd::params::path)
+    $_penpals_bonus_score = pick_default($penpals_bonus_score, $amavisd::params::penpals_bonus_score)
+    $_penpals_threshold_high = pick_default($penpals_threshold_high, $amavisd::params::penpals_threshold_high)
     $_pid_file = pick($pid_file, "${amavisd::_state_dir}/${amavisd::_service_name}.pid")
+    $_policy_bank = pick_default($policy_bank, $amavisd::params::policy_bank)
+    $_quarantine_subdir_levels = pick_default($quarantine_subdir_levels, $amavisd::params::quarantine_subdir_levels)
+    $_quarantinedir = pick_default($quarantinedir, $amavisd::params::quarantinedir)
+    $_recipient_delimiter = pick_default($recipient_delimiter, $amavisd::params::recipient_delimiter)
+    $_redis_logging_key = pick_default($redis_logging_key, $amavisd::params::redis_logging_key)
+    $_redis_logging_queue_size_limit = pick_default($redis_logging_queue_size_limit, $amavisd::params::redis_logging_queue_size_limit)
+    $_release_format = pick_default($release_format, $amavisd::params::release_format)
+    $_report_format = pick_default($report_format, $amavisd::params::report_format)
+    $_sa_crediblefrom_dsn_cutoff_level = pick_default($sa_crediblefrom_dsn_cutoff_level, $amavisd::params::sa_crediblefrom_dsn_cutoff_level)
+    $_sa_dsn_cutoff_level = pick_default($sa_dsn_cutoff_level, $amavisd::params::sa_dsn_cutoff_level)
+    $_sa_kill_level_deflt = pick_default($sa_kill_level_deflt, $amavisd::params::sa_kill_level_deflt)
+    $_sa_local_tests_only = pick_default($sa_local_tests_only, $amavisd::params::sa_local_tests_only)
+    $_sa_mail_body_size_limit = pick_default($sa_mail_body_size_limit, $amavisd::params::sa_mail_body_size_limit)
+    $_sa_quarantine_cutoff_level = pick_default($sa_quarantine_cutoff_level, $amavisd::params::sa_quarantine_cutoff_level)
+    $_sa_spam_subject_tag = pick_default($sa_spam_subject_tag, $amavisd::params::sa_spam_subject_tag)
+    $_sa_tag2_level_deflt = pick_default($sa_tag2_level_deflt, $amavisd::params::sa_tag2_level_deflt)
+    $_sa_tag_level_deflt = pick_default($sa_tag_level_deflt, $amavisd::params::sa_tag_level_deflt)
+    $_spam_quarantine_to = pick_default($spam_quarantine_to, $amavisd::params::spam_quarantine_to)
+    $_storage_redis_dsn = pick_default($storage_redis_dsn, $amavisd::params::storage_redis_dsn)
+    $_storage_sql_dsn = pick_default($storage_sql_dsn, $amavisd::params::storage_sql_dsn)
+    $_syslog_facility = pick_default($syslog_facility, $amavisd::params::syslog_facility)
+    $_tempbase = pick_default($tempbase, $amavisd::params::tempbase)
+    $_timestamp_fmt_mysql = pick_default($timestamp_fmt_mysql, $amavisd::params::timestamp_fmt_mysql)
+    $_tmpdir = pick_default($tmpdir, $amavisd::params::tmpdir)
     $_unix_socketname = pick($unix_socketname, "${amavisd::_state_dir}/${amavisd::_service_name}.sock")
+    $_virus_admin = pick_default($virus_admin, $amavisd::params::virus_admin)
+    $_virus_quarantine_to = pick_default($virus_quarantine_to, $amavisd::params::virus_quarantine_to)
+    $_warnbadhrecip = pick_default($warnbadhrecip, $amavisd::params::warnbadhrecip)
+    $_warnbadhsender = pick_default($warnbadhsender, $amavisd::params::warnbadhsender)
+    $_warnbannedrecip = pick_default($warnbannedrecip, $amavisd::params::warnbannedrecip)
+    $_warnvirusrecip = pick_default($warnvirusrecip, $amavisd::params::warnvirusrecip)
 
     $amavis_conf = "${amavisd::_config_dir}/${amavisd::_config_file}"
 
+    if $_include_keep_decoded_original_maps {
+        $amavis_kdom_template = 'amavisd/keep_decoded_original_maps.conf.erb'
+    } else {
+        $amavis_kdom_template = 'amavisd/blank.erb'
+    }
+
+    if $_include_banned_filename_re {
+        $amavis_bfe_template = 'amavisd/banned_filename_re.conf.erb'
+    } else {
+        $amavis_bfe_template = 'amavisd/blank.erb'
+    }
+
+    if $_include_score_sender_maps {
+        $amavis_ssm_template = 'amavisd/score_sender_maps.conf.erb'
+    } else {
+        $amavis_ssm_template = 'amavisd/blank.erb'
+    }
+
+    if $_include_decoders {
+        $amavis_d_template = 'amavisd/decoders.conf.erb'
+    } else {
+        $amavis_d_template = 'amavisd/blank.erb'
+    }
+
+    if $_include_av_scanners {
+        $amavis_as_template = 'amavisd/av_scanners.conf.erb'
+    } else {
+        $amavis_as_template = 'amavisd/blank.erb'
+    }
+
+    if $_include_av_scanners_backup {
+        $amavis_asb_template = 'amavisd/av_scanners_backup.conf.erb'
+    } else {
+        $amavis_asb_template = 'amavisd/blank.erb'
+    }
+
     concat { $amavis_conf:
         ensure => 'present',
+        backup => false,
         owner  => 'root',
         group  => $amavisd::params::root_group,
         mode   => '0644'
@@ -189,37 +282,37 @@ class amavisd::config (
 
     concat::fragment { 'amavis_keep_decoded_original_maps':
         target  => $amavis_conf,
-        content => template('amavisd/keep_decoded_original_maps.conf.erb'),
+        content => template($amavis_kdom_template),
         order   => '10'
     }
 
     concat::fragment { 'amavis_banned_filename_re':
         target  => $amavis_conf,
-        content => template('amavisd/banned_filename_re.conf.erb'),
+        content => template($amavis_bfe_template),
         order   => '20'
     }
 
     concat::fragment { 'amavis_score_sender_maps':
         target  => $amavis_conf,
-        content => template('amavisd/score_sender_maps.conf.erb'),
+        content => template($amavis_ssm_template),
         order   => '30'
     }
 
     concat::fragment { 'amavis_decoders':
         target  => $amavis_conf,
-        content => template('amavisd/decoders.conf.erb'),
+        content => template($amavis_d_template),
         order   => '40'
     }
 
     concat::fragment { 'amavis_av_scanners':
         target  => $amavis_conf,
-        content => template('amavisd/av_scanners.conf.erb'),
+        content => template($amavis_as_template),
         order   => '50'
     }
 
     concat::fragment { 'amavis_av_scanners_backup':
         target  => $amavis_conf,
-        content => template('amavisd/av_scanners_backup.conf.erb'),
+        content => template($amavis_asb_template),
         order   => '70'
     }
 

@@ -1,82 +1,92 @@
+
 # COMMONLY ADJUSTED SETTINGS:
 
-<% if @bypass_virus_checks_maps %>@bypass_virus_checks_maps = (
-  <% @bypass_virus_checks_maps.each do |amap| %><%= amap %>,<% end %>
+<% if @_bypass_virus_checks_maps.is_a?(Array) -%>
+<% if !@_bypass_virus_checks_maps.empty? -%>
+@bypass_virus_checks_maps = (
+  <% @_bypass_virus_checks_maps.each do |amap| %><%= amap %>,<% end %>
 );
 <% end -%>
-<% if @bypass_spam_checks_maps %>@bypass_spam_checks_maps = (
-  <% @bypass_spam_checks_maps.each do |amap| %><%= amap %>,<% end %>
+<% end -%>
+<% if @_bypass_spam_checks_maps.is_a?(Array) -%>
+<% if !@_bypass_spam_checks_maps.empty? -%>
+@bypass_spam_checks_maps = (
+  <% @_bypass_spam_checks_maps.each do |amap| %><%= amap %>,<% end %>
 );
 <% end -%>
-<% if @bypass_decode_parts %>@bypass_decode_parts = (
-  <% @bypass_decode_parts.each do |amap| %><%= amap %>,<% end %>
+<% end -%>
+<% if @_bypass_decode_parts.is_a?(Array) -%>
+<% if !@_bypass_decode_parts.empty? -%>
+@bypass_decode_parts = (
+  <% @_bypass_decode_parts.each do |amap| %><%= amap %>,<% end %>
 );
 <% end -%>
-<% if @max_servers %>$max_servers = <%= @max_servers %>;
 <% end -%>
-<% if @_daemon_user %>$daemon_user = '<%= @_daemon_user %>';
+<% if !@_max_servers.empty? %>$max_servers = <%= @_max_servers %>;
 <% end -%>
-<% if @_daemon_group %>$daemon_group = '<%= @_daemon_group %>';
+<% if !@_daemon_user.empty? %>$daemon_user = '<%= @_daemon_user %>';
 <% end -%>
-<% if @mydomain %>$mydomain = '<%= @mydomain %>';
+<% if !@_daemon_group.empty? %>$daemon_group = '<%= @_daemon_group %>';
 <% end -%>
-<% if @myhome %>$MYHOME = '<%= @myhome %>';
+<% if !@_mydomain.empty? %>$mydomain = '<%= @_mydomain %>';
 <% end -%>
-<% if @tempbase %>$TEMPBASE = "<%= @tempbase %>";
+<% if !@_myhome.empty? %>$MYHOME = '<%= @_myhome %>';
 <% end -%>
-<% if @tmpdir %>$ENV{TMPDIR} = "<%= @tmpdir %>";
+<% if !@_tempbase.empty? %>$TEMPBASE = "<%= @_tempbase %>";
 <% end -%>
-<% if @quarantinedir %>$QUARANTINEDIR = "<%= @quarantinedir %>";
+<% if !@_tmpdir.empty? %>$ENV{TMPDIR} = "<%= @_tmpdir %>";
+<% end -%>
+<% if !@_quarantinedir.empty? %>$QUARANTINEDIR = "<%= @_quarantinedir %>";
 <% else -%>
 $QUARANTINEDIR = undef;
 <% end -%>
-<% if @quarantine_subdir_levels %>$quarantine_subdir_levels = "<%= @quarantine_subdir_levels %>";
+<% if !@_quarantine_subdir_levels.empty? %>$quarantine_subdir_levels = "<%= @_quarantine_subdir_levels %>";
 <% end -%>
-<% if @release_format %>$release_format = "<%= @release_format %>";
+<% if !@_release_format.empty? %>$release_format = "<%= @_release_format %>";
 <% end -%>
-<% if @report_format %>$report_format = "<%= @report_format %>";
+<% if !@_report_format.empty? %>$report_format = "<%= @_report_format %>";
 <% end -%>
-<% if @daemon_chroot_dir %>$daemon_chroot_dir = "<%= @daemon_chroot_dir %>";
+<% if !@_daemon_chroot_dir.empty? %>$daemon_chroot_dir = "<%= @_daemon_chroot_dir %>";
 <% end -%>
-<% if @db_home %>$db_home = "<%= @db_home %>";
+<% if !@_db_home.empty? %>$db_home = "<%= @_db_home %>";
 <% end -%>
-<% if @helpers_home %>$helpers_home = "<%= @helpers_home %>";
+<% if !@_helpers_home.empty? %>$helpers_home = "<%= @_helpers_home %>";
 <% end -%>
-<% if @_lock_file %>$lock_file = "<%= @_lock_file %>";
+<% if !@_lock_file.empty? %>$lock_file = "<%= @_lock_file %>";
 <% end -%>
-<% if @_pid_file %>$pid_file = "<%= @_pid_file %>";
+<% if !@_pid_file.empty? %>$pid_file = "<%= @_pid_file %>";
 <% end -%>
-<% if @log_level %>$log_level = <%= @log_level %>;
+<% if !@_log_level.empty? %>$log_level = <%= @_log_level %>;
 <% end -%>
-<% if @log_recip_templ %>$log_recip_templ = <%= @log_recip_templ %>;
+<% if !@_log_recip_templ.empty? %>$log_recip_templ = <%= @_log_recip_templ %>;
 <% else -%>
 $log_recip_templ = undef;
 <% end -%>
-<% if @do_syslog %>$do_syslog = <%= @do_syslog %>;
+<% if !@_do_syslog.empty? %>$do_syslog = <%= @_do_syslog %>;
 <% end -%>
-<% if @syslog_facility %>$syslog_facility = "<%= @syslog_facility %>";
+<% if !@_syslog_facility.empty? %>$syslog_facility = "<%= @_syslog_facility %>";
 <% end -%>
-<% if @enable_db %>$enable_db = <%= @enable_db %>;
+<% if !@_enable_db.empty? %>$enable_db = <%= @_enable_db %>;
 <% end -%>
-<% if @enable_zmq %>$enable_zmq = <%= @enable_zmq %>;
+<% if !@_enable_zmq.empty? %>$enable_zmq = <%= @_enable_zmq %>;
 <% end -%>
-<% if @nanny_details_level %>$nanny_details_level = <%= @nanny_details_level %>;
+<% if !@_nanny_details_level.empty? %>$nanny_details_level = <%= @_nanny_details_level %>;
 <% end -%>
-<% if @enable_dkim_verification %>$enable_dkim_verification = <%= @enable_dkim_verification %>;
+<% if !@_enable_dkim_verification.empty? %>$enable_dkim_verification = <%= @_enable_dkim_verification %>;
 <% end -%>
-<% if @enable_dkim_signing %>$enable_dkim_signing = <%= @enable_dkim_signing %>;
+<% if !@_enable_dkim_signing.empty? %>$enable_dkim_signing = <%= @_enable_dkim_signing %>;
 <% end -%>
-<% if @local_domains_maps %>@local_domains_maps = ( [<% @local_domains_maps.each do |domain| %>"<%= domain %>",<% end -%>] );
+<% if !@_local_domains_maps.empty? %>@local_domains_maps = ( [<% @_local_domains_maps.each do |domain| %>"<%= domain %>",<% end -%>] );
 <% end -%>
-<% if @mynetworks %>@mynetworks = qw( <% @mynetworks.each do |network| %><%= network %> <% end -%> );
+<% if !@_mynetworks.empty? %>@mynetworks = qw( <% @_mynetworks.each do |network| %><%= network %> <% end -%> );
 <% end -%>
-<% if @_unix_socketname %>$unix_socketname = <%= @_unix_socketname %>;
+<% if !@_unix_socketname.empty? %>$unix_socketname = <%= @_unix_socketname %>;
 <% end -%>
-<% if @inet_socket_port %>$inet_socket_port = [<% @inet_socket_port.each do |port| %>"<%= port %>",<% end -%>];
+<% if !@_inet_socket_port.empty? %>$inet_socket_port = [<% @_inet_socket_port.each do |port| %>"<%= port %>",<% end -%>];
 <% end -%>
 
-<% if @policy_bank -%>
-<% @policy_bank.each_pair do |bank_key, bank_hash| -%>
+<% if @_policy_bank -%>
+<% @_policy_bank.each_pair do |bank_key, bank_hash| -%>
 $policy_bank{'<%= bank_key %>'} = {
 <% bank_hash.each_pair do |bank_hash_key, bank_hash_value| %>  <%= bank_hash_key %> => <%= bank_hash_value %>,
 <% end -%>
@@ -84,169 +94,185 @@ $policy_bank{'<%= bank_key %>'} = {
 
 <% end -%>
 <% end -%>
-<% @interface_policy.each_pair do |interface_key, interface_value| -%>
+<% if @_interface_policy -%>
+<% @_interface_policy.each_pair do |interface_key, interface_value| -%>
 $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <% end -%>
+<% end -%>
 
-<% if @sa_tag_level_deflt %>$sa_tag_level_deflt = <%= @sa_tag_level_deflt %>;
+<% if !@_sa_tag_level_deflt.empty? %>$sa_tag_level_deflt = <%= @_sa_tag_level_deflt %>;
 <% end -%>
-<% if @sa_tag2_level_deflt %>$sa_tag2_level_deflt = <%= @sa_tag2_level_deflt %>;
+<% if !@_sa_tag2_level_deflt.empty? %>$sa_tag2_level_deflt = <%= @_sa_tag2_level_deflt %>;
 <% end -%>
-<% if @sa_kill_level_deflt %>$sa_kill_level_deflt = <%= @sa_kill_level_deflt %>;
+<% if !@_sa_kill_level_deflt.empty? %>$sa_kill_level_deflt = <%= @_sa_kill_level_deflt %>;
 <% end -%>
-<% if @sa_dsn_cutoff_level %>$sa_dsn_cutoff_level = <%= @sa_dsn_cutoff_level %>;
+<% if !@_sa_dsn_cutoff_level.empty? %>$sa_dsn_cutoff_level = <%= @_sa_dsn_cutoff_level %>;
 <% end -%>
-<% if @sa_crediblefrom_dsn_cutoff_level %>$sa_crediblefrom_dsn_cutoff_level = <%= @sa_crediblefrom_dsn_cutoff_level %>;
+<% if !@_sa_crediblefrom_dsn_cutoff_level.empty? %>$sa_crediblefrom_dsn_cutoff_level = <%= @_sa_crediblefrom_dsn_cutoff_level %>;
 <% end -%>
-<% if @sa_quarantine_cutoff_level %>$sa_quarantine_cutoff_level = <%= @sa_quarantine_cutoff_level %>;
+<% if !@_sa_quarantine_cutoff_level.empty? %>$sa_quarantine_cutoff_level = <%= @_sa_quarantine_cutoff_level %>;
 <% end -%>
-<% if @penpals_bonus_score %>$penpals_bonus_score = <%= @penpals_bonus_score %>;
+<% if !@_penpals_bonus_score.empty? %>$penpals_bonus_score = <%= @_penpals_bonus_score %>;
 <% end -%>
-<% if @penpals_threshold_high %>$penpals_threshold_high = <%= @penpals_threshold_high %>;
+<% if !@_penpals_threshold_high.empty? %>$penpals_threshold_high = <%= @_penpals_threshold_high %>;
 <% end -%>
-<% if @bounce_killer_score %>$bounce_killer_score = <%= @bounce_killer_score %>;
+<% if !@_bounce_killer_score.empty? %>$bounce_killer_score = <%= @_bounce_killer_score %>;
 <% end -%>
-<% if @sa_mail_body_size_limit %>$sa_mail_body_size_limit = <%= @sa_mail_body_size_limit %>;
+<% if !@_sa_mail_body_size_limit.empty? %>$sa_mail_body_size_limit = <%= @_sa_mail_body_size_limit %>;
 <% end -%>
-<% if @sa_local_tests_only %>$sa_local_tests_only = <%= @sa_local_tests_only %>;
+<% if !@_sa_local_tests_only.empty? %>$sa_local_tests_only = <%= @_sa_local_tests_only %>;
 <% end -%>
-<% if @lookup_sql_dsn %>@lookup_sql_dsn = (
-  <% @lookup_sql_dsn.each do |dsn| %>[<%= dsn %>],
+<% if @_lookup_sql_dsn.is_a?(Array) -%>
+<% if !@_lookup_sql_dsn.empty? -%>
+@lookup_sql_dsn = (
+  <% @_lookup_sql_dsn.each do |dsn| %>[<%= dsn %>],
 <% end -%>
 );
 <% end -%>
-<% if @storage_sql_dsn %>@storage_sql_dsn = <%= @storage_sql_dsn %>;
 <% end -%>
-<% if @storage_redis_dsn %>@storage_redis_dsn = (
-<% @storage_redis_dsn.each do |dsn| %>
+<% if !@_storage_sql_dsn.empty? %>@storage_sql_dsn = <%= @_storage_sql_dsn %>;
+<% end -%>
+<% if @_storage_redis_dsn.is_a?(Array) -%>
+<% if !@_storage_redis_dsn.empty? -%>
+@storage_redis_dsn = (
+<% @_storage_redis_dsn.each do |dsn| %>
   {<% dsn.each_pair do |dsn_key, dsn_value| %><%= dsn_key %>=><%= dsn_value %>,<% end %>},
 <% end -%>
 );
 <% end -%>
-<% if @redis_logging_key %>$redis_logging_key = <%= @redis_logging_key %>;
 <% end -%>
-<% if @redis_logging_queue_size_limit %>$redis_logging_queue_size_limit = <%= @redis_logging_queue_size_limit %>;
+<% if !@_redis_logging_key.empty? %>$redis_logging_key = <%= @_redis_logging_key %>;
 <% end -%>
-<% if @timestamp_fmt_mysql %>$timestamp_fmt_mysql = <%= @timestamp_fmt_mysql %>;
+<% if !@_redis_logging_queue_size_limit.empty? %>$redis_logging_queue_size_limit = <%= @_redis_logging_queue_size_limit %>;
 <% end -%>
-<% if @virus_admin %>$virus_admin = "<%= @virus_admin %>";
+<% if !@_timestamp_fmt_mysql.empty? %>$timestamp_fmt_mysql = <%= @_timestamp_fmt_mysql %>;
+<% end -%>
+<% if !@_virus_admin.empty? %>$virus_admin = "<%= @_virus_admin %>";
 <% else -%>
 $virus_admin = undef;
 <% end -%>
-<% if @virus_admin %>$virus_admin = "<%= @virus_admin %>";
-<% else -%>
-$virus_admin = undef;
-<% end -%>
-<% if @mailfrom_notify_admin %>$mailfrom_notify_admin = "<%= @mailfrom_notify_admin %>";
+<% if !@_mailfrom_notify_admin.empty? %>$mailfrom_notify_admin = "<%= @_mailfrom_notify_admin %>";
 <% else -%>
 $mailfrom_notify_admin = undef;
 <% end -%>
-<% if @mailfrom_notify_recip %>$mailfrom_notify_recip = "<%= @mailfrom_notify_recip %>";
+<% if !@_mailfrom_notify_recip.empty? %>$mailfrom_notify_recip = "<%= @_mailfrom_notify_recip %>";
 <% else -%>
 $mailfrom_notify_recip = undef;
 <% end -%>
-<% if @mailfrom_notify_spamadmin %>$mailfrom_notify_spamadmin = "<%= @mailfrom_notify_spamadmin %>";
+<% if !@_mailfrom_notify_spamadmin.empty? %>$mailfrom_notify_spamadmin = "<%= @_mailfrom_notify_spamadmin %>";
 <% else -%>
 $mailfrom_notify_spamadmin = undef;
 <% end -%>
-<% if @mailfrom_to_quarantine %>$mailfrom_to_quarantine = "<%= @mailfrom_to_quarantine %>";
+<% if !@_mailfrom_to_quarantine.empty? %>$mailfrom_to_quarantine = "<%= @_mailfrom_to_quarantine %>";
 <% else -%>
 $mailfrom_to_quarantine = '';
 <% end -%>
-<% if @addr_extension_virus_maps %>@addr_extension_virus_maps = (
-  <% @addr_extension_virus_maps.each do |amap| %>'<%= amap %>',
+<% if @_addr_extension_virus_maps.is_a?(Array) -%>
+<% if !@_addr_extension_virus_maps.empty? -%>
+@addr_extension_virus_maps = (
+  <% @_addr_extension_virus_maps.each do |amap| %>'<%= amap %>',
 <% end -%>
 );
 <% end -%>
-<% if @addr_extension_banned_maps %>@addr_extension_banned_maps = (
-  <% @addr_extension_banned_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
+<% if @_addr_extension_banned_maps.is_a?(Array) -%>
+<% if !@_addr_extension_banned_maps.empty? -%>
+@addr_extension_banned_maps = (
+  <% @_addr_extension_banned_maps.each do |amap| %>'<%= amap %>',
 <% end -%>
 );
 <% end -%>
-<% if @addr_extension_spam_maps %>@addr_extension_spam_maps = (
-  <% @addr_extension_spam_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
+<% if @_addr_extension_spam_maps.is_a?(Array) -%>
+<% if !@_addr_extension_spam_maps.empty? -%>
+@addr_extension_spam_maps = (
+  <% @_addr_extension_spam_maps.each do |amap| %>'<%= amap %>',
 <% end -%>
 );
 <% end -%>
-<% if @addr_extension_bad_header_maps %>@addr_extension_bad_header_maps = (
-  <% @addr_extension_bad_header_maps.each do |amap| %>'<%= amap %>',
+<% end -%>
+<% if @_addr_extension_bad_header_maps.is_a?(Array) -%>
+<% if !@_addr_extension_bad_header_maps.empty? -%>
+@addr_extension_bad_header_maps = (
+  <% @_addr_extension_bad_header_maps.each do |amap| %>'<%= amap %>',
 <% end -%>
 );
 <% end -%>
-<% if @recipient_delimiter %>$recipient_delimiter = <%= @recipient_delimiter %>;
 <% end -%>
-<% if @path %>$path = '<%= @path %>';
+<% if !@_recipient_delimiter.empty? %>$recipient_delimiter = <%= @_recipient_delimiter %>;
 <% end -%>
-<% if @dspam %>$dspam = '<%= @dspam %>';
+<% if !@_path.empty? %>$path = '<%= @_path %>';
 <% end -%>
-<% if @maxlevels %>$MAXLEVELS = <%= @maxlevels %>;
+<% if !@_dspam.empty? %>$dspam = '<%= @_dspam %>';
 <% end -%>
-<% if @maxfiles %>$MAXFILES = <%= @maxfiles %>;
+<% if !@_maxlevels.empty? %>$MAXLEVELS = <%= @_maxlevels %>;
 <% end -%>
-<% if @min_expansion_quota %>$MIN_EXPANSION_QUOTA = <%= @min_expansion_quota %>;
+<% if !@_maxfiles.empty? %>$MAXFILES = <%= @_maxfiles %>;
 <% end -%>
-<% if @max_expansion_quota %>$MAX_EXPANSION_QUOTA = <%= @max_expansion_quota %>;
+<% if !@_min_expansion_quota.empty? %>$MIN_EXPANSION_QUOTA = <%= @_min_expansion_quota %>;
 <% end -%>
-<% if @sa_spam_subject_tag %>$sa_spam_subject_tag = '<%= @sa_spam_subject_tag %>';
+<% if !@_max_expansion_quota.empty? %>$MAX_EXPANSION_QUOTA = <%= @_max_expansion_quota %>;
 <% end -%>
-<% if @defang_virus %>$defang_virus = <%= @defang_virus %>;
+<% if !@_sa_spam_subject_tag.empty? %>$sa_spam_subject_tag = '<%= @_sa_spam_subject_tag %>';
 <% end -%>
-<% if @defang_banned %>$defang_banned = <%= @defang_banned %>;
+<% if !@_defang_virus.empty? %>$defang_virus = <%= @_defang_virus %>;
+<% end -%>
+<% if !@_defang_banned.empty? %>$defang_banned = <%= @_defang_banned %>;
 <% end -%>
 
-<% if @defang_by_ccat -%>
-<% @defang_by_ccat.each do |ccat| %>$defang_by_ccat{<%= ccat %>} = 1;
+<% if @_defang_by_ccat -%>
+<% @_defang_by_ccat.each do |ccat| %>$defang_by_ccat{<%= ccat %>} = 1;
 <% end -%>
 <% end -%>
 
-<% if @myhostname %>$myhostname = '<%= @myhostname %>';
+<% if !@_myhostname.empty? %>$myhostname = '<%= @_myhostname %>';
 <% end -%>
-<% if @notify_method %>$notify_method = '<%= @notify_method %>';
+<% if !@_notify_method.empty? %>$notify_method = '<%= @_notify_method %>';
 <% end -%>
-<% if @forward_method %>$forward_method = '<%= @forward_method %>';
+<% if !@_forward_method.empty? %>$forward_method = '<%= @_forward_method %>';
 <% end -%>
-<% if @final_virus_destiny %>$final_virus_destiny = <%= @final_virus_destiny %>;
+<% if !@_final_virus_destiny.empty? %>$final_virus_destiny = <%= @_final_virus_destiny %>;
 <% end -%>
-<% if @final_banned_destiny %>$final_banned_destiny = <%= @final_banned_destiny %>;
+<% if !@_final_banned_destiny.empty? %>$final_banned_destiny = <%= @_final_banned_destiny %>;
 <% end -%>
-<% if @final_spam_destiny %>$final_spam_destiny = <%= @final_spam_destiny %>;
+<% if !@_final_spam_destiny.empty? %>$final_spam_destiny = <%= @_final_spam_destiny %>;
 <% end -%>
-<% if @final_bad_header_destiny %>$final_bad_header_destiny = <%= @final_bad_header_destiny %>;
+<% if !@_final_bad_header_destiny.empty? %>$final_bad_header_destiny = <%= @_final_bad_header_destiny %>;
 <% end -%>
-<% if @bad_header_quarantine_method %>$bad_header_quarantine_method = <%= @bad_header_quarantine_method %>;
+<% if !@_bad_header_quarantine_method.empty? %>$bad_header_quarantine_method = <%= @_bad_header_quarantine_method %>;
 <% end -%>
-<% if @os_fingerprint_method %>$os_fingerprint_method = <%= @os_fingerprint_method %>;
+<% if !@_os_fingerprint_method.empty? %>$os_fingerprint_method = <%= @_os_fingerprint_method %>;
 <% end -%>
-<% if @warnbadhsender %>$warnbadhsender = <%= @warnbadhsender %>;
+<% if !@_warnbadhsender.empty? %>$warnbadhsender = <%= @_warnbadhsender %>;
 <% end -%>
-<% if @warnvirusrecip %>$warnvirusrecip = <%= @warnvirusrecip %>;
+<% if !@_warnvirusrecip.empty? %>$warnvirusrecip = <%= @_warnvirusrecip %>;
 <% end -%>
-<% if @warnbannedrecip %>$warnbannedrecip = <%= @warnbannedrecip %>;
+<% if !@_warnbannedrecip.empty? %>$warnbannedrecip = <%= @_warnbannedrecip %>;
 <% end -%>
-<% if @warnbadhrecip %>$warnbadhrecip = <%= @warnbadhrecip %>;
+<% if !@_warnbadhrecip.empty? %>$warnbadhrecip = <%= @_warnbadhrecip %>;
 <% end -%>
 
-<% if @clean_quarantine_method %>$clean_quarantine_method = <%= @clean_quarantine_method %>;
+<% if !@_clean_quarantine_method.empty? %>$clean_quarantine_method = <%= @_clean_quarantine_method %>;
 <% end -%>
-<% if @virus_quarantine_to %>$virus_quarantine_to = <%= @virus_quarantine_to %>;
+<% if !@_virus_quarantine_to.empty? %>$virus_quarantine_to = <%= @_virus_quarantine_to %>;
 <% end -%>
-<% if @banned_quarantine_to %>$banned_quarantine_to = <%= @banned_quarantine_to %>;
+<% if !@_banned_quarantine_to.empty? %>$banned_quarantine_to = <%= @_banned_quarantine_to %>;
 <% end -%>
-<% if @bad_header_quarantine_to %>$bad_header_quarantine_to = <%= @bad_header_quarantine_to %>;
+<% if !@_bad_header_quarantine_to.empty? %>$bad_header_quarantine_to = <%= @_bad_header_quarantine_to %>;
 <% end -%>
-<% if @spam_quarantine_to %>$spam_quarantine_to = <%= @spam_quarantine_to %>;
+<% if !@_spam_quarantine_to.empty? %>$spam_quarantine_to = <%= @_spam_quarantine_to %>;
 <% end -%>
-<% if @defang_bad_header %>$defang_bad_header = <%= @defang_bad_header %>;
+<% if !@_defang_bad_header.empty? %>$defang_bad_header = <%= @_defang_bad_header %>;
 <% end -%>
-<% if @defang_undecipherable %>$defang_undecipherable = <%= @defang_undecipherable %>;
+<% if !@_defang_undecipherable.empty? %>$defang_undecipherable = <%= @_defang_undecipherable %>;
 <% end -%>
-<% if @defang_spam %>$defang_spam = <%= @defang_spam %>;
+<% if !@_defang_spam.empty? %>$defang_spam = <%= @_defang_spam %>;
 <% end -%>
 <%#
-@bypass_banned_checks_maps, @bypass_header_checks_maps,
+@_bypass_banned_checks_maps, @_bypass_header_checks_maps,
 
-@virus_lovers_maps, @spam_lovers_maps,
-@banned_files_lovers_maps, @bad_header_lovers_maps,
+@_virus_lovers_maps, @_spam_lovers_maps,
+@_banned_files_lovers_maps, @_bad_header_lovers_maps,
 
-@blacklist_sender_maps
+@_blacklist_sender_maps
 -%>
