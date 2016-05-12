@@ -26,7 +26,7 @@ describe 'amavisd' do
         let(:facts) { {
           :osfamily => osfamily,
           :operatingsystem => 'RedHat',
-          :operatingsystemrelease => '6.5',
+          :operatingsystemrelease => '7.2',
           :operatingsystemmajrelease => '7',
         } }
 
