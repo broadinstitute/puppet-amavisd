@@ -155,19 +155,19 @@ class amavisd::params {
             $addr_extension_banned_maps         = [ 'banned' ]
             $addr_extension_spam_maps           = [ 'spam' ]
             $addr_extension_virus_maps          = [ 'virus' ]
-            $bounce_killer_score                = '100'
+            $bounce_killer_score                = 100
             $db_home                            = '$MYHOME/db'
-            $defang_banned                      = '1'
+            $defang_banned                      = 1
             $defang_by_ccat                     = [
                 'CC_BADH.",3"',
                 'CC_BADH.",5"',
                 'CC_BADH.",6"'
             ]
-            $defang_virus                       = '1'
-            $do_syslog                          = '1'
-            $enable_db                          = '1'
-            $enable_dkim_signing                = '1'
-            $enable_dkim_verification           = '1'
+            $defang_virus                       = 1
+            $do_syslog                          = 1
+            $enable_db                          = 1
+            $enable_dkim_signing                = 1
+            $enable_dkim_verification           = 1
             $final_bad_header_destiny           = 'D_BOUNCE'
             $final_banned_destiny               = 'D_BOUNCE'
             $final_spam_destiny                 = 'D_DISCARD'
@@ -184,11 +184,11 @@ class amavisd::params {
                 'SOCK' => 'AM.PDP-SOCK'
             }
             $local_domains_maps                 = [ '.$mydomain' ]
-            $log_level                          = '0'
-            $max_expansion_quota                = '500*1024*1024'
-            $maxfiles                           = '3000'
-            $maxlevels                          = '14'
-            $max_servers                        = '2'
+            $log_level                          = 0
+            $max_expansion_quota                = 500*1024*1024
+            $maxfiles                           = 3000
+            $maxlevels                          = 14
+            $max_servers                        = 2
             $min_expansion_quota                = '100*1024'
             $mydomain                           = 'example.com'
             $myhome                             = '/var/spool/amavisd'
@@ -201,9 +201,9 @@ class amavisd::params {
                 '172.16.0.0/12',
                 '192.168.0.0/16'
             ]
-            $nanny_details_level                = '2'
+            $nanny_details_level                = 2
             $path                               = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/usr/bin:/bin'
-            $penpals_bonus_score                = '8'
+            $penpals_bonus_score                = 8
             $penpals_threshold_high             = '$sa_kill_level_deflt'
             $policy_bank                        = {
                 'MYNETS' => {
@@ -211,25 +211,25 @@ class amavisd::params {
                     os_fingerprint_method => 'undef'
                 },
                 'ORIGINATING' => {
-                    originating                     => '1',
-                    allow_disclaimers               => '1',
+                    originating                     => 1,
+                    allow_disclaimers               => 1,
                     virus_admin_maps                => '["virusalert\@$mydomain"]',
                     spam_admin_maps                 => '["virusalert\@$mydomain"]',
-                    warnbadhsender                  => '1',
+                    warnbadhsender                  => 1,
                     forward_method                  => "'smtp:[127.0.0.1]:10027'",
                     smtpd_discard_ehlo_keywords     => "['8BITMIME']",
                     bypass_banned_checks_maps       => '[1]',
-                    terminate_dsn_on_notify_success => '0'
+                    terminate_dsn_on_notify_success => 0
                 },
                 'AM.PDP-SOCK' => {
                     protocol => "'AM.PDP'",
                     auth_required_release => '0'
                 }
             }
-            $sa_crediblefrom_dsn_cutoff_level   = '18'
-            $sa_dsn_cutoff_level                = '10'
+            $sa_crediblefrom_dsn_cutoff_level   = 18
+            $sa_dsn_cutoff_level                = 10
             $sa_kill_level_deflt                = '6.9'
-            $sa_local_tests_only                = '0'
+            $sa_local_tests_only                = 0
             $sa_mail_body_size_limit            = '400*1024'
             $sa_spam_subject_tag                = '***Spam*** '
             $sa_tag_level_deflt                 = '2.0'
