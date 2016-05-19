@@ -195,7 +195,16 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 @banned_filename_re = new_RE(
 <% @_banned_filename_re.each do |amap| %><%= amap %>,
 <% end -%>
-));
+);
+<% end -%>
+<% end -%>
+
+<% if @_decoders.is_a?(Array) -%>
+<% if !@_decoders.empty? -%>
+@decoders = (
+<% @_decoders.each do |amap| %><%= amap %>,
+<% end -%>
+);
 <% end -%>
 <% end -%>
 

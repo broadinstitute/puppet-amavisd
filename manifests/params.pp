@@ -95,6 +95,7 @@ class amavisd::params {
             $banned_filename_re                 = undef
             $bounce_killer_score                = undef
             $db_home                            = undef
+            $decoders                           = undef
             $defang_banned                      = undef
             $defang_by_ccat                     = []
             $defang_virus                       = undef
@@ -108,7 +109,6 @@ class amavisd::params {
             $final_virus_destiny                = undef
             $include_banned_filename_re         = false
             $include_score_sender_maps          = false
-            $include_decoders                   = false
             $include_av_scanners                = false
             $include_av_scanners_backup         = false
             $inet_socket_port                   = []
@@ -167,6 +167,34 @@ class amavisd::params {
             ]
             $bounce_killer_score                = 100
             $db_home                            = '$MYHOME/db'
+            $decoders                           = [
+                "['mail', \\&do_mime_decode]",
+                "['F',    \\&do_uncompress, ['unfreeze', 'freeze -d', 'melt', 'fcat'] ]",
+                "['Z',    \\&do_uncompress, ['uncompress', 'gzip -d', 'zcat'] ]",
+                "['gz',   \\&do_uncompress, 'gzip -d']",
+                "['gz',   \\&do_gunzip]",
+                "['bz2',  \\&do_uncompress, 'bzip2 -d']",
+                "['xz',   \\&do_uncompress, ['xzdec', 'xz -dc', 'unxz -c', 'xzcat'] ]",
+                "['lzma', \\&do_uncompress, ['lzmadec', 'xz -dc --format=lzma','lzma -dc', 'unlzma -c', 'lzcat', 'lzmadec'] ]",
+                "['lrz',  \\&do_uncompress, ['lrzip -q -k -d -o -', 'lrzcat -q -k'] ]",
+                "['lzo',  \\&do_uncompress, 'lzop -d']",
+                "['lz4',  \\&do_uncompress, ['lz4c -d'] ]",
+                "['rpm',  \\&do_uncompress, ['rpm2cpio.pl', 'rpm2cpio'] ]",
+                "[['cpio','tar'], \\&do_pax_cpio, ['pax', 'gcpio', 'cpio'] ]",
+                "['deb',  \\&do_ar, 'ar']",
+                "['rar',  \\&do_unrar, ['unrar', 'rar'] ]",
+                "['arj',  \\&do_unarj, ['unarj', 'arj'] ]",
+                "['arc',  \\&do_arc,   ['nomarch', 'arc'] ]",
+                "['zoo',  \\&do_zoo,   ['zoo', 'unzoo'] ]",
+                "['cab',  \\&do_cabextract, 'cabextract']",
+                "['tnef', \\&do_tnef]",
+                "[['zip','kmz'], \\&do_7zip,  ['7za', '7z'] ]",
+                "[['zip','kmz'], \\&do_unzip]",
+                "['7z', \\&do_7zip,  ['7zr', '7za', '7z'] ]",
+                "[[qw(gz bz2 Z tar)], \\&do_7zip,  ['7za', '7z'] ]",
+                "[[qw(xz lzma jar cpio arj rar swf lha iso cab deb rpm)], \\&do_7zip,  '7z' ]",
+                "['exe',  \\&do_executable, ['unrar','rar'], 'lha', ['unarj','arj'] ]"
+            ]
             $defang_banned                      = 1
             $defang_by_ccat                     = [
                 'CC_BADH.",3"',
@@ -183,7 +211,6 @@ class amavisd::params {
             $final_spam_destiny                 = 'D_DISCARD'
             $final_virus_destiny                = 'D_DISCARD'
             $include_score_sender_maps          = true
-            $include_decoders                   = true
             $include_av_scanners                = true
             $include_av_scanners_backup         = true
             $inet_socket_port                   = [ 10024 ]

@@ -36,6 +36,7 @@ class amavisd::config (
     $daemon_group                       = undef,
     $daemon_user                        = undef,
     $db_home                            = undef,
+    $decoders                           = undef,
     $defang_bad_header                  = undef,
     $defang_banned                      = undef,
     $defang_by_ccat                     = undef,
@@ -56,7 +57,6 @@ class amavisd::config (
     $helpers_home                       = undef,
     $include_banned_filename_re         = undef,
     $include_score_sender_maps          = undef,
-    $include_decoders                   = undef,
     $include_av_scanners                = undef,
     $include_av_scanners_backup         = undef,
     $inet_socket_port                   = undef,
@@ -140,6 +140,7 @@ class amavisd::config (
     $_daemon_chroot_dir = pick_default($daemon_chroot_dir, $amavisd::params::daemon_chroot_dir)
     $_daemon_group = pick_default($daemon_group, $amavisd::_daemon_group)
     $_daemon_user = pick_default($daemon_user, $amavisd::_daemon_user)
+    $_decoders = pick_default($decoders, $amavisd::params::decoders)
     $_db_home = pick_default($db_home, $amavisd::params::db_home)
     $_defang_bad_header = pick_default($defang_bad_header, $amavisd::params::defang_bad_header)
     $_defang_banned = pick_default($defang_banned, $amavisd::params::defang_banned)
@@ -160,7 +161,6 @@ class amavisd::config (
     $_forward_method = pick_default($forward_method, $amavisd::params::forward_method)
     $_helpers_home = pick_default($helpers_home, $amavisd::params::helpers_home)
     $_include_score_sender_maps = pick_default($include_score_sender_maps, $amavisd::params::include_score_sender_maps)
-    $_include_decoders = pick_default($include_decoders, $amavisd::params::include_decoders)
     $_include_av_scanners = pick_default($include_av_scanners, $amavisd::params::include_av_scanners)
     $_include_av_scanners_backup = pick_default($include_av_scanners_backup, $amavisd::params::include_av_scanners_backup)
     $_inet_socket_port = pick_default($inet_socket_port, $amavisd::params::inet_socket_port)
@@ -269,13 +269,13 @@ class amavisd::config (
         }
     }
 
-    if $_include_decoders {
-        concat::fragment { 'amavis_decoders':
-            target  => $amavis_conf,
-            content => template('amavisd/decoders.conf.erb'),
-            order   => '40'
-        }
-    }
+    # if $_include_decoders {
+    #     concat::fragment { 'amavis_decoders':
+    #         target  => $amavis_conf,
+    #         content => template('amavisd/decoders.conf.erb'),
+    #         order   => '40'
+    #     }
+    # }
 
     if $_include_av_scanners {
         concat::fragment { 'amavis_av_scanners':
