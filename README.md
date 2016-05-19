@@ -40,6 +40,8 @@ This module should correctly setup Amavisd on a given host.  This includes:
 
 ### Setup Requirements **OPTIONAL**
 
+librarian-puppet install --verbose --path=/etc/puppetlabs/code/modules
+
 If your module requires anything extra before setting up (pluginsync enabled,
 etc.), mention it here.
 

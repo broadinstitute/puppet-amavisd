@@ -22,37 +22,37 @@
 );
 <% end -%>
 <% end -%>
-<%= scope.function_perl_varprint(["$max_servers", @_max_servers]) %>
-<%= scope.function_perl_varprint(["$daemon_user", @_daemon_user]) %>
-<%= scope.function_perl_varprint(["$daemon_group", @daemon_group]) %>
-<%= scope.function_perl_varprint(["$mydomain", @mydomain]) %>
-<%= scope.function_perl_varprint(["$MYHOME", @MYHOME]) %>
-<%= scope.function_perl_varprint(["$TEMPBASE", @TEMPBASE]) %>
-<%= scope.function_perl_varprint(["$TEMPBASE", @TEMPBASE]) %>
-<%= scope.function_perl_varprint(["$ENV{TMPDIR}", @_tmpdir]) %>
-<%= scope.function_perl_varprint(["$QUARANTINEDIR", @_quarantinedir]) %>
-<%= scope.function_perl_varprint(["$quarantine_subdir_levels", @_quarantine_subdir_levels]) %>
-<%= scope.function_perl_varprint(["$release_format", @_release_format]) %>
-<%= scope.function_perl_varprint(["$report_format", @_report_format]) %>
-<%= scope.function_perl_varprint(["$daemon_chroot_dir", @_daemon_chroot_dir]) %>
-<%= scope.function_perl_varprint(["$db_home", @_db_home]) %>
-<%= scope.function_perl_varprint(["$helpers_home", @_helpers_home]) %>
-<%= scope.function_perl_varprint(["$lock_file", @_lock_file]) %>
-<%= scope.function_perl_varprint(["$pid_file", @_pid_file]) %>
-<%= scope.function_perl_varprint(["$log_level", @_log_level]) %>
-<%= scope.function_perl_varprint(["$log_recip_templ", @_log_recip_templ]) %>
-<%= scope.function_perl_varprint(["$do_syslog", @_do_syslog]) %>
-<%= scope.function_perl_varprint(["$syslog_facility", @_syslog_facility]) %>
-<%= scope.function_perl_varprint(["$enable_db", @_enable_db]) %>
-<%= scope.function_perl_varprint(["$enable_zmq", @_enable_zmq]) %>
-<%= scope.function_perl_varprint(["$nanny_details_level", @_nanny_details_level]) %>
-<%= scope.function_perl_varprint(["$enable_dkim_verification", @_enable_dkim_verification]) %>
-<%= scope.function_perl_varprint(["$enable_dkim_signing", @_enable_dkim_signing]) %>
+<%= scope.function_perl_var_print(["$max_servers", @_max_servers]) %>
+<%= scope.function_perl_var_print(["$daemon_user", @_daemon_user]) %>
+<%= scope.function_perl_var_print(["$daemon_group", @daemon_group]) %>
+<%= scope.function_perl_var_print(["$mydomain", @mydomain]) %>
+<%= scope.function_perl_var_print(["$MYHOME", @MYHOME]) %>
+<%= scope.function_perl_var_print(["$TEMPBASE", @TEMPBASE]) %>
+<%= scope.function_perl_var_print(["$TEMPBASE", @TEMPBASE]) %>
+<%= scope.function_perl_var_print(["$ENV{TMPDIR}", @_tmpdir]) %>
+<%= scope.function_perl_var_print(["$QUARANTINEDIR", @_quarantinedir]) %>
+<%= scope.function_perl_var_print(["$quarantine_subdir_levels", @_quarantine_subdir_levels]) %>
+<%= scope.function_perl_var_print(["$release_format", @_release_format]) %>
+<%= scope.function_perl_var_print(["$report_format", @_report_format]) %>
+<%= scope.function_perl_var_print(["$daemon_chroot_dir", @_daemon_chroot_dir]) %>
+<%= scope.function_perl_var_print(["$db_home", @_db_home]) %>
+<%= scope.function_perl_var_print(["$helpers_home", @_helpers_home]) %>
+<%= scope.function_perl_var_print(["$lock_file", @_lock_file]) %>
+<%= scope.function_perl_var_print(["$pid_file", @_pid_file]) %>
+<%= scope.function_perl_var_print(["$log_level", @_log_level]) %>
+<%= scope.function_perl_var_print(["$log_recip_templ", @_log_recip_templ]) %>
+<%= scope.function_perl_var_print(["$do_syslog", @_do_syslog]) %>
+<%= scope.function_perl_var_print(["$syslog_facility", @_syslog_facility]) %>
+<%= scope.function_perl_var_print(["$enable_db", @_enable_db]) %>
+<%= scope.function_perl_var_print(["$enable_zmq", @_enable_zmq]) %>
+<%= scope.function_perl_var_print(["$nanny_details_level", @_nanny_details_level]) %>
+<%= scope.function_perl_var_print(["$enable_dkim_verification", @_enable_dkim_verification]) %>
+<%= scope.function_perl_var_print(["$enable_dkim_signing", @_enable_dkim_signing]) %>
 <% if !@_local_domains_maps.empty? %>@local_domains_maps = ( [<% @_local_domains_maps.each do |domain| %>"<%= domain %>",<% end -%>] );
 <% end -%>
 <% if !@_mynetworks.empty? %>@mynetworks = qw( <% @_mynetworks.each do |network| %><%= network %> <% end -%> );
 <% end -%>
-<%= scope.function_perl_varprint(["$unix_socketname", @_unix_socketname]) %>
+<%= scope.function_perl_var_print(["$unix_socketname", @_unix_socketname]) %>
 <% if !@_inet_socket_port.empty? %>$inet_socket_port = [<% @_inet_socket_port.each do |port| %>"<%= port %>",<% end -%>];
 <% end -%>
 
@@ -71,17 +71,17 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <% end -%>
 <% end -%>
 
-<%= scope.function_perl_varprint(["$sa_tag_level_deflt", @_sa_tag_level_deflt]) %>
-<%= scope.function_perl_varprint(["$sa_tag2_level_deflt", @_sa_tag2_level_deflt]) %>
-<%= scope.function_perl_varprint(["$sa_kill_level_deflt", @_sa_kill_level_deflt]) %>
-<%= scope.function_perl_varprint(["$sa_dsn_cutoff_level", @_sa_dsn_cutoff_level]) %>
-<%= scope.function_perl_varprint(["$sa_crediblefrom_dsn_cutoff_level", @_sa_crediblefrom_dsn_cutoff_level]) %>
-<%= scope.function_perl_varprint(["$sa_quarantine_cutoff_level", @_sa_quarantine_cutoff_level]) %>
-<%= scope.function_perl_varprint(["$penpals_bonus_score", @_penpals_bonus_score]) %>
-<%= scope.function_perl_varprint(["$penpals_threshold_high", @_penpals_threshold_high]) %>
-<%= scope.function_perl_varprint(["$bounce_killer_score", @_bounce_killer_score]) %>
-<%= scope.function_perl_varprint(["$sa_mail_body_size_limit", @_sa_mail_body_size_limit]) %>
-<%= scope.function_perl_varprint(["$sa_local_tests_only", @_sa_local_tests_only]) %>
+<%= scope.function_perl_var_print(["$sa_tag_level_deflt", @_sa_tag_level_deflt]) %>
+<%= scope.function_perl_var_print(["$sa_tag2_level_deflt", @_sa_tag2_level_deflt]) %>
+<%= scope.function_perl_var_print(["$sa_kill_level_deflt", @_sa_kill_level_deflt]) %>
+<%= scope.function_perl_var_print(["$sa_dsn_cutoff_level", @_sa_dsn_cutoff_level]) %>
+<%= scope.function_perl_var_print(["$sa_crediblefrom_dsn_cutoff_level", @_sa_crediblefrom_dsn_cutoff_level]) %>
+<%= scope.function_perl_var_print(["$sa_quarantine_cutoff_level", @_sa_quarantine_cutoff_level]) %>
+<%= scope.function_perl_var_print(["$penpals_bonus_score", @_penpals_bonus_score]) %>
+<%= scope.function_perl_var_print(["$penpals_threshold_high", @_penpals_threshold_high]) %>
+<%= scope.function_perl_var_print(["$bounce_killer_score", @_bounce_killer_score]) %>
+<%= scope.function_perl_var_print(["$sa_mail_body_size_limit", @_sa_mail_body_size_limit]) %>
+<%= scope.function_perl_var_print(["$sa_local_tests_only", @_sa_local_tests_only]) %>
 <% if @_lookup_sql_dsn.is_a?(Array) -%>
 <% if !@_lookup_sql_dsn.empty? -%>
 @lookup_sql_dsn = (
@@ -90,7 +90,7 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 );
 <% end -%>
 <% end -%>
-<%= scope.function_perl_varprint(["$storage_sql_dsn", @_storage_sql_dsn]) %>
+<%= scope.function_perl_var_print(["$storage_sql_dsn", @_storage_sql_dsn]) %>
 <% if @_storage_redis_dsn.is_a?(Array) -%>
 <% if !@_storage_redis_dsn.empty? -%>
 @storage_redis_dsn = (
@@ -100,14 +100,14 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 );
 <% end -%>
 <% end -%>
-<%= scope.function_perl_varprint(["$redis_logging_key", @_redis_logging_key]) %>
-<%= scope.function_perl_varprint(["$redis_logging_queue_size_limit", @_redis_logging_queue_size_limit]) %>
-<%= scope.function_perl_varprint(["$timestamp_fmt_mysql", @_timestamp_fmt_mysql]) %>
-<%= scope.function_perl_varprint(["$virus_admin", @_virus_admin]) %>
-<%= scope.function_perl_varprint(["$mailfrom_notify_admin", @_mailfrom_notify_admin]) %>
-<%= scope.function_perl_varprint(["$mailfrom_notify_recip", @_mailfrom_notify_recip]) %>
-<%= scope.function_perl_varprint(["$mailfrom_notify_spamadmin", @_mailfrom_notify_spamadmin]) %>
-<%= scope.function_perl_varprint(["$mailfrom_to_quarantine", @_mailfrom_to_quarantine]) %>
+<%= scope.function_perl_var_print(["$redis_logging_key", @_redis_logging_key]) %>
+<%= scope.function_perl_var_print(["$redis_logging_queue_size_limit", @_redis_logging_queue_size_limit]) %>
+<%= scope.function_perl_var_print(["$timestamp_fmt_mysql", @_timestamp_fmt_mysql]) %>
+<%= scope.function_perl_var_print(["$virus_admin", @_virus_admin]) %>
+<%= scope.function_perl_var_print(["$mailfrom_notify_admin", @_mailfrom_notify_admin]) %>
+<%= scope.function_perl_var_print(["$mailfrom_notify_recip", @_mailfrom_notify_recip]) %>
+<%= scope.function_perl_var_print(["$mailfrom_notify_spamadmin", @_mailfrom_notify_spamadmin]) %>
+<%= scope.function_perl_var_print(["$mailfrom_to_quarantine", @_mailfrom_to_quarantine]) %>
 <% if @_addr_extension_virus_maps.is_a?(Array) -%>
 <% if !@_addr_extension_virus_maps.empty? -%>
 @addr_extension_virus_maps = (
@@ -140,46 +140,56 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 );
 <% end -%>
 <% end -%>
-<%= scope.function_perl_varprint(["$recipient_delimiter", @_recipient_delimiter]) %>
-<%= scope.function_perl_varprint(["$path", @_path]) %>
-<%= scope.function_perl_varprint(["$dspam", @_dspam]) %>
-<%= scope.function_perl_varprint(["$MAXLEVELS", @_maxlevels]) %>
-<%= scope.function_perl_varprint(["$MAXFILES", @_maxfiles]) %>
-<%= scope.function_perl_varprint(["$MIN_EXPANSION_QUOTA", @_min_expansion_quota]) %>
-<%= scope.function_perl_varprint(["$MAX_EXPANSION_QUOTA", @_max_expansion_quota]) %>
-<%= scope.function_perl_varprint(["$sa_spam_subject_tag", @_sa_spam_subject_tag]) %>
-<%= scope.function_perl_varprint(["$defang_virus", @_defang_virus]) %>
-<%= scope.function_perl_varprint(["$defang_banned", @_defang_banned]) %>
+<%= scope.function_perl_var_print(["$recipient_delimiter", @_recipient_delimiter]) %>
+<%= scope.function_perl_var_print(["$path", @_path]) %>
+<%= scope.function_perl_var_print(["$dspam", @_dspam]) %>
+<%= scope.function_perl_var_print(["$MAXLEVELS", @_maxlevels]) %>
+<%= scope.function_perl_var_print(["$MAXFILES", @_maxfiles]) %>
+<%= scope.function_perl_var_print(["$MIN_EXPANSION_QUOTA", @_min_expansion_quota]) %>
+<%= scope.function_perl_var_print(["$MAX_EXPANSION_QUOTA", @_max_expansion_quota]) %>
+<%= scope.function_perl_var_print(["$sa_spam_subject_tag", @_sa_spam_subject_tag]) %>
+<%= scope.function_perl_var_print(["$defang_virus", @_defang_virus]) %>
+<%= scope.function_perl_var_print(["$defang_banned", @_defang_banned]) %>
 
 <% if @_defang_by_ccat -%>
 <% @_defang_by_ccat.each do |ccat| %>$defang_by_ccat{<%= ccat %>} = 1;
 <% end -%>
 <% end -%>
 
-<%= scope.function_perl_varprint(["$myhostname", @_myhostname]) %>
-<%= scope.function_perl_varprint(["$notify_method", @_notify_method]) %>
-<%= scope.function_perl_varprint(["$forward_method", @_forward_method]) %>
-<%= scope.function_perl_varprint(["$final_virus_destiny", @_final_virus_destiny]) %>
-<%= scope.function_perl_varprint(["$final_banned_destiny", @_final_banned_destiny]) %>
-<%= scope.function_perl_varprint(["$final_spam_destiny", @_final_spam_destiny]) %>
-<%= scope.function_perl_varprint(["$final_bad_header_destiny", @_final_bad_header_destiny]) %>
+<%= scope.function_perl_var_print(["$myhostname", @_myhostname]) %>
+<%= scope.function_perl_var_print(["$notify_method", @_notify_method]) %>
+<%= scope.function_perl_var_print(["$forward_method", @_forward_method]) %>
+<%= scope.function_perl_var_print(["$final_virus_destiny", @_final_virus_destiny]) %>
+<%= scope.function_perl_var_print(["$final_banned_destiny", @_final_banned_destiny]) %>
+<%= scope.function_perl_var_print(["$final_spam_destiny", @_final_spam_destiny]) %>
+<%= scope.function_perl_var_print(["$final_bad_header_destiny", @_final_bad_header_destiny]) %>
 
-<%= scope.function_perl_varprint(["$bad_header_quarantine_method", @_bad_header_quarantine_method]) %>
-<%= scope.function_perl_varprint(["$os_fingerprint_method", @_os_fingerprint_method]) %>
-<%= scope.function_perl_varprint(["$warnbadhsender", @_warnbadhsender]) %>
-<%= scope.function_perl_varprint(["$warnvirusrecip", @_warnvirusrecip]) %>
-<%= scope.function_perl_varprint(["$warnbannedrecip", @_warnbannedrecip]) %>
-<%= scope.function_perl_varprint(["$warnbadhrecip", @_warnbadhrecip]) %>
+<%= scope.function_perl_var_print(["$bad_header_quarantine_method", @_bad_header_quarantine_method]) %>
+<%= scope.function_perl_var_print(["$os_fingerprint_method", @_os_fingerprint_method]) %>
+<%= scope.function_perl_var_print(["$warnbadhsender", @_warnbadhsender]) %>
+<%= scope.function_perl_var_print(["$warnvirusrecip", @_warnvirusrecip]) %>
+<%= scope.function_perl_var_print(["$warnbannedrecip", @_warnbannedrecip]) %>
+<%= scope.function_perl_var_print(["$warnbadhrecip", @_warnbadhrecip]) %>
 
-<%= scope.function_perl_varprint(["$clean_quarantine_method", @_clean_quarantine_method]) %>
-<%= scope.function_perl_varprint(["$virus_quarantine_to", @_virus_quarantine_to]) %>
-<%= scope.function_perl_varprint(["$banned_quarantine_to", @_banned_quarantine_to]) %>
-<%= scope.function_perl_varprint(["$bad_header_quarantine_to", @_bad_header_quarantine_to]) %>
-<%= scope.function_perl_varprint(["$spam_quarantine_to", @_spam_quarantine_to]) %>
+<%= scope.function_perl_var_print(["$clean_quarantine_method", @_clean_quarantine_method]) %>
+<%= scope.function_perl_var_print(["$virus_quarantine_to", @_virus_quarantine_to]) %>
+<%= scope.function_perl_var_print(["$banned_quarantine_to", @_banned_quarantine_to]) %>
+<%= scope.function_perl_var_print(["$bad_header_quarantine_to", @_bad_header_quarantine_to]) %>
+<%= scope.function_perl_var_print(["$spam_quarantine_to", @_spam_quarantine_to]) %>
 
-<%= scope.function_perl_varprint(["$defang_bad_header", @_defang_bad_header]) %>
-<%= scope.function_perl_varprint(["$defang_undecipherable", @_defang_undecipherable]) %>
-<%= scope.function_perl_varprint(["$defang_spam", @_defang_spam]) %>
+<%= scope.function_perl_var_print(["$defang_bad_header", @_defang_bad_header]) %>
+<%= scope.function_perl_var_print(["$defang_undecipherable", @_defang_undecipherable]) %>
+<%= scope.function_perl_var_print(["$defang_spam", @_defang_spam]) %>
+
+<% if @_keep_decoded_original_maps.is_a?(Array) -%>
+<% if !@_keep_decoded_original_maps.empty? -%>
+@keep_decoded_original_maps = (new_RE(
+<% @_keep_decoded_original_maps.each do |amap| %><%= amap %>,
+<% end -%>
+));
+<% end -%>
+<% end -%>
+
 <%#
 @_bypass_banned_checks_maps, @_bypass_header_checks_maps,
 

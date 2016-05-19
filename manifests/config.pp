@@ -53,7 +53,6 @@ class amavisd::config (
     $final_virus_destiny                = undef,
     $forward_method                     = undef,
     $helpers_home                       = undef,
-    $include_keep_decoded_original_maps = undef,
     $include_banned_filename_re         = undef,
     $include_score_sender_maps          = undef,
     $include_decoders                   = undef,
@@ -61,6 +60,7 @@ class amavisd::config (
     $include_av_scanners_backup         = undef,
     $inet_socket_port                   = undef,
     $interface_policy                   = undef,
+    $keep_decoded_original_maps         = undef,
     $local_domains_maps                 = undef,
     $lock_file                          = undef,
     $log_level                          = undef,
@@ -157,7 +157,6 @@ class amavisd::config (
     $_final_virus_destiny = pick_default($final_virus_destiny, $amavisd::params::final_virus_destiny)
     $_forward_method = pick_default($forward_method, $amavisd::params::forward_method)
     $_helpers_home = pick_default($helpers_home, $amavisd::params::helpers_home)
-    $_include_keep_decoded_original_maps = pick_default($include_keep_decoded_original_maps, $amavisd::params::include_keep_decoded_original_maps)
     $_include_banned_filename_re = pick_default($include_banned_filename_re, $amavisd::params::include_banned_filename_re)
     $_include_score_sender_maps = pick_default($include_score_sender_maps, $amavisd::params::include_score_sender_maps)
     $_include_decoders = pick_default($include_decoders, $amavisd::params::include_decoders)
@@ -165,6 +164,7 @@ class amavisd::config (
     $_include_av_scanners_backup = pick_default($include_av_scanners_backup, $amavisd::params::include_av_scanners_backup)
     $_inet_socket_port = pick_default($inet_socket_port, $amavisd::params::inet_socket_port)
     $_interface_policy = pick_default($interface_policy, $amavisd::params::interface_policy)
+    $_keep_decoded_original_maps = pick_default($keep_decoded_original_maps, $amavisd::params::keep_decoded_original_maps)
     $_local_domains_maps = pick_default($local_domains_maps, $amavisd::params::local_domains_maps)
     $_lock_file = pick($lock_file, "${amavisd::_state_dir}/${amavisd::_service_name}.lock")
     $_log_level = pick_default($log_level, $amavisd::params::log_level)
@@ -244,13 +244,13 @@ class amavisd::config (
         order   => '05'
     }
 
-    if $_include_keep_decoded_original_maps {
-        concat::fragment { 'amavis_keep_decoded_original_maps':
-            target  => $amavis_conf,
-            content => template('amavisd/keep_decoded_original_maps.conf.erb'),
-            order   => '10'
-        }
-    }
+    # if $_include_keep_decoded_original_maps {
+    #     concat::fragment { 'amavis_keep_decoded_original_maps':
+    #         target  => $amavis_conf,
+    #         content => template('amavisd/keep_decoded_original_maps.conf.erb'),
+    #         order   => '10'
+    #     }
+    # }
 
     if $_include_banned_filename_re {
         concat::fragment { 'amavis_banned_filename_re':

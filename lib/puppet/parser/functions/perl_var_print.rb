@@ -1,4 +1,4 @@
-Puppet::Parser::Functions::newfunction(:perl_varprint, :type => :rvalue, :doc => <<-EOS
+Puppet::Parser::Functions::newfunction(:perl_var_print, :type => :rvalue, :doc => <<-EOS
 Print out a Puppet data type as a Perl data type.  This takes care of doing
 things like quoting strings, not quoting integer types, and will hopefully one
 day correctly (recursively) print out arrays and hashes, with sub arrays and
@@ -14,9 +14,9 @@ Example:
     $var3 = undef
     $var4 = 'undef'
 
-    perl_varprint($var1)
+    perl_varprint("$var1", 10)
     # => 10
-    perl_varprint($var2)
+    perl_varprint("$var2", 'hello')
     # => "hello"
     perl_varprint($var3)
     # => undef
@@ -35,29 +35,23 @@ EOS
     return nil
   end
 
-  # if arg.is_a(String) and arg == 'undef'
-  if Puppet::Pops::Types::TypeCalculator.instance?(String, arg) and arg == 'undef'
-    debug("type 1")
-    return "#{varname} = undef;"
-  end
-
-  #if arg.is_a(String)
   if Puppet::Pops::Types::TypeCalculator.instance?(String, arg)
-    debug("type 2")
-    return "#{varname} = \"#{arg}\";"
+    debug("type 1")
+    data = function_perl_data_print([arg])
+    return "#{varname} = #{data};"
   end
 
-  # if arg.is_a(Integer)
   if Puppet::Pops::Types::TypeCalculator.instance?(Integer, arg)
-    debug("type 3")
-    return "#{varname} = #{arg};"
+    debug("type 2")
+    data = function_perl_data_print([arg])
+    return "#{varname} = #{data};"
   end
 
-  # if arg.nil? or arg == false or arg =~ /false/i or arg == :undef
-  #   return 'Off'
-  # elsif arg == true or arg =~ /true/i
-  #   return 'On'
-  # end
+  if Puppet::Pops::Types::TypeCalculator.instance?(Array, arg)
+    debug("type 3")
+    data = function_perl_data_print(arg)
+    return "#{varname} = #{data};"
+  end
 
   return arg.to_s
 end

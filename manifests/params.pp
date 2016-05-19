@@ -105,7 +105,6 @@ class amavisd::params {
             $final_banned_destiny               = undef
             $final_spam_destiny                 = undef
             $final_virus_destiny                = undef
-            $include_keep_decoded_original_maps = false
             $include_banned_filename_re         = false
             $include_score_sender_maps          = false
             $include_decoders                   = false
@@ -172,7 +171,6 @@ class amavisd::params {
             $final_banned_destiny               = 'D_BOUNCE'
             $final_spam_destiny                 = 'D_DISCARD'
             $final_virus_destiny                = 'D_DISCARD'
-            $include_keep_decoded_original_maps = true
             $include_banned_filename_re         = true
             $include_score_sender_maps          = true
             $include_decoders                   = true
@@ -183,6 +181,11 @@ class amavisd::params {
                 '10026' => 'ORIGINATING',
                 'SOCK' => 'AM.PDP-SOCK'
             }
+            $keep_decoded_original_maps         =  [
+                "qr'^MAIL$'",
+                "qr'^MAIL-UNDECIPHERABLE$'",
+                "qr'^(ASCII(?! cpio)|text|uuencoded|xxencoded|binhex)'i",
+            ]
             $local_domains_maps                 = [ '.$mydomain' ]
             $log_level                          = 0
             $max_expansion_quota                = 500*1024*1024
