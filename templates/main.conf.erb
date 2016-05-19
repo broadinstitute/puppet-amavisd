@@ -208,6 +208,24 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <% end -%>
 <% end -%>
 
+<% if @_av_scanners.is_a?(Array) -%>
+<% if !@_av_scanners.empty? -%>
+@av_scanners = (
+<% @_av_scanners.each do |amap| %><%= amap %>,
+<% end -%>
+);
+<% end -%>
+<% end -%>
+
+<% if @_av_scanners_backup.is_a?(Array) -%>
+<% if !@_av_scanners_backup.empty? -%>
+@av_scanners_backup = (
+<% @_av_scanners_backup.each do |amap| %><%= amap %>,
+<% end -%>
+);
+<% end -%>
+<% end -%>
+
 <%#
 @_bypass_banned_checks_maps, @_bypass_header_checks_maps,
 

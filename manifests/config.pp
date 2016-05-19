@@ -23,6 +23,8 @@ class amavisd::config (
     $addr_extension_banned_maps         = undef,
     $addr_extension_spam_maps           = undef,
     $addr_extension_virus_maps          = undef,
+    $av_scanners                        = undef,
+    $av_scanners_backup                 = undef,
     $bad_header_quarantine_method       = undef,
     $bad_header_quarantine_to           = undef,
     $banned_filename_re                 = undef,
@@ -55,10 +57,7 @@ class amavisd::config (
     $final_virus_destiny                = undef,
     $forward_method                     = undef,
     $helpers_home                       = undef,
-    $include_banned_filename_re         = undef,
     $include_score_sender_maps          = undef,
-    $include_av_scanners                = undef,
-    $include_av_scanners_backup         = undef,
     $inet_socket_port                   = undef,
     $interface_policy                   = undef,
     $keep_decoded_original_maps         = undef,
@@ -128,6 +127,8 @@ class amavisd::config (
     $_addr_extension_banned_maps = pick_default($addr_extension_banned_maps, $amavisd::params::addr_extension_banned_maps)
     $_addr_extension_spam_maps = pick_default($addr_extension_spam_maps, $amavisd::params::addr_extension_spam_maps)
     $_addr_extension_virus_maps = pick_default($addr_extension_virus_maps, $amavisd::params::addr_extension_virus_maps)
+    $_av_scanners = pick_default($av_scanners, $amavisd::params::av_scanners)
+    $_av_scanners_backup = pick_default($av_scanners_backup, $amavisd::params::av_scanners_backup)
     $_bad_header_quarantine_method = pick_default($bad_header_quarantine_method, $amavisd::params::bad_header_quarantine_method)
     $_bad_header_quarantine_to = pick_default($bad_header_quarantine_to, $amavisd::params::bad_header_quarantine_to)
     $_banned_filename_re = pick_default($banned_filename_re, $amavisd::params::banned_filename_re)
@@ -161,8 +162,6 @@ class amavisd::config (
     $_forward_method = pick_default($forward_method, $amavisd::params::forward_method)
     $_helpers_home = pick_default($helpers_home, $amavisd::params::helpers_home)
     $_include_score_sender_maps = pick_default($include_score_sender_maps, $amavisd::params::include_score_sender_maps)
-    $_include_av_scanners = pick_default($include_av_scanners, $amavisd::params::include_av_scanners)
-    $_include_av_scanners_backup = pick_default($include_av_scanners_backup, $amavisd::params::include_av_scanners_backup)
     $_inet_socket_port = pick_default($inet_socket_port, $amavisd::params::inet_socket_port)
     $_interface_policy = pick_default($interface_policy, $amavisd::params::interface_policy)
     $_keep_decoded_original_maps = pick_default($keep_decoded_original_maps, $amavisd::params::keep_decoded_original_maps)
@@ -245,51 +244,11 @@ class amavisd::config (
         order   => '05'
     }
 
-    # if $_include_keep_decoded_original_maps {
-    #     concat::fragment { 'amavis_keep_decoded_original_maps':
-    #         target  => $amavis_conf,
-    #         content => template('amavisd/keep_decoded_original_maps.conf.erb'),
-    #         order   => '10'
-    #     }
-    # }
-
-    # if $_include_banned_filename_re {
-    #     concat::fragment { 'amavis_banned_filename_re':
-    #         target  => $amavis_conf,
-    #         content => template('amavisd/banned_filename_re.conf.erb'),
-    #         order   => '20'
-    #     }
-    # }
-
     if $_include_score_sender_maps {
         concat::fragment { 'amavis_score_sender_maps':
             target  => $amavis_conf,
             content => template('amavisd/score_sender_maps.conf.erb'),
             order   => '30'
-        }
-    }
-
-    # if $_include_decoders {
-    #     concat::fragment { 'amavis_decoders':
-    #         target  => $amavis_conf,
-    #         content => template('amavisd/decoders.conf.erb'),
-    #         order   => '40'
-    #     }
-    # }
-
-    if $_include_av_scanners {
-        concat::fragment { 'amavis_av_scanners':
-            target  => $amavis_conf,
-            content => template('amavisd/av_scanners.conf.erb'),
-            order   => '50'
-        }
-    }
-
-    if $_include_av_scanners_backup {
-        concat::fragment { 'amavis_av_scanners_backup':
-            target  => $amavis_conf,
-            content => template('amavisd/av_scanners_backup.conf.erb'),
-            order   => '70'
         }
     }
 
