@@ -25,6 +25,7 @@ class amavisd::config (
     $addr_extension_virus_maps          = undef,
     $bad_header_quarantine_method       = undef,
     $bad_header_quarantine_to           = undef,
+    $banned_filename_re                 = undef,
     $banned_quarantine_to               = undef,
     $bounce_killer_score                = undef,
     $bypass_decode_parts                = undef,
@@ -129,6 +130,7 @@ class amavisd::config (
     $_addr_extension_virus_maps = pick_default($addr_extension_virus_maps, $amavisd::params::addr_extension_virus_maps)
     $_bad_header_quarantine_method = pick_default($bad_header_quarantine_method, $amavisd::params::bad_header_quarantine_method)
     $_bad_header_quarantine_to = pick_default($bad_header_quarantine_to, $amavisd::params::bad_header_quarantine_to)
+    $_banned_filename_re = pick_default($banned_filename_re, $amavisd::params::banned_filename_re)
     $_banned_quarantine_to = pick_default($banned_quarantine_to, $amavisd::params::banned_quarantine_to)
     $_bounce_killer_score = pick_default($bounce_killer_score, $amavisd::params::bounce_killer_score)
     $_bypass_decode_parts = pick_default($bypass_decode_parts, $amavisd::params::bypass_decode_parts)
@@ -157,7 +159,6 @@ class amavisd::config (
     $_final_virus_destiny = pick_default($final_virus_destiny, $amavisd::params::final_virus_destiny)
     $_forward_method = pick_default($forward_method, $amavisd::params::forward_method)
     $_helpers_home = pick_default($helpers_home, $amavisd::params::helpers_home)
-    $_include_banned_filename_re = pick_default($include_banned_filename_re, $amavisd::params::include_banned_filename_re)
     $_include_score_sender_maps = pick_default($include_score_sender_maps, $amavisd::params::include_score_sender_maps)
     $_include_decoders = pick_default($include_decoders, $amavisd::params::include_decoders)
     $_include_av_scanners = pick_default($include_av_scanners, $amavisd::params::include_av_scanners)
@@ -252,13 +253,13 @@ class amavisd::config (
     #     }
     # }
 
-    if $_include_banned_filename_re {
-        concat::fragment { 'amavis_banned_filename_re':
-            target  => $amavis_conf,
-            content => template('amavisd/banned_filename_re.conf.erb'),
-            order   => '20'
-        }
-    }
+    # if $_include_banned_filename_re {
+    #     concat::fragment { 'amavis_banned_filename_re':
+    #         target  => $amavis_conf,
+    #         content => template('amavisd/banned_filename_re.conf.erb'),
+    #         order   => '20'
+    #     }
+    # }
 
     if $_include_score_sender_maps {
         concat::fragment { 'amavis_score_sender_maps':

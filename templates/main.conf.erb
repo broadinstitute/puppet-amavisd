@@ -190,6 +190,15 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <% end -%>
 <% end -%>
 
+<% if @_banned_filename_re.is_a?(Array) -%>
+<% if !@_banned_filename_re.empty? -%>
+@banned_filename_re = new_RE(
+<% @_banned_filename_re.each do |amap| %><%= amap %>,
+<% end -%>
+));
+<% end -%>
+<% end -%>
+
 <%#
 @_bypass_banned_checks_maps, @_bypass_header_checks_maps,
 

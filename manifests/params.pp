@@ -92,6 +92,7 @@ class amavisd::params {
             $addr_extension_banned_maps         = []
             $addr_extension_spam_maps           = []
             $addr_extension_virus_maps          = []
+            $banned_filename_re                 = undef
             $bounce_killer_score                = undef
             $db_home                            = undef
             $defang_banned                      = undef
@@ -154,6 +155,16 @@ class amavisd::params {
             $addr_extension_banned_maps         = [ 'banned' ]
             $addr_extension_spam_maps           = [ 'spam' ]
             $addr_extension_virus_maps          = [ 'virus' ]
+            $banned_filename_re                 = [
+                "qr'^\\.(exe-ms|dll)$'",
+                "[ qr'^\\.(rpm|cpio|tar)$'       => 0 ]",
+                "qr'.\\.(pif|scr)$'i",
+                "qr'^application/x-msdownload$'i",
+                "qr'^application/x-msdos-program$'i",
+                "qr'^application/hta$'i",
+                "qr'^(?!cid:).*\\.[^./]*[A-Za-z][^./]*\\.\\s*(exe|vbs|pif|scr|bat|cmd|com|cpl|dll)[.\\s]*$'i",
+                "qr'.\\.(exe|vbs|pif|scr|cpl)$'i"
+            ]
             $bounce_killer_score                = 100
             $db_home                            = '$MYHOME/db'
             $defang_banned                      = 1
@@ -171,7 +182,6 @@ class amavisd::params {
             $final_banned_destiny               = 'D_BOUNCE'
             $final_spam_destiny                 = 'D_DISCARD'
             $final_virus_destiny                = 'D_DISCARD'
-            $include_banned_filename_re         = true
             $include_score_sender_maps          = true
             $include_decoders                   = true
             $include_av_scanners                = true
