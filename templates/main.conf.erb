@@ -158,10 +158,18 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <%= scope.function_perl_var_print(["$myhostname", @myhostname]) %>
 <%= scope.function_perl_var_print(["$notify_method", @notify_method]) %>
 <%= scope.function_perl_var_print(["$forward_method", @forward_method]) %>
-<%= scope.function_perl_var_print(["$final_virus_destiny", @final_virus_destiny]) %>
-<%= scope.function_perl_var_print(["$final_banned_destiny", @final_banned_destiny]) %>
-<%= scope.function_perl_var_print(["$final_spam_destiny", @final_spam_destiny]) %>
-<%= scope.function_perl_var_print(["$final_bad_header_destiny", @final_bad_header_destiny]) %>
+<% if @final_virus_destiny -%>
+$final_virus_destiny = <%= @final_virus_destiny %>
+<% end -%>
+<% if @final_banned_destiny -%>
+$final_banned_destiny = <%= @final_banned_destiny %>
+<% end -%>
+<% if @final_spam_destiny -%>
+$final_spam_destiny = <%= @final_spam_destiny %>
+<% end -%>
+<% if @final_bad_header_destiny -%>
+$final_bad_header_destiny = <%= @final_bad_header_destiny %>
+<% end -%>
 
 <%= scope.function_perl_var_print(["$bad_header_quarantine_method", @bad_header_quarantine_method]) %>
 <%= scope.function_perl_var_print(["$os_fingerprint_method", @os_fingerprint_method]) %>
