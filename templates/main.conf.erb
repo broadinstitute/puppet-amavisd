@@ -52,7 +52,7 @@
 <% if !@mynetworks.empty? %>@mynetworks = qw( <% @mynetworks.each do |network| %><%= network %> <% end -%> );
 <% end -%>
 <%= scope.function_perl_var_print(["$unix_socketname", @unix_socketname]) %>
-<% if !@inet_socket_port.empty? %>$inet_socket_port = [<% @inet_socket_port.each do |port| %>"<%= port %>",<% end -%>];
+<% if !@inet_socket_port.empty? %>$inet_socket_port = [<% @inet_socket_port.each do |port| %><%= port %>,<% end -%>];
 <% end -%>
 
 <% if @policy_bank -%>
