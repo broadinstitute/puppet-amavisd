@@ -144,8 +144,12 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <%= scope.function_perl_var_print(["$dspam", @dspam]) %>
 <%= scope.function_perl_var_print(["$MAXLEVELS", @maxlevels]) %>
 <%= scope.function_perl_var_print(["$MAXFILES", @maxfiles]) %>
-<%= scope.function_perl_var_print(["$MIN_EXPANSION_QUOTA", @min_expansion_quota]) %>
-<%= scope.function_perl_var_print(["$MAX_EXPANSION_QUOTA", @max_expansion_quota]) %>
+<% if @min_expansion_quota -%>
+$MIN_EXPANSION_QUOTA = <%= @min_expansion_quota %>
+<% end -%>
+<% if @max_expansion_quota -%>
+$MAX_EXPANSION_QUOTA = <%= @max_expansion_quota %>
+<% end -%>
 <%= scope.function_perl_var_print(["$sa_spam_subject_tag", @sa_spam_subject_tag]) %>
 <%= scope.function_perl_var_print(["$defang_virus", @defang_virus]) %>
 <%= scope.function_perl_var_print(["$defang_banned", @defang_banned]) %>
