@@ -47,7 +47,7 @@
 <%= scope.function_perl_var_print(["$nanny_details_level", @nanny_details_level]) %>
 <%= scope.function_perl_var_print(["$enable_dkim_verification", @enable_dkim_verification]) %>
 <%= scope.function_perl_var_print(["$enable_dkim_signing", @enable_dkim_signing]) %>
-<% if !@local_domains_maps.empty? %>@local_domains_maps = ( [<% @local_domains_maps.each do |domain| %>"<%= domain %>",<% end -%>] );
+<% if !@local_domains_maps.empty? %>@local_domains_maps = ( [qw( <% @local_domains_maps.each do |domain| %><%= domain %> <% end %>)] );
 <% end -%>
 <% if !@mynetworks.empty? %>@mynetworks = qw( <% @mynetworks.each do |network| %><%= network %> <% end -%> );
 <% end -%>
