@@ -47,7 +47,6 @@ class amavisd::params {
     $enable_zmq                     = undef
     $forward_method                 = undef
     $helpers_home                   = undef
-    $lock_file                      = undef
     $log_recip_templ                = undef
     $lookup_sql_dsn                 = []
     $mailfrom_notify_admin          = undef
@@ -57,7 +56,6 @@ class amavisd::params {
     $myhostname                     = undef
     $notify_method                  = undef
     $os_fingerprint_method          = undef
-    $pid_file                       = undef
     $quarantine_subdir_levels       = undef
     $quarantinedir                  = undef
     $recipient_delimiter            = undef
@@ -70,7 +68,6 @@ class amavisd::params {
     $storage_redis_dsn              = []
     $storage_sql_dsn                = undef
     $timestamp_fmt_mysql            = undef
-    $unix_socketname                = undef
     $virus_admin                    = undef
     $virus_quarantine_to            = undef
     $warnbadhrecip                  = undef
