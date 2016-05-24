@@ -110,8 +110,6 @@ class amavisd::params {
             $final_spam_destiny                 = undef
             $final_virus_destiny                = undef
             $include_score_sender_maps          = false
-            $include_av_scanners                = false
-            $include_av_scanners_backup         = false
             $inet_socket_port                   = []
             $interface_policy                   = {}
             $local_domains_maps                 = []
