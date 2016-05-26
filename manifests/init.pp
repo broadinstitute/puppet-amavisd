@@ -258,7 +258,6 @@ class amavisd (
 
     class { 'amavisd::repos': } ->
     class { 'amavisd::install': } ->
-    class { 'amavisd::config': }
-    # class { 'amavisd::config': } ->
-    # class { 'amavisd::service': }
+    class { 'amavisd::config': } ->
+    class { 'amavisd::service': }
 }
