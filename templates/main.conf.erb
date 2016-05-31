@@ -70,24 +70,16 @@ $interface_policy{'<%= interface_key %>'} = '<%= interface_value %>';
 <% end -%>
 <% end -%>
 
-<% if @sa_tag_level_deflt -%>
-$sa_tag_level_deflt = <%= @sa_tag_level_deflt %>
-<% end -%>
-<% if @sa_kill_level_deflt -%>
-$sa_kill_level_deflt = <%= @sa_kill_level_deflt %>
-<% end -%>
-<% if @sa_tag2_level_deflt -%>
-$sa_tag2_level_deflt = <%= @sa_tag2_level_deflt %>
-<% end -%>
+<%= scope.function_perl_var_print(["$sa_tag_level_deflt", @sa_tag_level_deflt]) %>
+<%= scope.function_perl_var_print(["$sa_kill_level_deflt", @sa_kill_level_deflt]) %>
+<%= scope.function_perl_var_print(["$sa_tag2_level_deflt", @sa_tag2_level_deflt]) %>
 
 <%= scope.function_perl_var_print(["$sa_crediblefrom_dsn_cutoff_level", @sa_crediblefrom_dsn_cutoff_level]) %>
 <%= scope.function_perl_var_print(["$sa_quarantine_cutoff_level", @sa_quarantine_cutoff_level]) %>
 <%= scope.function_perl_var_print(["$penpals_bonus_score", @penpals_bonus_score]) %>
 <%= scope.function_perl_var_print(["$penpals_threshold_high", @penpals_threshold_high]) %>
 <%= scope.function_perl_var_print(["$bounce_killer_score", @bounce_killer_score]) %>
-<% if @sa_mail_body_size_limit -%>
-$sa_mail_body_size_limit = <%= @sa_mail_body_size_limit %>
-<% end -%>
+<%= scope.function_perl_var_print(["$sa_mail_body_size_limit", @sa_mail_body_size_limit]) %>
 <%= scope.function_perl_var_print(["$sa_local_tests_only", @sa_local_tests_only]) %>
 <% if @lookup_sql_dsn.is_a?(Array) -%>
 <% if !@lookup_sql_dsn.empty? -%>
@@ -152,12 +144,8 @@ $sa_mail_body_size_limit = <%= @sa_mail_body_size_limit %>
 <%= scope.function_perl_var_print(["$dspam", @dspam]) %>
 <%= scope.function_perl_var_print(["$MAXLEVELS", @maxlevels]) %>
 <%= scope.function_perl_var_print(["$MAXFILES", @maxfiles]) %>
-<% if @min_expansion_quota -%>
-$MIN_EXPANSION_QUOTA = <%= @min_expansion_quota %>
-<% end -%>
-<% if @max_expansion_quota -%>
-$MAX_EXPANSION_QUOTA = <%= @max_expansion_quota %>
-<% end -%>
+<%= scope.function_perl_var_print(["$MIN_EXPANSION_QUOTA", @min_expansion_quota]) %>
+<%= scope.function_perl_var_print(["$MAX_EXPANSION_QUOTA", @max_expansion_quota]) %>
 <%= scope.function_perl_var_print(["$sa_spam_subject_tag", @sa_spam_subject_tag]) %>
 <%= scope.function_perl_var_print(["$defang_virus", @defang_virus]) %>
 <%= scope.function_perl_var_print(["$defang_banned", @defang_banned]) %>

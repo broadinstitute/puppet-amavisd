@@ -28,17 +28,32 @@ EOS
     return nil
   end
 
-  if Puppet::Pops::Types::TypeCalculator.instance?(String, data) and data == 'undef'
+  if function_is_string([data]) and data == 'undef'
     return "undef"
   end
 
-  if Puppet::Pops::Types::TypeCalculator.instance?(String, data)
-    return "\"#{data}\""
-  end
-
-  if Puppet::Pops::Types::TypeCalculator.instance?(Integer, data)
+  if function_is_numeric([data])
     return "#{data}"
   end
 
-  return data.to_s
+  # Super-hacky thing to make variables with "math" work.
+  # Only accounting for multiplication currently.
+  d = data.split('*')
+  ret = []
+  is_math = true
+
+  d.each do |num|
+    if function_is_numeric([num])
+      ret << num
+    else
+      is_math = false
+      break
+    end
+  end
+
+  if is_math
+    return ret.join('*')
+  end
+
+  return "\"#{data}\""
 end

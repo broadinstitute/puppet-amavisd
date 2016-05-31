@@ -31,27 +31,10 @@ EOS
   arg = args[1]
 
   if arg.nil? or arg == ""
-    debug("type 0")
     return nil
   end
 
-  if Puppet::Pops::Types::TypeCalculator.instance?(String, arg)
-    debug("type 1")
-    data = function_perl_data_print([arg])
-    return "#{varname} = #{data};"
-  end
+  data = function_perl_data_print([arg])
+  return "#{varname} = #{data};"
 
-  if Puppet::Pops::Types::TypeCalculator.instance?(Integer, arg)
-    debug("type 2")
-    data = function_perl_data_print([arg])
-    return "#{varname} = #{data};"
-  end
-
-  if Puppet::Pops::Types::TypeCalculator.instance?(Array, arg)
-    debug("type 3")
-    data = function_perl_data_print(arg)
-    return "#{varname} = #{data};"
-  end
-
-  return arg.to_s
 end
