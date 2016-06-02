@@ -199,7 +199,7 @@ $final_bad_header_destiny = <%= @final_bad_header_destiny %>;
 
 <% if @banned_filename_re.is_a?(Array) -%>
 <% if !@banned_filename_re.empty? -%>
-@banned_filename_re = new_RE(
+$banned_filename_re = new_RE(
 <% @banned_filename_re.each do |amap| %><%= amap %>,
 <% end -%>
 );
