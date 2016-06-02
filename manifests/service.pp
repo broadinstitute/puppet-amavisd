@@ -13,13 +13,13 @@
 class amavisd::service {
 
     if $amavisd::watch_clamav {
-        $svc_require = Service[$amavisd::_clamd_service]
+        $svc_require   = Service[$amavisd::_clamd_service]
         $svc_subscribe = [
             Concat[$amavisd::config::amavis_conf],
             Service[$clamav::clamd_service]
         ]
     } else {
-        $svc_after = undef
+        $svc_require   = undef
         $svc_subscribe = Concat[$amavisd::config::amavis_conf]
     }
 
