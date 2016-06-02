@@ -21,7 +21,9 @@ class amavisd::repos {
         'RedHat': {
             if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
                 if ($amavisd::_manage_epel == true) {
-                    include ::epel
+                    if !defined(Class['epel']) {
+                        include ::epel
+                    }
 
                     Class['epel'] -> Package[$amavisd::_package_name]
                 }
