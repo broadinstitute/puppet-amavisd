@@ -37,14 +37,24 @@
 #
 class amavisd::install {
 
-    if $amavisd::manage_clamav {
-        include clamav
+    if $::osfamily == 'RedHat' {
+        if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
+            if $amavisd::_manage_epel {
+                $_requireEpel = true
+            }
+        }
+    }
+
+    if $_requireEpel {
+        $pkg_require = Class['epel']
+    } else {
+        $pkg_require = undef
     }
 
     package { $amavisd::_package_name:
-        ensure => $amavisd::package_ensure,
-        name   => $amavisd::_package_name,
-        # Re-enable after config is done
-        # before => Service[$amavisd::_service_name]
+        ensure  => $amavisd::package_ensure,
+        name    => $amavisd::_package_name,
+        require => $pkg_require,
+        before  => Service[$amavisd::_service_name]
     }
 }

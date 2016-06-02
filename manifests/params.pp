@@ -78,6 +78,7 @@ class amavisd::params {
     case $::osfamily {
         'Debian': {
             # Service settings
+            $clamd_service     = 'clamd'
             $config_dir        = '/etc/amavis/conf.d'
             $config_file       = '60-puppet'
             $manage_epel       = false
@@ -138,6 +139,7 @@ class amavisd::params {
         }
         'RedHat': {
             # Service settings
+            $clamd_service                      = 'clamd'
             $config_dir                         = '/etc/amavisd'
             $config_file                        = 'amavisd.conf'
             $manage_epel                        = true

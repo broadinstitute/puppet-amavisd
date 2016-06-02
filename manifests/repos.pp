@@ -25,7 +25,7 @@ class amavisd::repos {
                         include ::epel
                     }
 
-                    Class['epel'] -> Package[$amavisd::_package_name]
+                    # Class['epel'] -> Package[$amavisd::_package_name]
                 }
             }
         }
