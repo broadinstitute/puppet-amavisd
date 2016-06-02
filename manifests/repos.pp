@@ -22,7 +22,9 @@ class amavisd::repos {
             if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
                 if ($amavisd::_manage_epel == true) {
                     if !defined(Class['epel']) {
-                        include ::epel
+                        if !defined(Yumrepo['epel']) {
+                            include ::epel
+                        }
                     }
 
                     # Class['epel'] -> Package[$amavisd::_package_name]
