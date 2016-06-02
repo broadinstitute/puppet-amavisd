@@ -79,6 +79,7 @@ class amavisd (
     $forward_method                   = undef,
     $helpers_home                     = undef,
     $include_score_sender_maps        = undef,
+    $inet_socket_bind                 = undef,
     $inet_socket_port                 = undef,
     $interface_policy                 = undef,
     $keep_decoded_original_maps       = undef,
@@ -91,6 +92,7 @@ class amavisd (
     $mailfrom_notify_recip            = undef,
     $mailfrom_notify_spamadmin        = undef,
     $mailfrom_to_quarantine           = undef,
+    $manage_apt                       = undef,
     $manage_epel                      = undef,
     $max_expansion_quota              = undef,
     $max_servers                      = undef,
@@ -198,6 +200,7 @@ class amavisd (
     $_forward_method                   = pick_default($forward_method, $amavisd::params::forward_method)
     $_helpers_home                     = pick_default($helpers_home, $amavisd::params::helpers_home)
     $_include_score_sender_maps        = pick_default($include_score_sender_maps, $amavisd::params::include_score_sender_maps)
+    $_inet_socket_bind                 = pick_default($inet_socket_bind, $amavisd::params::inet_socket_bind)
     $_inet_socket_port                 = pick_default($inet_socket_port, $amavisd::params::inet_socket_port)
     $_interface_policy                 = pick_default($interface_policy, $amavisd::params::interface_policy)
     $_keep_decoded_original_maps       = pick_default($keep_decoded_original_maps, $amavisd::params::keep_decoded_original_maps)

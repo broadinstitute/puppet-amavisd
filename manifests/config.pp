@@ -64,6 +64,7 @@ class amavisd::config {
     $forward_method                   = $amavisd::_forward_method
     $helpers_home                     = $amavisd::_helpers_home
     $include_score_sender_maps        = $amavisd::_include_score_sender_maps
+    $inet_socket_bind                 = $amavisd::_inet_socket_bind
     $inet_socket_port                 = $amavisd::_inet_socket_port
     $interface_policy                 = $amavisd::_interface_policy
     $keep_decoded_original_maps       = $amavisd::_keep_decoded_original_maps

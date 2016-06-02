@@ -54,6 +54,7 @@
 <%= scope.function_perl_var_print(["$unix_socketname", @unix_socketname]) %>
 <% if !@inet_socket_port.empty? %>$inet_socket_port = [<% @inet_socket_port.each do |port| %><%= port %>,<% end -%>];
 <% end -%>
+<%= scope.function_perl_var_print(["$inet_socket_bind", @inet_socket_bind]) %>
 
 <% if @policy_bank -%>
 <% @policy_bank.each_pair do |bank_key, bank_hash| -%>

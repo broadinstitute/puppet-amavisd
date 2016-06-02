@@ -2,6 +2,20 @@
 #
 # This class takes care of all necessary repository installations
 #
+# === Variables
+#
+# These variables from other classes are required for correct functionality:
+#
+# [*amavisd::_package_name*]
+#   This is used to provide repository dependencies to the package resource
+#
+# [*amavisd::_manage_apt*]
+#   This determines whether the *apt* class is included by this module
+#
+# [*amavisd::_manage_epel*]
+#   This determines whether the *epel* class is included and whether the
+#   EPEL repository is managed using this module
+#
 # === Authors
 #
 # Andrew Teixeira <teixeira@broadinstitute.org>
@@ -14,7 +28,9 @@ class amavisd::repos {
 
     case $::osfamily {
         'Debian': {
-            include ::apt
+            if !defined(Class['apt']) {
+                include ::apt
+            }
 
             Exec['apt_update'] -> Package[$amavisd::_package_name]
         }
@@ -26,8 +42,6 @@ class amavisd::repos {
                             include ::epel
                         }
                     }
-
-                    # Class['epel'] -> Package[$amavisd::_package_name]
                 }
             }
         }

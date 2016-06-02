@@ -81,6 +81,7 @@ class amavisd::params {
             $clamd_service     = 'clamd'
             $config_dir        = '/etc/amavis/conf.d'
             $config_file       = '60-puppet'
+            $manage_apt        = true
             $manage_epel       = false
             $service_name      = 'amavis'
             $snmp_package_name = undef
@@ -108,6 +109,7 @@ class amavisd::params {
             $final_spam_destiny                 = undef
             $final_virus_destiny                = undef
             $include_score_sender_maps          = false
+            $inet_socket_bind                   = undef
             $inet_socket_port                   = []
             $interface_policy                   = {}
             $local_domains_maps                 = []
@@ -142,6 +144,7 @@ class amavisd::params {
             $clamd_service                      = 'clamd'
             $config_dir                         = '/etc/amavisd'
             $config_file                        = 'amavisd.conf'
+            $manage_apt                         = false
             $manage_epel                        = true
             $service_name                       = 'amavisd'
             $snmp_package_name                  = 'amavisd-new-snmp'
@@ -209,6 +212,7 @@ class amavisd::params {
             $final_spam_destiny                 = 'D_DISCARD'
             $final_virus_destiny                = 'D_DISCARD'
             $include_score_sender_maps          = true
+            $inet_socket_bind                   = '127.0.0.1'
             $inet_socket_port                   = [ 10024 ]
             $interface_policy                   = {
                 '10026' => 'ORIGINATING',
