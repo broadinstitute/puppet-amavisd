@@ -41,9 +41,11 @@ class amavisd::repos {
                         if !defined(Yumrepo['epel']) {
                             include ::epel
 
-                            Class['epel'] -> Package[$amavisd::_package_name]
                         }
+
                     }
+
+                    Class['epel'] -> Package[$amavisd::_package_name]
                 }
             }
         }
