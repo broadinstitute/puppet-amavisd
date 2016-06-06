@@ -51,6 +51,31 @@ class amavisd::install {
         $pkg_require = undef
     }
 
+    if $amavisd::_manage_group {
+        $group_require = Group[$amavisd::_daemon_group]
+
+        group { $amavisd::_daemon_group:
+            ensure => 'present',
+            system => true,
+        }
+    } else {
+        $group_require = undef
+    }
+
+    if $amavisd::_manage_user {
+        user { $amavisd::_daemon_user:
+            ensure => 'present',
+            comment => 'User for amavisd-new',
+            forcelocal => true,
+            gid => $amavisd::_daemon_group,
+            home => $amavisd::_myhome,
+            managehome => false,
+            shell => '/sbin/nologin',
+            system => true,
+            require => $group_require,
+        }
+    }
+
     package { $amavisd::_package_name:
         ensure  => $amavisd::package_ensure,
         name    => $amavisd::_package_name,

@@ -94,6 +94,8 @@ class amavisd (
     $mailfrom_to_quarantine           = undef,
     $manage_apt                       = undef,
     $manage_epel                      = undef,
+    $manage_group                     = undef,
+    $manage_user                      = undef,
     $max_expansion_quota              = undef,
     $max_servers                      = undef,
     $maxfiles                         = undef,
@@ -213,6 +215,8 @@ class amavisd (
     $_mailfrom_notify_recip            = pick_default($mailfrom_notify_recip, $amavisd::params::mailfrom_notify_recip)
     $_mailfrom_notify_spamadmin        = pick_default($mailfrom_notify_spamadmin, $amavisd::params::mailfrom_notify_spamadmin)
     $_mailfrom_to_quarantine           = pick_default($mailfrom_to_quarantine, $amavisd::params::mailfrom_to_quarantine)
+    $_manage_group                     = pick_default($manage_group, $amavisd::params::manage_group)
+    $_manage_user                      = pick_default($manage_user, $amavisd::params::manage_user)
     $_max_expansion_quota              = pick_default($max_expansion_quota, $amavisd::params::max_expansion_quota)
     $_max_servers                      = pick_default($max_servers, $amavisd::params::max_servers)
     $_maxfiles                         = pick_default($maxfiles, $amavisd::params::maxfiles)

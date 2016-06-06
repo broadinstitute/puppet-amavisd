@@ -26,6 +26,8 @@ class amavisd::params {
     $clamav_config_dir = '/etc/clamd.d'
     $daemon_user       = 'amavis'
     $daemon_group      = 'amavis'
+    $manage_group      = true
+    $manage_user       = true
     $package_name      = 'amavisd-new'
     $root_group        = 'root'
 
