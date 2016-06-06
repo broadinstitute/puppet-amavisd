@@ -40,6 +40,8 @@ class amavisd::repos {
                     if !defined(Class['epel']) {
                         if !defined(Yumrepo['epel']) {
                             include ::epel
+
+                            Class['epel'] -> Package[$amavisd::_package_name]
                         }
                     }
                 }
