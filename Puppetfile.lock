@@ -3,8 +3,8 @@ FORGE
   specs:
     puppetlabs-apt (2.2.2)
       puppetlabs-stdlib (< 5.0.0, >= 4.5.0)
-    puppetlabs-concat (2.1.0)
-      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
+    puppetlabs-concat (2.2.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
     puppetlabs-stdlib (4.12.0)
     stahnma-epel (1.2.2)
       puppetlabs-stdlib (>= 3.0.0)

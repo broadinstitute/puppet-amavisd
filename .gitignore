@@ -3,3 +3,8 @@
 spec/fixtures
 .DS_Store
 *.swp
+.vagrant
+.bundle
+/spec/fixtures/manifests
+/spec/fixtures/modules
+.rspec_system
