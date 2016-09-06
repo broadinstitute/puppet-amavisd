@@ -80,6 +80,6 @@ class amavisd::install {
         ensure  => $amavisd::package_ensure,
         name    => $amavisd::_package_name,
         require => $pkg_require,
-        before  => Service[$amavisd::_service_name]
+        before  => Service['amavisd_service']
     }
 }

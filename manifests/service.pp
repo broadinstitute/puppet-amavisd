@@ -23,7 +23,7 @@ class amavisd::service {
         $svc_subscribe = Concat[$amavisd::config::amavis_conf]
     }
 
-    service { $amavisd::_service_name:
+    service { 'amavisd_service':
         ensure    => $amavisd::service_ensure,
         enable    => $amavisd::service_enable,
         name      => $amavisd::_service_name,

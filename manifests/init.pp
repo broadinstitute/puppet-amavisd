@@ -131,7 +131,7 @@ class amavisd (
     $sa_tag2_level_deflt              = undef,
     $sa_tag_level_deflt               = undef,
     $service_enable                   = true,
-    $service_ensure                   = running,
+    $service_ensure                   = 'running',
     $service_name                     = undef,
     $spam_quarantine_to               = undef,
     $state_dir                        = undef,
@@ -162,6 +162,9 @@ class amavisd (
     $_service_name  = pick($service_name, $amavisd::params::service_name)
     $_state_dir     = pick($state_dir, $amavisd::params::state_dir)
     $_user_shell    = pick($user_shell, $amavisd::params::user_shell)
+
+    validate_re($package_ensure, '^(absent|held|installed|latest|present|purged)$')
+    validate_re($service_ensure, '^(running|stopped)$')
 
     # Config settings
     $_addr_extension_bad_header_maps   = pick_default($addr_extension_bad_header_maps, $amavisd::params::addr_extension_bad_header_maps)

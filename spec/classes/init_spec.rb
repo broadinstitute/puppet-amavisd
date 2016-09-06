@@ -2,36 +2,79 @@ require 'spec_helper'
 
 describe 'amavisd' do
 
-  # on_supported_os.each do |os, facts|
-  #   context "on #{os}" do
-  #     let(:facts) do
-  #       facts
-  #     end
+  on_supported_os.each do |os, facts|
+    context "on #{os}" do
+      let(:facts) do
+        facts
+      end
 
-  [ 'Debian', 'RedHat' ].each do |osfamily|
+      it { should compile.with_all_deps }
 
-    context "on #{osfamily}" do
+      context 'with defaults for all parameters' do
+        it { should contain_class('amavisd') }
+        it { should contain_group('amavis').with_ensure('present') }
+        it { should contain_user('amavis').with_ensure('present') }
+        it { should contain_service('amavisd_service').with_enable(true) }
+        it { should contain_service('amavisd_service').with_ensure('running') }
+        it { should contain_package('amavisd-new').with_ensure('present') }
+      end
 
-      if osfamily == 'Debian'
-        let(:facts) { {
-          :osfamily               => 'Debian',
-          :operatingsystem        => 'Debian',
-          :lsbdistid              => 'Debian',
-          :lsbdistcodename        => 'wheezy',
-          :kernelrelease          => '3.2.0-4-amd64',
-          :operatingsystemrelease => '7.3',
-          :operatingsystemmajrelease => '7',
-        } }
+      context 'with manage_group => false' do
+        let (:params) { { :manage_group => false } }
 
-        context 'with defaults for all parameters' do
-          it { should contain_class('amavisd') }
+        it { should_not contain_group('amavis') }
+      end
+
+      context 'with manage_user => false' do
+        let (:params) { { :manage_user => false } }
+
+        it { should_not contain_user('amavis') }
+      end
+
+      context 'with custom group' do
+        let (:params) { { :daemon_group => 'testgrp' } }
+
+        it { should contain_group('testgrp').with_ensure('present') }
+      end
+
+      context 'with custom user' do
+        let (:params) { { :daemon_user => 'testuser' } }
+
+        it { should contain_user('testuser').with_ensure('present') }
+      end
+
+      context 'with package_ensure => absent' do
+        let (:params) { { :package_ensure => 'absent' } }
+
+        it { should contain_package('amavisd-new').with_ensure('absent') }
+      end
+
+      context 'with service_enable => false' do
+        let (:params) { { :service_enable => false } }
+
+        it { should contain_service('amavisd_service').with_enable(false) }
+      end
+
+      context 'with service_ensure => stopped' do
+        let (:params) { { :service_ensure => 'stopped' } }
+
+        it { should contain_service('amavisd_service').with_ensure('stopped') }
+      end
+
+      context 'with custom service_name' do
+        let (:params) { { :service_name => 'amavistest' } }
+
+        it { should contain_service('amavisd_service').with_name('amavistest') }
+      end
+
+      case facts[:osfamily]
+      when 'Debian'
+
+        context 'osfamily differences with defaults for all parameters' do
           it { should contain_class('apt') }
-          it { should contain_group('amavis').with_ensure('present') }
-          it { should contain_user('amavis').with_ensure('present') }
-          it { should contain_package('amavisd-new').with_ensure('present') }
-          it { should contain_service('amavis').with_enable(true) }
-          it { should contain_service('amavis').with_ensure('running') }
+          it { should_not contain_class('epel') }
           it { should contain_concat('/etc/amavis/conf.d/60-puppet') }
+          it { should contain_service('amavisd_service').with_name('amavis') }
         end
 
         context 'with a custom config_dir' do
@@ -46,28 +89,16 @@ describe 'amavisd' do
           it { should contain_concat('/etc/amavis/conf.d/test.conf') }
         end
 
-      end
+      when 'RedHat'
 
-      if osfamily == 'RedHat'
-        let(:facts) { {
-          :osfamily => osfamily,
-          :operatingsystem => 'RedHat',
-          :operatingsystemrelease => '7.2',
-          :operatingsystemmajrelease => '7',
-        } }
-
-        context 'with defaults for all parameters' do
-          it { should contain_class('amavisd') }
+        context 'osfamily differences with defaults for all parameters' do
           it { should contain_class('epel') }
-          it { should contain_group('amavis').with_ensure('present') }
-          it { should contain_user('amavis').with_ensure('present') }
-          it { should contain_package('amavisd-new').with_ensure('present') }
-          it { should contain_service('amavisd').with_enable(true) }
-          it { should contain_service('amavisd').with_ensure('running') }
+          it { should_not contain_class('apt') }
           it { should contain_concat('/etc/amavisd/amavisd.conf') }
+          it { should contain_service('amavisd_service').with_name('amavisd') }
         end
 
-        context 'It should not include epel if manage_epel => false' do
+        context 'with manage_epel => false' do
           let (:params) { { 'manage_epel' => false } }
 
           it { should_not contain_class('epel') }

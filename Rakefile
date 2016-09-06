@@ -39,6 +39,15 @@ begin
 rescue LoadError
 end
 
+# Prevent fixtures from being deleted on each successful run by cutting out
+# the spec_clean task
+# https://projects.puppetlabs.com/issues/20013
+Rake::Task[:spec].clear
+task :spec do
+  Rake::Task[:spec_prep].invoke
+  Rake::Task[:spec_standalone].invoke
+end
+
 task :metadata_lint do
   sh "bundle exec metadata-json-lint metadata.json"
 end
