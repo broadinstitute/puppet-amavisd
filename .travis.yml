@@ -3,7 +3,7 @@ language: ruby
 sudo: false
 cache: bundler
 bundler_args: --without development system_tests
-before_install: gem update bundler; rm Gemfile.lock || true
+before_install: rm Gemfile.lock || true
 script: bundle exec rake test
 branches:
   only:
