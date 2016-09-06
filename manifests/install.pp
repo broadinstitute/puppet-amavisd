@@ -40,13 +40,13 @@ class amavisd::install {
     if $::osfamily == 'RedHat' {
         if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
             if $amavisd::_manage_epel {
-                $_requireEpel = true
+                $pkg_require = Class['epel']
+            } else {
+                $pkg_require = undef
             }
+        } else {
+            $pkg_require = undef
         }
-    }
-
-    if $_requireEpel {
-        $pkg_require = Class['epel']
     } else {
         $pkg_require = undef
     }
@@ -70,7 +70,7 @@ class amavisd::install {
             gid => $amavisd::_daemon_group,
             home => $amavisd::_myhome,
             managehome => false,
-            shell => '/sbin/nologin',
+            shell => $amavisd::_user_shell,
             system => true,
             require => $group_require,
         }

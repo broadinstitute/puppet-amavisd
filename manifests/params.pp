@@ -83,12 +83,12 @@ class amavisd::params {
             $clamd_service     = 'clamd'
             $config_dir        = '/etc/amavis/conf.d'
             $config_file       = '60-puppet'
-            $manage_apt        = true
             $manage_epel       = false
             $service_name      = 'amavis'
             $snmp_package_name = undef
             $snmp_service_name = undef
             $state_dir         = '/var/run/amavis'
+            $user_shell        = '/usr/sbin/nologin'
 
             # Config settings
             $addr_extension_bad_header_maps     = []
@@ -122,7 +122,7 @@ class amavisd::params {
             $maxlevels                          = undef
             $min_expansion_quota                = undef
             $mydomain                           = undef
-            $myhome                             = undef
+            $myhome                             = '/var/lib/amavis'
             $mynetworks                         = []
             $nanny_details_level                = undef
             $path                               = undef
@@ -146,12 +146,12 @@ class amavisd::params {
             $clamd_service                      = 'clamd'
             $config_dir                         = '/etc/amavisd'
             $config_file                        = 'amavisd.conf'
-            $manage_apt                         = false
             $manage_epel                        = true
             $service_name                       = 'amavisd'
             $snmp_package_name                  = 'amavisd-new-snmp'
             $snmp_service_name                  = 'amavisd-snmp'
             $state_dir                          = '/var/run/amavisd'
+            $user_shell                         = '/sbin/nologin'
 
             # Config settings
             $addr_extension_bad_header_maps     = ['badh' ]

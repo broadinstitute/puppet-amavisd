@@ -92,7 +92,6 @@ class amavisd (
     $mailfrom_notify_recip            = undef,
     $mailfrom_notify_spamadmin        = undef,
     $mailfrom_to_quarantine           = undef,
-    $manage_apt                       = undef,
     $manage_epel                      = undef,
     $manage_group                     = undef,
     $manage_user                      = undef,
@@ -143,6 +142,7 @@ class amavisd (
     $timestamp_fmt_mysql              = undef,
     $tmpdir                           = undef,
     $unix_socketname                  = undef,
+    $user_shell                       = undef,
     $virus_admin                      = undef,
     $virus_quarantine_to              = undef,
     $warnbadhrecip                    = undef,
@@ -156,11 +156,12 @@ class amavisd (
     # Service Settings
     $_clamd_service = pick($clamd_service, $amavisd::params::clamd_service)
     $_config_dir    = pick($config_dir, $amavisd::params::config_dir)
-    $_config_file   = pick($config_dir, $amavisd::params::config_file)
+    $_config_file   = pick($config_file, $amavisd::params::config_file)
     $_manage_epel   = pick($manage_epel, $amavisd::params::manage_epel)
     $_package_name  = pick($package_name, $amavisd::params::package_name)
     $_service_name  = pick($service_name, $amavisd::params::service_name)
     $_state_dir     = pick($state_dir, $amavisd::params::state_dir)
+    $_user_shell    = pick($user_shell, $amavisd::params::user_shell)
 
     # Config settings
     $_addr_extension_bad_header_maps   = pick_default($addr_extension_bad_header_maps, $amavisd::params::addr_extension_bad_header_maps)
