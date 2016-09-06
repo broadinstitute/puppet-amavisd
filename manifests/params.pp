@@ -114,6 +114,7 @@ class amavisd::params {
             $inet_socket_bind                   = undef
             $inet_socket_port                   = []
             $interface_policy                   = {}
+            $keep_decoded_original_maps         = []
             $local_domains_maps                 = []
             $log_level                          = undef
             $max_expansion_quota                = undef
