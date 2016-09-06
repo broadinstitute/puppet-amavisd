@@ -21,7 +21,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "file", source: "Gemfile", destination: "/tmp/Gemfile"
-  config.vm.provision "file", source: "Gemfile.lock", destination: "/tmp/Gemfile.lock"
   config.vm.provision "file", source: "vagrant_files/hiera.yaml", destination: "/tmp/hiera.yaml"
   config.vm.provision "shell", path: "vagrant_files/centos7-init.sh"
 

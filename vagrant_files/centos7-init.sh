@@ -4,7 +4,6 @@ rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
 yum -y install git puppet ruby-devel vim
 mv /tmp/Gemfile /etc/puppetlabs/code/
-mv /tmp/Gemfile.lock /etc/puppetlabs/code/
 mv /tmp/hiera.yaml /etc/puppetlabs/code/
 mkdir -p /etc/puppetlabs/code/hieradata
 mkdir -p /etc/puppetlabs/code/modules
