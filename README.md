@@ -1,5 +1,6 @@
 # amavisd
-
+[![Build Status](https://travis-ci.org/broadinstitute/puppet-amavisd.svg?branch=master)](https://travis-ci.org/broadinstitute/puppet-amavisd)
+[![License (Apache 2.0)](https://img.shields.io/badge/license-Apache-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 #### Table of Contents
 
 1. [Overview](#overview)
