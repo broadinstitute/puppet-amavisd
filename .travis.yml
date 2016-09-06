@@ -30,3 +30,5 @@ matrix:
     env: PUPPET_GEM_VERSION="~> 3.7.0"
   - rvm: 2.2
     env: PUPPET_GEM_VERSION="~> 3.8.0"
+  - rvm: 2.2
+    env: PUPPET_GEM_VERSION="~> 3.8.0" FUTURE_PARSER="yes"
