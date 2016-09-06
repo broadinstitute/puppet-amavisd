@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 puppetversion = ENV['PUPPET_GEM_VERSION']
+gem "json", "< 2.0.0"
 gem 'facter', '>= 1.7.0'
 gem 'librarian-puppet'
 gem 'metadata-json-lint'
