@@ -2,12 +2,9 @@ source 'https://rubygems.org'
 
 puppetversion = ENV['PUPPET_GEM_VERSION']
 
-if ENV['FUTURE_PARSER']
-    gem "syck", ">= 1.1.0"
-end
-
 gem "json", "< 2.0.0", :platform => 'ruby_19'
 gem "json_pure", "< 2.0.0", :platform => 'ruby_19'
+gem "syck", ">= 1.1.0", :platform => 'ruby_22'
 gem 'facter', '>= 1.7.0'
 gem 'librarian-puppet'
 gem 'metadata-json-lint'
