@@ -1,7 +1,9 @@
 fixtures:
   forge_modules:
     apt: 'puppetlabs/apt'
-    concat: 'puppetlabs/concat'
+    concat:
+      repo: 'puppetlabs/concat'
+      ref: '2.2.1'
     epel: 'stahnma/epel'
     stdlib:
       repo: 'puppetlabs/stdlib'
