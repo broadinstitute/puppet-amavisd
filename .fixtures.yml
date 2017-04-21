@@ -9,6 +9,6 @@ fixtures:
     epel: 'stahnma/epel'
     stdlib:
       repo: 'puppetlabs/stdlib'
-      ref: '4.12.0'
+      ref: '4.13.0'
   symlinks:
     amavisd: "#{source_dir}"
