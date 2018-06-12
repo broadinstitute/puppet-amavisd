@@ -21,12 +21,6 @@ PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{
 PuppetLint.configuration.fail_on_warnings = true
 PuppetLint.configuration.disable_documentation
 
-# Forsake support for Puppet 2.6.2 for the benefit of cleaner code.
-# http://puppet-lint.com/checks/class_parameter_defaults/
-PuppetLint.configuration.send('disable_class_parameter_defaults')
-# To fix unquoted cases in spec/fixtures/modules/apt/manifests/key.pp
-PuppetLint.configuration.send('disable_unquoted_string_in_case')
-
 PuppetLint.configuration.ignore_paths = exclude_paths
 
 PuppetSyntax.exclude_paths = exclude_paths
