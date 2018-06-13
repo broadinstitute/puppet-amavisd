@@ -25,18 +25,14 @@ class amavisd::repos {
 
     case $::osfamily {
         'Debian': {
-            if !defined(Class['apt']) {
-                require ::apt
-            }
+            require ::apt
 
             Exec['apt_update'] -> Package[$amavisd::_package_name]
         }
         'RedHat': {
             if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
                 if ($amavisd::_manage_epel == true) {
-                    if !defined(Class['epel']) {
-                        require ::epel
-                    }
+                    require ::epel
 
                     Class['epel'] -> Package[$amavisd::_package_name]
                 }

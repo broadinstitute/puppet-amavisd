@@ -35,6 +35,6 @@ EOS
   end
 
   data = function_perl_data_print([arg])
-  return "#{varname} = #{data};"
+  return "#{varname} = #{data};\n"
 
 end

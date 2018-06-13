@@ -63,17 +63,32 @@ class amavisd::install {
     }
 
     if $amavisd::_manage_user {
+        $user_require = User[$amavisd::_daemon_user]
+
         user { $amavisd::_daemon_user:
-            ensure => 'present',
-            comment => 'User for amavisd-new',
+            ensure     => 'present',
+            comment    => 'User for amavisd-new',
             forcelocal => true,
-            gid => $amavisd::_daemon_group,
-            home => $amavisd::_myhome,
+            gid        => $amavisd::_daemon_group,
+            home       => $amavisd::_myhome,
             managehome => false,
-            shell => $amavisd::_user_shell,
-            system => true,
-            require => $group_require,
+            shell      => $amavisd::_user_shell,
+            system     => true,
+            require    => $group_require,
         }
+    } else {
+        $user_require = undef
+    }
+
+    $file_require = unique([$group_require, $user_require])
+
+    file { $amavisd::_myhome:
+        ensure  => 'directory',
+        owner   => $amavisd::_daemon_user,
+        group   => $amavisd::_daemon_group,
+        mode    => '0750',
+        before  => Package[$amavisd::_package_name],
+        require => $file_require,
     }
 
     package { $amavisd::_package_name:
