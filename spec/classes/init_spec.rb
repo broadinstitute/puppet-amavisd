@@ -68,7 +68,7 @@ describe 'amavisd' do
       end
 
       case facts[:osfamily]
-      when 'Debian'
+      when 'Debian', 'Ubuntu'
 
         context 'osfamily differences with defaults for all parameters' do
           it { should contain_class('apt') }
