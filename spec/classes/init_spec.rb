@@ -1,155 +1,236 @@
 require 'spec_helper'
 
 describe 'amavisd' do
-
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
         facts
       end
 
-      it { should compile.with_all_deps }
+      it do
+        is_expected.to compile.with_all_deps
+      end
 
       context 'with defaults for all parameters' do
-        it { should contain_class('amavisd') }
-        it { should contain_group('amavis').with_ensure('present') }
-        it { should contain_user('amavis').with_ensure('present') }
-        it { should contain_service('amavisd_service').with_enable(true) }
-        it { should contain_service('amavisd_service').with_ensure('running') }
-        it { should contain_package('amavisd-new').with_ensure('present') }
+        it do
+          is_expected.to contain_class('amavisd')
+        end
+        it do
+          is_expected.to contain_group('amavis').with_ensure('present')
+        end
+        it do
+          is_expected.to contain_user('amavis').with_ensure('present')
+        end
+        it do
+          is_expected.to contain_service('amavisd_service').with_enable(true)
+        end
+        it do
+          is_expected.to contain_service('amavisd_service').with_ensure('running')
+        end
+        it do
+          is_expected.to contain_package('amavisd-new').with_ensure('present')
+        end
       end
 
       context 'with manage_group => false' do
-        let (:params) { { :manage_group => false } }
+        let(:params) do
+          { manage_group: false }
+        end
 
-        it { should_not contain_group('amavis') }
+        it do
+          is_expected.not_to contain_group('amavis')
+        end
       end
 
       context 'with manage_user => false' do
-        let (:params) { { :manage_user => false } }
+        let(:params) do
+          { manage_user: false }
+        end
 
-        it { should_not contain_user('amavis') }
+        it do
+          is_expected.not_to contain_user('amavis')
+        end
       end
 
       context 'with custom group' do
-        let (:params) { { :daemon_group => 'testgrp' } }
+        let(:params) do
+          { daemon_group: 'testgrp' }
+        end
 
-        it { should contain_group('testgrp').with_ensure('present') }
+        it do
+          is_expected.to contain_group('testgrp').with_ensure('present')
+        end
       end
 
       context 'with custom user' do
-        let (:params) { { :daemon_user => 'testuser' } }
+        let(:params) do
+          { daemon_user: 'testuser' }
+        end
 
-        it { should contain_user('testuser').with_ensure('present') }
+        it do
+          is_expected.to contain_user('testuser').with_ensure('present')
+        end
       end
 
       context 'with package_ensure => absent' do
-        let (:params) { { :package_ensure => 'absent' } }
+        let(:params) do
+          { package_ensure: 'absent' }
+        end
 
-        it { should contain_package('amavisd-new').with_ensure('absent') }
+        it do
+          is_expected.to contain_package('amavisd-new').with_ensure('absent')
+        end
       end
 
       context 'with service_enable => false' do
-        let (:params) { { :service_enable => false } }
+        let(:params) do
+          { service_enable: false }
+        end
 
-        it { should contain_service('amavisd_service').with_enable(false) }
+        it do
+          is_expected.to contain_service('amavisd_service').with_enable(false)
+        end
       end
 
       context 'with service_ensure => stopped' do
-        let (:params) { { :service_ensure => 'stopped' } }
+        let(:params) do
+          { service_ensure: 'stopped' }
+        end
 
-        it { should contain_service('amavisd_service').with_ensure('stopped') }
+        it do
+          is_expected.to contain_service('amavisd_service').with_ensure('stopped')
+        end
       end
 
       context 'with custom service_name' do
-        let (:params) { { :service_name => 'amavistest' } }
+        let(:params) do
+          { service_name: 'amavistest' }
+        end
 
-        it { should contain_service('amavisd_service').with_name('amavistest') }
+        it do
+          is_expected.to contain_service('amavisd_service').with_name('amavistest')
+        end
       end
 
       case facts[:osfamily]
       when 'Debian', 'Ubuntu'
-
         context 'osfamily differences with defaults for all parameters' do
-          it { should contain_class('apt') }
-          it { should_not contain_class('epel') }
-          it { should contain_concat('/etc/amavis/conf.d/60-puppet') }
-          it { should contain_service('amavisd_service').with_name('amavis') }
+          it do
+            is_expected.to contain_class('apt')
+          end
+          it do
+            is_expected.not_to contain_class('epel')
+          end
+          it do
+            is_expected.to contain_concat('/etc/amavis/conf.d/60-puppet')
+          end
+          it do
+            is_expected.to contain_service('amavisd_service').with_name('amavis')
+          end
         end
 
         context 'with a custom config_dir' do
-          let (:params) { { :config_dir => '/etc/testing' } }
+          let(:params) do
+            { config_dir: '/etc/testing' }
+          end
 
-          it { should contain_concat('/etc/testing/60-puppet') }
+          it do
+            is_expected.to contain_concat('/etc/testing/60-puppet')
+          end
         end
 
         context 'with a custom config_file' do
-          let (:params) { { :config_file => 'test.conf' } }
+          let(:params) do
+            { config_file: 'test.conf' }
+          end
 
-          it { should contain_concat('/etc/amavis/conf.d/test.conf') }
+          it do
+            is_expected.to contain_concat('/etc/amavis/conf.d/test.conf')
+          end
         end
 
       when 'RedHat'
-
         context 'osfamily differences with defaults for all parameters' do
-          it { should contain_class('epel') }
-          it { should_not contain_class('apt') }
-          it { should contain_concat('/etc/amavisd/amavisd.conf') }
-          it { should contain_service('amavisd_service').with_name('amavisd') }
+          it do
+            is_expected.to contain_class('epel')
+          end
+          it do
+            is_expected.not_to contain_class('apt')
+          end
+          it do
+            is_expected.to contain_concat('/etc/amavisd/amavisd.conf')
+          end
+          it do
+            is_expected.to contain_service('amavisd_service').with_name('amavisd')
+          end
         end
 
         context 'with manage_epel => false' do
-          let (:params) { { 'manage_epel' => false } }
+          let(:params) do
+            { manage_epel: false }
+          end
 
-          it { should_not contain_class('epel') }
+          it do
+            is_expected.not_to contain_class('epel')
+          end
         end
 
         context 'with a custom config_dir' do
-          let (:params) { { :config_dir => '/etc/testing' } }
+          let(:params) do
+            { config_dir: '/etc/testing' }
+          end
 
-          it { should contain_concat('/etc/testing/amavisd.conf') }
+          it do
+            is_expected.to contain_concat('/etc/testing/amavisd.conf')
+          end
         end
 
         context 'with a custom config_file' do
-          let (:params) { { :config_file => 'test.conf' } }
+          let(:params) do
+            { config_file: 'test.conf' }
+          end
 
-          it { should contain_concat('/etc/amavisd/test.conf') }
+          it do
+            is_expected.to contain_concat('/etc/amavisd/test.conf')
+          end
         end
-
       end
-
     end
-
   end
 
-  context "specific to Amazon Linux" do
-
-    let(:facts) { {
-      :osfamily => 'RedHat',
-      :operatingsystem => 'Amazon',
-      :operatingsystemrelease => '7.2',
-      :operatingsystemmajrelease => '7',
-    } }
+  context 'specific to Amazon Linux' do
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystem: 'Amazon',
+        operatingsystemrelease: '7.2',
+        operatingsystemmajrelease: '7',
+      }
+    end
 
     context 'It should not include epel' do
-      it { should_not contain_class('epel') }
+      it do
+        is_expected.not_to contain_class('epel')
+      end
     end
   end
 
-  context "specific to Fedora" do
-
-    let(:facts) { {
-      :osfamily => 'RedHat',
-      :operatingsystem => 'Fedora',
-      :operatingsystemrelease => '7.2',
-      :operatingsystemmajrelease => '7',
-    } }
+  context 'specific to Fedora' do
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystem: 'Fedora',
+        operatingsystemrelease: '7.2',
+        operatingsystemmajrelease: '7',
+      }
+    end
 
     context 'It should not include epel' do
-      it { should_not contain_class('epel') }
+      it do
+        is_expected.not_to contain_class('epel')
+      end
     end
   end
-
 end
 
 # it {
