@@ -1,7 +1,12 @@
 # amavisd
-[![Build Status](https://travis-ci.org/broadinstitute/puppet-amavisd.svg?branch=master)](https://travis-ci.org/broadinstitute/puppet-amavisd)
-[![License (Apache 2.0)](https://img.shields.io/badge/license-Apache-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-#### Table of Contents
+
+[![CircleCI](https://circleci.com/gh/broadinstitute/puppet-amavisd/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-amavisd)
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/amavisd.svg)](https://forge.puppet.com/broadinstitute/amavisd)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/amavisd.svg)](https://forge.puppet.com/broadinstitute/amavisd)
+[![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/amavisd.svg)](https://forge.puppet.com/broadinstitute/amavisd)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
+## Table of Contents
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
@@ -11,8 +16,8 @@
     * [Beginning with amavisd](#beginning-with-amavisd)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+6. [Limitations - OS compatibility, etc.](#limitations)
+7. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
@@ -52,7 +57,7 @@ The very basic steps needed for a user to get the module up and running.
 
 If your most recent release breaks compatibility or requires particular steps
 for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+(For an example, see [http://forge.puppetlabs.com/puppetlabs/firewall](puppetlabs/firewall)).
 
 ## Usage
 
@@ -74,9 +79,3 @@ This is where you list OS compatibility, version compatibility, etc.
 
 Since your module is awesome, other users will want to play with it. Let them
 know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.

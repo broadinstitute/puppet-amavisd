@@ -7,5 +7,6 @@ fixtures:
     epel: 'stahnma/epel'
     stdlib:
       repo: 'puppetlabs/stdlib'
+    yumrepo_core: 'puppetlabs/yumrepo_core'
   symlinks:
     amavisd: "#{source_dir}"
