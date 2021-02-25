@@ -1,10 +1,11 @@
-# amavisd
+# puppet-amavisd
 
-[![CircleCI](https://circleci.com/gh/broadinstitute/puppet-amavisd/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-amavisd)
+![checks](https://github.com/broadinstitute/puppet-amavisd/workflows/checks/badge.svg?branch=main)
 [![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/amavisd.svg)](https://forge.puppet.com/broadinstitute/amavisd)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/amavisd.svg)](https://forge.puppet.com/broadinstitute/amavisd)
 [![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/amavisd.svg)](https://forge.puppet.com/broadinstitute/amavisd)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![codecov](https://codecov.io/gh/broadinstitute/puppet-amavisd/branch/main/graph/badge.svg)](https://codecov.io/gh/broadinstitute/puppet-amavisd)
 
 ## Table of Contents
 
