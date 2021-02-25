@@ -1,19 +1,9 @@
-# == Class: amavisd::repos
+# @summary This class takes care of all necessary repository installations
 #
-# This class takes care of all necessary repository installations
+# Variables used by this class:
 #
-# === Variables
-#
-#  $amavisd::_manage_epel
-#  $amavisd::package_name
-#
-# === Authors
-#
-# Andrew Teixeira <teixeira@broadinstitute.org>
-#
-# === Copyright
-#
-# Copyright 2018
+#  * $amavisd::_manage_epel
+#  * $amavisd::package_name
 #
 class amavisd::repos {
 

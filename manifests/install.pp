@@ -1,26 +1,16 @@
-# == Class: amavisd::install
+# @summary This class takes care of all necessary package installations
 #
-# This class takes care of all necessary package installations
+# Variables used by this class:
 #
-# === Variables
-#
-#  $amavisd::daemon_group
-#  $amavisd::daemon_user
-#  $amavisd::_manage_epel
-#  $amavisd::manage_group
-#  $amavisd::manage_user
-#  $amavisd::_myhome
-#  $amavisd::package_ensure
-#  $amavisd::package_name
-#  $amavisd::user_shell
-#
-# === Authors
-#
-# Andrew Teixeira <teixeira@broadinstitute.org>
-#
-# === Copyright
-#
-# Copyright 2018
+#  * $amavisd::daemon_group
+#  * $amavisd::daemon_user
+#  * $amavisd::_manage_epel
+#  * $amavisd::manage_group
+#  * $amavisd::manage_user
+#  * $amavisd::_myhome
+#  * $amavisd::package_ensure
+#  * $amavisd::package_name
+#  * $amavisd::user_shell
 #
 class amavisd::install {
 

@@ -1,16 +1,4 @@
-# == Class: amavisd::params
-#
-# The default parameters for the amavisd class
-#
-# === Variables
-#
-# === Authors
-#
-# Andrew Teixeira <teixeira@broadinstitute.org>
-#
-# === Copyright
-#
-# Copyright 2018
+# @summary The default parameters for the amavisd class
 #
 class amavisd::params {
   # System settings

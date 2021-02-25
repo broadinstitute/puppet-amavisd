@@ -1,15 +1,5 @@
-# == Class: amavisd::config
-#
-# This class takes care of all necessary configuration files using options
-# passed to the main *amavisd* class.
-#
-# === Authors
-#
-# Andrew Teixeira <teixeira@broadinstitute.org>
-#
-# === Copyright
-#
-# Copyright 2018
+# @summary This class takes care of all necessary configuration files using options
+#     passed to the main *amavisd* class.
 #
 class amavisd::config {
 
@@ -21,7 +11,7 @@ class amavisd::config {
   $addr_extension_banned_maps       = $amavisd::_addr_extension_banned_maps
   $addr_extension_spam_maps         = $amavisd::_addr_extension_spam_maps
   $addr_extension_virus_maps        = $amavisd::_addr_extension_virus_maps
-  $amavis_conf                      = "${amavisd::_config_dir}/${amavisd::_config_file}"
+  $amavis_conf                      = "${::amavisd::_config_dir}/${::amavisd::_config_file}"
   $av_scanners                      = $amavisd::_av_scanners
   $av_scanners_backup               = $amavisd::_av_scanners_backup
   $bad_header_quarantine_method     = $amavisd::_bad_header_quarantine_method
