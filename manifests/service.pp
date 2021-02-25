@@ -1,22 +1,12 @@
-# == Class: amavisd::service
+# @summary This class takes care of all necessary services
 #
-# This class takes care of all necessary services
+# Variables used by this class:
 #
-# === Authors
-#
-# === Variables
-#
-#  $amavisd::_clamd_service
-#  $amavisd::service_enable
-#  $amavisd::service_ensure
-#  $amavisd::_service_name
-#  $amavisd::watch_clamav
-#
-# Andrew Teixeira <teixeira@broadinstitute.org>
-#
-# === Copyright
-#
-# Copyright 2018
+#  * $amavisd::_clamd_service
+#  * $amavisd::service_enable
+#  * $amavisd::service_ensure
+#  * $amavisd::_service_name
+#  * $amavisd::watch_clamav
 #
 class amavisd::service {
 

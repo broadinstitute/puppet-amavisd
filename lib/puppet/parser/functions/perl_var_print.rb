@@ -8,25 +8,23 @@ hashes printed in correct Perl format.
 Given a nil value (undef), perl_varprint will return 'undef'.  If given a string
 that exactly equals 'undef', the 'undef' Perl keyword will be returned.
 
-Example:
+Examples:
+  $var1 = 10
+  $var2 = 'hello'
+  $var3 = undef
+  $var4 = 'undef'
 
-    $var1 = 10
-    $var2 = 'hello'
-    $var3 = undef
-    $var4 = 'undef'
-
-    perl_varprint("$var1", 10)
-    # => 10
-    perl_varprint("$var2", 'hello')
-    # => "hello"
-    perl_varprint($var3)
-    # => undef
-    perl_varprint($var4)
-    # => undef
-
+  perl_var_print(["$var1", 10])
+  # => $var1 = 10;
+  perl_var_print(["$var2", 'hello'])
+  # => $var2 = "hello";
+  perl_var_print(["$var3"])
+  # => nil
+  perl_var_print(["$var4", "undef")
+  # => $var4 = undef;
 EOS
              ) do |args|
-    raise(Puppet::ParseError, "perl_varprint() wrong number of arguments. Given: #{args.size} for 2)") if args.size != 2
+    raise(Puppet::ParseError, "perl_var_print() wrong number of arguments. Given: #{args.size} for 2)") if args.size != 2
 
     varname = args[0]
     arg = args[1]

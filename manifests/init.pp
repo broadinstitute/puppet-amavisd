@@ -1,183 +1,282 @@
-# == Class: amavisd
+# @summary This is the base amavisd class that should orchestrate the installation of
+#    all the other pieces that make up the software.
 #
-# This is the base amavisd class that should orchestrate the installation of
-# all the other pieces that make up the software.
+# @author Andrew Teixeira <teixeira@broadinstitute.org>
 #
-# === Parameters
+# @param clamd_service
+#    The name of the clamd service if Amavisd is being used in conjuction with Clamd.
+#    (default: OS-dependent)
 #
-#  clamd_service - The name of the clamd service if Amavisd is being used in
-#    in conjuction with Clamd.
-#    Default: OS-dependent - see params.pp
+# @param config_dir
+#    The directory where the Amavisd configuration files live. (default: OS-dependent)
 #
-#  config_dir - The directory where the Amavisd configuration files live.
-#    Default: OS-dependent - see params.pp
+# @param config_file
+#    The name of the configuration file this module will write. (default: OS-dependent)
 #
-#  config_file - The name of the configuration file this module will write.
-#    Default: OS-dependent - see params.pp
+# @param daemon_group
+#    The group under which the Amavisd service will run. Note: This will also set the
+#    *daemon_group* setting in the Amavisd config. (default: `amavis`)
 #
-#  daemon_group - The group under which the Amavisd service will run.
-#    Note: This will also set the *daemon_group* setting in the Amavisd config.
-#    Default: 'amavis'
+# @param daemon_user
+#    The user under which the Amavisd service will run. Note: This will also set the
+#    *daemon_user* setting in the Amavisd config. (default: `amavis`)
 #
-#  daemon_user - The user under which the Amavisd service will run.
-#    Note: This will also set the *daemon_user* setting in the Amavisd config.
-#    Default: 'amavis'
+# @param include_score_sender_maps
+#    Determine whether to include the *sender_score_maps* template in the final config
+#    file. (default: OS-dependent)
 #
-#  include_score_sender_maps - Determine whether to include the *sender_score_maps*
-#    template in the final config file.
-#    Default: OS-dependent - see params.pp
+# @param manage_epel
+#    Whether or not to include the `epel` class for package installations.
+#    (default: OS-dependent)
 #
-#  manage_epel - Whether or not to include the `epel` class for package installations.
-#    Default: OS-dependent - see params.pp
+# @param manage_group
+#    If true, create and manage the *$daemon_group* group. (default: `true`)
 #
-#  manage_group - If true, create and manage the *$daemon_group* group.
-#    Default: true
+# @param manage_user
+#    If true, create and manage the *$daemon_user* user. (default: `true`)
 #
-#  manage_user - If true, create and manage the *$daemon_user* user.
-#    Default: true
+# @param package_ensure
+#    If true, manage the package(s) needed for Amavisd. (default: `true`)
 #
-#  package_ensure - If true, manage the package(s) needed for Amavisd.
-#    Default: true
+# @param package_name
+#    The name of the Amavisd package to install. (default: `amavisd-new`)
 #
-#  package_name - The name of the Amavisd package to install.
-#    Default: 'amavisd-new'
+# @param service_enable
+#    If true, enable the service on the system. (default: `true`)
 #
-#  service_enable - If true, enable the service on the system.
-#    Default: true
+# @param service_ensure
+#    Ensure that the service is in this state when Puppet runs. (default: `running`)
 #
-#  service_ensure - Ensure that the service is in this state when Puppet runs.
-#    Default: 'running'
+# @param service_name
+#    The name of the service that Puppet should start/stop. (default: OS-dependent)
 #
-#  service_name - The name of the service that Puppet should start/stop.
-#    Default: OS-dependent - see params.pp
+# @param state_dir
+#    The directory in which Amavisd stores files when it runs. (default: OS-dependent)
 #
-#  state_dir - The directory in which Amavisd stores files when it runs.
-#    Default: OS-dependent - see params.pp
+# @param user_shell
+#    The shell to use for the user created if *$manage_user* is true.
+#    (default: nologin (path to nologin is OS-dependent)
 #
-#  user_shell - The shell to use for the user created if *$manage_user* is true.
-#    Default: nologin (path to nologin is OS-dependent)
-#
-# === Parameters with a one-to-one match to Amavisd config file variables
-#  addr_extension_bad_header_maps
-#  addr_extension_banned_maps
-#  addr_extension_spam_maps
-#  addr_extension_virus_maps
-#  av_scanners
-#  av_scanners_backup
-#  bad_header_quarantine_method
-#  bad_header_quarantine_to
-#  banned_filename_re
-#  banned_quarantine_to
-#  bounce_killer_score
-#  bypass_decode_parts
-#  bypass_spam_checks_maps
-#  bypass_virus_checks_maps
-#  clean_quarantine_method
-#  config_dir
-#  config_file
-#  daemon_chroot_dir
-#  daemon_group
-#  daemon_user
-#  db_home
-#  decoders
-#  defang_bad_header
-#  defang_banned
-#  defang_by_ccat
-#  defang_spam
-#  defang_undecipherable
-#  defang_virus
-#  do_syslog
-#  dspam
-#  enable_db
-#  enable_dkim_signing
-#  enable_dkim_verification
-#  enable_zmq
-#  final_bad_header_destiny
-#  final_banned_destiny
-#  final_spam_destiny
-#  final_virus_destiny
-#  forward_method
-#  helpers_home
-#  inet_socket_bind
-#  inet_socket_port
-#  interface_policy
-#  keep_decoded_original_maps
-#  local_domains_maps
-#  lock_file
-#  log_level
-#  log_recip_templ
-#  lookup_sql_dsn
-#  mailfrom_notify_admin
-#  mailfrom_notify_recip
-#  mailfrom_notify_spamadmin
-#  mailfrom_to_quarantine
-#  manage_epel
-#  manage_group
-#  manage_user
-#  max_expansion_quota
-#  max_servers
-#  maxfiles
-#  maxlevels
-#  min_expansion_quota
-#  mydomain
-#  myhome
-#  myhostname
-#  mynetworks
-#  nanny_details_level
-#  notify_method
-#  os_fingerprint_method
-#  package_ensure
-#  package_name
-#  path
-#  penpals_bonus_score
-#  penpals_threshold_high
-#  pid_file
-#  policy_bank
-#  quarantine_subdir_levels
-#  quarantinedir
-#  recipient_delimiter
-#  redis_logging_key
-#  redis_logging_queue_size_limit
-#  release_format
-#  report_format
-#  sa_crediblefrom_dsn_cutoff_level
-#  sa_dsn_cutoff_level
-#  sa_kill_level_deflt
-#  sa_local_tests_only
-#  sa_mail_body_size_limit
-#  sa_quarantine_cutoff_level
-#  sa_spam_subject_tag
-#  sa_tag2_level_deflt
-#  sa_tag_level_deflt
-#  service_enable
-#  service_ensure
-#  service_name
-#  spam_quarantine_to
-#  state_dir
-#  storage_redis_dsn
-#  storage_sql_dsn
-#  syslog_facility
-#  tempbase
-#  timestamp_fmt_mysql
-#  tmpdir
-#  unix_socketname
-#  virus_admin
-#  virus_quarantine_to
-#  warnbadhrecip
-#  warnbadhsender
-#  warnbannedrecip
-#  warnvirusrecip
-#  watch_clamav
-#
-# === Examples
-#
-# === Authors
-#
-# Andrew Teixeira <teixeira@broadinstitute.org>
-#
-# === Copyright
-#
-# Copyright 2018
+# @param addr_extension_bad_header_maps
+#    Set the `addr_extension_bad_header_maps` Amavisd config variable
+# @param addr_extension_banned_maps
+#    Set the `addr_extension_banned_maps` Amavisd config variable
+# @param addr_extension_spam_maps
+#    Set the `addr_extension_spam_maps` Amavisd config variable
+# @param addr_extension_virus_maps
+#    Set the `addr_extension_virus_maps` Amavisd config variable
+# @param av_scanners
+#    Set the `av_scanners` Amavisd config variable
+# @param av_scanners_backup
+#    Set the `av_scanners_backup` Amavisd config variable
+# @param bad_header_quarantine_method
+#    Set the `bad_header_quarantine_method` Amavisd config variable
+# @param bad_header_quarantine_to
+#    Set the `bad_header_quarantine_to` Amavisd config variable
+# @param banned_filename_re
+#    Set the `banned_filename_re` Amavisd config variable
+# @param banned_quarantine_to
+#    Set the `banned_quarantine_to` Amavisd config variable
+# @param bounce_killer_score
+#    Set the `bounce_killer_score` Amavisd config variable
+# @param bypass_decode_parts
+#    Set the `bypass_decode_parts` Amavisd config variable
+# @param bypass_spam_checks_maps
+#    Set the `bypass_spam_checks_maps` Amavisd config variable
+# @param bypass_virus_checks_maps
+#    Set the `bypass_virus_checks_maps` Amavisd config variable
+# @param clean_quarantine_method
+#    Set the `clean_quarantine_method` Amavisd config variable
+# @param config_dir
+#    Set the `config_dir` Amavisd config variable
+# @param config_file
+#    Set the `config_file` Amavisd config variable
+# @param daemon_chroot_dir
+#    Set the `daemon_chroot_dir` Amavisd config variable
+# @param daemon_group
+#    Set the `daemon_group` Amavisd config variable
+# @param daemon_user
+#    Set the `daemon_user` Amavisd config variable
+# @param db_home
+#    Set the `db_home` Amavisd config variable
+# @param decoders
+#    Set the `decoders` Amavisd config variable
+# @param defang_bad_header
+#    Set the `defang_bad_header` Amavisd config variable
+# @param defang_banned
+#    Set the `defang_banned` Amavisd config variable
+# @param defang_by_ccat
+#    Set the `defang_by_ccat` Amavisd config variable
+# @param defang_spam
+#    Set the `defang_spam` Amavisd config variable
+# @param defang_undecipherable
+#    Set the `defang_undecipherable` Amavisd config variable
+# @param defang_virus
+#    Set the `defang_virus` Amavisd config variable
+# @param do_syslog
+#    Set the `do_syslog` Amavisd config variable
+# @param dspam
+#    Set the `dspam` Amavisd config variable
+# @param enable_db
+#    Set the `enable_db` Amavisd config variable
+# @param enable_dkim_signing
+#    Set the `enable_dkim_signing` Amavisd config variable
+# @param enable_dkim_verification
+#    Set the `enable_dkim_verification` Amavisd config variable
+# @param enable_zmq
+#    Set the `enable_zmq` Amavisd config variable
+# @param final_bad_header_destiny
+#    Set the `final_bad_header_destiny` Amavisd config variable
+# @param final_banned_destiny
+#    Set the `final_banned_destiny` Amavisd config variable
+# @param final_spam_destiny
+#    Set the `final_spam_destiny` Amavisd config variable
+# @param final_virus_destiny
+#    Set the `final_virus_destiny` Amavisd config variable
+# @param forward_method
+#    Set the `forward_method` Amavisd config variable
+# @param helpers_home
+#    Set the `helpers_home` Amavisd config variable
+# @param inet_socket_bind
+#    Set the `inet_socket_bind` Amavisd config variable
+# @param inet_socket_port
+#    Set the `inet_socket_port` Amavisd config variable
+# @param interface_policy
+#    Set the `interface_policy` Amavisd config variable
+# @param keep_decoded_original_maps
+#    Set the `keep_decoded_original_maps` Amavisd config variable
+# @param local_domains_maps
+#    Set the `local_domains_maps` Amavisd config variable
+# @param lock_file
+#    Set the `lock_file` Amavisd config variable
+# @param log_level
+#    Set the `log_level` Amavisd config variable
+# @param log_recip_templ
+#    Set the `log_recip_templ` Amavisd config variable
+# @param lookup_sql_dsn
+#    Set the `lookup_sql_dsn` Amavisd config variable
+# @param mailfrom_notify_admin
+#    Set the `mailfrom_notify_admin` Amavisd config variable
+# @param mailfrom_notify_recip
+#    Set the `mailfrom_notify_recip` Amavisd config variable
+# @param mailfrom_notify_spamadmin
+#    Set the `mailfrom_notify_spamadmin` Amavisd config variable
+# @param mailfrom_to_quarantine
+#    Set the `mailfrom_to_quarantine` Amavisd config variable
+# @param manage_epel
+#    Set the `manage_epel` Amavisd config variable
+# @param manage_group
+#    Set the `manage_group` Amavisd config variable
+# @param manage_user
+#    Set the `manage_user` Amavisd config variable
+# @param max_expansion_quota
+#    Set the `max_expansion_quota` Amavisd config variable
+# @param max_servers
+#    Set the `max_servers` Amavisd config variable
+# @param maxfiles
+#    Set the `maxfiles` Amavisd config variable
+# @param maxlevels
+#    Set the `maxlevels` Amavisd config variable
+# @param min_expansion_quota
+#    Set the `min_expansion_quota` Amavisd config variable
+# @param mydomain
+#    Set the `mydomain` Amavisd config variable
+# @param myhome
+#    Set the `myhome` Amavisd config variable
+# @param myhostname
+#    Set the `myhostname` Amavisd config variable
+# @param mynetworks
+#    Set the `mynetworks` Amavisd config variable
+# @param nanny_details_level
+#    Set the `nanny_details_level` Amavisd config variable
+# @param notify_method
+#    Set the `notify_method` Amavisd config variable
+# @param os_fingerprint_method
+#    Set the `os_fingerprint_method` Amavisd config variable
+# @param package_ensure
+#    Set the `package_ensure` Amavisd config variable
+# @param package_name
+#    Set the `package_name` Amavisd config variable
+# @param path
+#    Set the `path` Amavisd config variable
+# @param penpals_bonus_score
+#    Set the `penpals_bonus_score` Amavisd config variable
+# @param penpals_threshold_high
+#    Set the `penpals_threshold_high` Amavisd config variable
+# @param pid_file
+#    Set the `pid_file` Amavisd config variable
+# @param policy_bank
+#    Set the `policy_bank` Amavisd config variable
+# @param quarantine_subdir_levels
+#    Set the `quarantine_subdir_levels` Amavisd config variable
+# @param quarantinedir
+#    Set the `quarantinedir` Amavisd config variable
+# @param recipient_delimiter
+#    Set the `recipient_delimiter` Amavisd config variable
+# @param redis_logging_key
+#    Set the `redis_logging_key` Amavisd config variable
+# @param redis_logging_queue_size_limit
+#    Set the `redis_logging_queue_size_limit` Amavisd config variable
+# @param release_format
+#    Set the `release_format` Amavisd config variable
+# @param report_format
+#    Set the `report_format` Amavisd config variable
+# @param sa_crediblefrom_dsn_cutoff_level
+#    Set the `sa_crediblefrom_dsn_cutoff_level` Amavisd config variable
+# @param sa_dsn_cutoff_level
+#    Set the `sa_dsn_cutoff_level` Amavisd config variable
+# @param sa_kill_level_deflt
+#    Set the `sa_kill_level_deflt` Amavisd config variable
+# @param sa_local_tests_only
+#    Set the `sa_local_tests_only` Amavisd config variable
+# @param sa_mail_body_size_limit
+#    Set the `sa_mail_body_size_limit` Amavisd config variable
+# @param sa_quarantine_cutoff_level
+#    Set the `sa_quarantine_cutoff_level` Amavisd config variable
+# @param sa_spam_subject_tag
+#    Set the `sa_spam_subject_tag` Amavisd config variable
+# @param sa_tag2_level_deflt
+#    Set the `sa_tag2_level_deflt` Amavisd config variable
+# @param sa_tag_level_deflt
+#    Set the `sa_tag_level_deflt` Amavisd config variable
+# @param service_enable
+#    Set the `service_enable` Amavisd config variable
+# @param service_ensure
+#    Set the `service_ensure` Amavisd config variable
+# @param service_name
+#    Set the `service_name` Amavisd config variable
+# @param spam_quarantine_to
+#    Set the `spam_quarantine_to` Amavisd config variable
+# @param state_dir
+#    Set the `state_dir` Amavisd config variable
+# @param storage_redis_dsn
+#    Set the `storage_redis_dsn` Amavisd config variable
+# @param storage_sql_dsn
+#    Set the `storage_sql_dsn` Amavisd config variable
+# @param syslog_facility
+#    Set the `syslog_facility` Amavisd config variable
+# @param tempbase
+#    Set the `tempbase` Amavisd config variable
+# @param timestamp_fmt_mysql
+#    Set the `timestamp_fmt_mysql` Amavisd config variable
+# @param tmpdir
+#    Set the `tmpdir` Amavisd config variable
+# @param unix_socketname
+#    Set the `unix_socketname` Amavisd config variable
+# @param virus_admin
+#    Set the `virus_admin` Amavisd config variable
+# @param virus_quarantine_to
+#    Set the `virus_quarantine_to` Amavisd config variable
+# @param warnbadhrecip
+#    Set the `warnbadhrecip` Amavisd config variable
+# @param warnbadhsender
+#    Set the `warnbadhsender` Amavisd config variable
+# @param warnbannedrecip
+#    Set the `warnbannedrecip` Amavisd config variable
+# @param warnvirusrecip
+#    Set the `warnvirusrecip` Amavisd config variable
+# @param watch_clamav
+#    Set the `watch_clamav` Amavisd config variable
 #
 class amavisd (
   Optional[String] $clamd_service                     = undef,
@@ -359,7 +458,7 @@ class amavisd (
   $_interface_policy                 = pick_default($interface_policy, $amavisd::params::interface_policy)
   $_keep_decoded_original_maps       = pick_default($keep_decoded_original_maps, $amavisd::params::keep_decoded_original_maps)
   $_local_domains_maps               = pick_default($local_domains_maps, $amavisd::params::local_domains_maps)
-  $_lock_file                        = pick($lock_file, "${amavisd::_state_dir}/${amavisd::_service_name}.lock")
+  $_lock_file                        = pick($lock_file, "${_state_dir}/${_service_name}.lock")
   $_log_level                        = pick_default($log_level, $amavisd::params::log_level)
   $_log_recip_templ                  = pick_default($log_recip_templ, $amavisd::params::log_recip_templ)
   $_lookup_sql_dsn                   = pick_default($lookup_sql_dsn, $amavisd::params::lookup_sql_dsn)
@@ -382,7 +481,7 @@ class amavisd (
   $_path                             = pick_default($path, $amavisd::params::path)
   $_penpals_bonus_score              = pick_default($penpals_bonus_score, $amavisd::params::penpals_bonus_score)
   $_penpals_threshold_high           = pick_default($penpals_threshold_high, $amavisd::params::penpals_threshold_high)
-  $_pid_file                         = pick($pid_file, "${amavisd::_state_dir}/${amavisd::_service_name}.pid")
+  $_pid_file                         = pick($pid_file, "${_state_dir}/${_service_name}.pid")
   $_policy_bank                      = pick_default($policy_bank, $amavisd::params::policy_bank)
   $_quarantine_subdir_levels         = pick_default($quarantine_subdir_levels, $amavisd::params::quarantine_subdir_levels)
   $_quarantinedir                    = pick_default($quarantinedir, $amavisd::params::quarantinedir)
@@ -407,7 +506,7 @@ class amavisd (
   $_tempbase                         = pick_default($tempbase, $amavisd::params::tempbase)
   $_timestamp_fmt_mysql              = pick_default($timestamp_fmt_mysql, $amavisd::params::timestamp_fmt_mysql)
   $_tmpdir                           = pick_default($tmpdir, $amavisd::params::tmpdir)
-  $_unix_socketname                  = pick($unix_socketname, "${amavisd::_state_dir}/${amavisd::_service_name}.sock")
+  $_unix_socketname                  = pick($unix_socketname, "${_state_dir}/${_service_name}.sock")
   $_virus_admin                      = pick_default($virus_admin, $amavisd::params::virus_admin)
   $_virus_quarantine_to              = pick_default($virus_quarantine_to, $amavisd::params::virus_quarantine_to)
   $_warnbadhrecip                    = pick_default($warnbadhrecip, $amavisd::params::warnbadhrecip)

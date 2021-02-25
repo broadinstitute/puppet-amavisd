@@ -8,15 +8,18 @@ Given a nil value (undef), perl_varprint will return 'undef'.
 
 Example:
 
-    $var1 = [ 10, "abc" ]
+    $var1 = 10
+    $var2 = 'hello'
+    $var3 = undef
+    $var4 = 'undef'
 
-    perl_varprint($var1)
+    perl_data_print($var1)
     # => 10
-    perl_varprint($var2)
+    perl_data_print($var2)
     # => "hello"
-    perl_varprint($var3)
+    perl_data_print($var3)
     # => undef
-    perl_varprint($var4)
+    perl_data_print($var4)
     # => undef
 
 EOS
