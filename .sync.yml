@@ -1,6 +1,8 @@
 ---
 appveyor.yml:
   delete: true
+.devcontainer/devcontainer.json:
+  unmanaged: true
 .gitignore:
   required:
     - '/.librarian'
@@ -19,13 +21,6 @@ Rakefile:
     - 'puppet_url_without_modules'
   requires:
     - 'puppet-lint/tasks/puppet-lint'
-Gemfile:
-  optional:
-    ':development':
-      - gem: 'github_changelog_generator'
-        git: 'https://github.com/skywinder/github-changelog-generator'
-        ref: 'f73e689ef1d4b8726aa39c4dc5cc8671da0d45e2'
-        condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.2.2')"
 .travis.yml:
   delete: true
 .yardopts:

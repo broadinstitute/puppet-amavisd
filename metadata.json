@@ -1,67 +1,67 @@
 {
   "name": "puppet-amavisd",
-  "version": "2.0.3",
+  "version": "2.0.2",
   "author": "Andrew Teixeira <teixeira@broadinstitute.org>",
   "summary": "Amavisd Puppet module",
-  "license": "Apache-2.0",
+  "license": "BSD-3-Clause",
   "source": "https://github.com/broadinstitute/puppet-amavisd",
   "project_page": "https://github.com/broadinstitute/puppet-amavisd",
   "issues_url": "https://github.com/broadinstitute/puppet-amavisd/issues",
   "dependencies": [
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">= 1.8.0 < 7.0.0"
+      "version_requirement": ">= 1.8.0 < 9.0.0"
     },
     {
       "name": "puppetlabs/concat",
-      "version_requirement": ">= 2.2.1 < 6.0.0"
+      "version_requirement": ">= 2.2.1 < 8.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 1.0.0 < 6.0.0"
+      "version_requirement": ">= 1.0.0 < 7.0.0"
     },
     {
-      "name": "stahnma/epel",
-      "version_requirement": ">= 1.0.2 < 2.0.0"
+      "name": "puppet/epel",
+      "version_requirement": ">= 1.0.2 < 4.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8",
-        "9"
+        "9",
+        "10"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "16.04",
-        "18.04"
+        "18.04",
+        "20.04"
       ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">=3.0.0 < 6.0.0"
+      "version_requirement": ">=3.0.0 < 8.0.0"
     }
   ],
-  "pdk-version": "1.18.0",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#1.11.1",
-  "template-ref": "tags/1.11.1-0-g2ff8c24"
+  "pdk-version": "2.0.0",
+  "template-url": "https://github.com/puppetlabs/pdk-templates#2.0.0",
+  "template-ref": "2.0.0-0-ge838f1d"
 }
