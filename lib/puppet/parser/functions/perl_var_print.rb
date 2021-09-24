@@ -23,7 +23,7 @@ Examples:
   perl_var_print(["$var4", "undef")
   # => $var4 = undef;
 EOS
-             ) do |args|
+  ) do |args|
     raise(Puppet::ParseError, "perl_var_print() wrong number of arguments. Given: #{args.size} for 2)") if args.size != 2
 
     varname = args[0]
