@@ -23,7 +23,7 @@ Example:
     # => undef
 
 EOS
-             ) do |args|
+  ) do |args|
     raise(Puppet::ParseError, "perl_data_print() wrong number of arguments. Given: #{args.size} for 1)") if args.size != 1
 
     data = args[0]
