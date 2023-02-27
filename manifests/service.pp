@@ -9,7 +9,6 @@
 #  * $amavisd::watch_clamav
 #
 class amavisd::service {
-
   if $amavisd::watch_clamav {
     $svc_require   = Service[$amavisd::_clamd_service]
     $svc_subscribe = [
@@ -26,6 +25,6 @@ class amavisd::service {
     enable    => $amavisd::service_enable,
     name      => $amavisd::_service_name,
     require   => $svc_require,
-    subscribe => $svc_subscribe
+    subscribe => $svc_subscribe,
   }
 }

@@ -4,21 +4,16 @@ repos:
     rev: v4.4.0
     hooks:
       - id: check-added-large-files
-      - id: check-ast
       - id: check-case-conflict
-      - id: check-docstring-first
       - id: check-executables-have-shebangs
       - id: check-json
       - id: check-merge-conflict
       - id: check-symlinks
-      - id: check-yaml
-      - id: debug-statements
       - id: detect-private-key
-      - id: end-of-file-fixer
       - id: detect-aws-credentials
         args:
           - --allow-missing-credentials
-      - id: fix-encoding-pragma
+      - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/chriskuehl/puppet-pre-commit-hooks.git
@@ -32,6 +27,8 @@ repos:
       - id: puppet-validate
         additional_dependencies: ['puppet:<7']
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.28.0
+    rev: v1.29.0
     hooks:
       - id: yamllint
+        args:
+          - -s

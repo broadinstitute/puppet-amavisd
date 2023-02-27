@@ -201,10 +201,14 @@ describe 'amavisd' do
   context 'specific to Amazon Linux' do
     let(:facts) do
       {
-        osfamily: 'RedHat',
-        operatingsystem: 'Amazon',
-        operatingsystemrelease: '7.2',
-        operatingsystemmajrelease: '7',
+        os: {
+          family: 'RedHat',
+          name: 'Amazon',
+          release: {
+            full: '7.2',
+            major: '7',
+          }
+        }
       }
     end
 
@@ -218,10 +222,14 @@ describe 'amavisd' do
   context 'specific to Fedora' do
     let(:facts) do
       {
-        osfamily: 'RedHat',
-        operatingsystem: 'Fedora',
-        operatingsystemrelease: '7.2',
-        operatingsystemmajrelease: '7',
+        os: {
+          family: 'RedHat',
+          name: 'Fedora',
+          release: {
+            full: '7.2',
+            major: '7',
+          }
+        }
       }
     end
 

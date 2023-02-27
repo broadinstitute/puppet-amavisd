@@ -50,7 +50,7 @@ class amavisd::params {
   $warnbannedrecip                = undef
   $warnvirusrecip                 = undef
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     /^(Debian|Ubuntu)/: {
       # Service settings
       $clamd_service     = 'clamd'
@@ -128,10 +128,10 @@ class amavisd::params {
       $user_shell                         = '/sbin/nologin'
 
       # Config settings
-      $addr_extension_bad_header_maps     = ['badh' ]
-      $addr_extension_banned_maps         = [ 'banned' ]
-      $addr_extension_spam_maps           = [ 'spam' ]
-      $addr_extension_virus_maps          = [ 'virus' ]
+      $addr_extension_bad_header_maps     = ['badh']
+      $addr_extension_banned_maps         = ['banned']
+      $addr_extension_spam_maps           = ['spam']
+      $addr_extension_virus_maps          = ['virus']
       $banned_filename_re                 = [
         "qr'^\\.(exe-ms|dll)$'",
         "[ qr'^\\.(rpm|cpio|tar)$'       => 0 ]",
@@ -140,7 +140,7 @@ class amavisd::params {
         "qr'^application/x-msdos-program$'i",
         "qr'^application/hta$'i",
         "qr'^(?!cid:).*\\.[^./]*[A-Za-z][^./]*\\.\\s*(exe|vbs|pif|scr|bat|cmd|com|cpl|dll)[.\\s]*$'i",
-        "qr'.\\.(exe|vbs|pif|scr|cpl)$'i"
+        "qr'.\\.(exe|vbs|pif|scr|cpl)$'i",
       ]
       $bounce_killer_score                = 100
       $db_home                            = '$MYHOME/db'
@@ -170,13 +170,13 @@ class amavisd::params {
         "['7z', \\&do_7zip,  ['7zr', '7za', '7z'] ]",
         "[[qw(gz bz2 Z tar)], \\&do_7zip,  ['7za', '7z'] ]",
         "[[qw(xz lzma jar cpio arj rar swf lha iso cab deb rpm)], \\&do_7zip,  '7z' ]",
-        "['exe',  \\&do_executable, ['unrar','rar'], 'lha', ['unarj','arj'] ]"
+        "['exe',  \\&do_executable, ['unrar','rar'], 'lha', ['unarj','arj'] ]",
       ]
       $defang_banned                      = 1
       $defang_by_ccat                     = [
         'CC_BADH.",3"',
         'CC_BADH.",5"',
-        'CC_BADH.",6"'
+        'CC_BADH.",6"',
       ]
       $defang_virus                       = 1
       $do_syslog                          = 1
@@ -189,17 +189,17 @@ class amavisd::params {
       $final_virus_destiny                = 'D_DISCARD'
       $include_score_sender_maps          = true
       $inet_socket_bind                   = '127.0.0.1'
-      $inet_socket_port                   = [ 10024 ]
+      $inet_socket_port                   = [10024]
       $interface_policy                   = {
         '10026' => 'ORIGINATING',
-        'SOCK' => 'AM.PDP-SOCK'
+        'SOCK' => 'AM.PDP-SOCK',
       }
-      $keep_decoded_original_maps         =  [
+      $keep_decoded_original_maps         = [
         "qr'^MAIL$'",
         "qr'^MAIL-UNDECIPHERABLE$'",
         "qr'^(ASCII(?! cpio)|text|uuencoded|xxencoded|binhex)'i",
       ]
-      $local_domains_maps                 = [ '.$mydomain' ]
+      $local_domains_maps                 = ['.$mydomain']
       $log_level                          = 0
       $max_expansion_quota                = 500*1024*1024
       $maxfiles                           = 3000
@@ -215,7 +215,7 @@ class amavisd::params {
         '[FEC0::]/10',
         '10.0.0.0/8',
         '172.16.0.0/12',
-        '192.168.0.0/16'
+        '192.168.0.0/16',
       ]
       $nanny_details_level                = 2
       $path                               = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/usr/bin:/bin'
@@ -224,7 +224,7 @@ class amavisd::params {
       $policy_bank                        = {
         'MYNETS' => {
           originating           => 1,
-          os_fingerprint_method => 'undef'
+          os_fingerprint_method => 'undef',
         },
         'ORIGINATING' => {
           originating                     => 1,
@@ -235,12 +235,12 @@ class amavisd::params {
           forward_method                  => "'smtp:[127.0.0.1]:10027'",
           smtpd_discard_ehlo_keywords     => "['8BITMIME']",
           bypass_banned_checks_maps       => '[1]',
-          terminate_dsn_on_notify_success => 0
+          terminate_dsn_on_notify_success => 0,
         },
         'AM.PDP-SOCK' => {
           protocol => "'AM.PDP'",
-          auth_required_release => '0'
-        }
+          auth_required_release => '0',
+        },
       }
       $sa_crediblefrom_dsn_cutoff_level   = 18
       $sa_dsn_cutoff_level                = 10
@@ -253,11 +253,9 @@ class amavisd::params {
       $syslog_facility                    = 'mail'
       $tempbase                           = '$MYHOME/tmp'
       $tmpdir                             = '$TEMPBASE'
-
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily}")
+      fail("Unsupported osfamily: ${facts['os']['family']}")
     }
   }
-
 }
