@@ -6,57 +6,41 @@
 # @param clamd_service
 #    The name of the clamd service if Amavisd is being used in conjuction with Clamd.
 #    (default: OS-dependent)
-#
 # @param config_dir
 #    The directory where the Amavisd configuration files live. (default: OS-dependent)
-#
 # @param config_file
 #    The name of the configuration file this module will write. (default: OS-dependent)
-#
 # @param daemon_group
 #    The group under which the Amavisd service will run. Note: This will also set the
 #    *daemon_group* setting in the Amavisd config. (default: `amavis`)
-#
 # @param daemon_user
 #    The user under which the Amavisd service will run. Note: This will also set the
 #    *daemon_user* setting in the Amavisd config. (default: `amavis`)
-#
 # @param include_score_sender_maps
 #    Determine whether to include the *sender_score_maps* template in the final config
 #    file. (default: OS-dependent)
-#
 # @param manage_epel
 #    Whether or not to include the `epel` class for package installations.
 #    (default: OS-dependent)
-#
 # @param manage_group
 #    If true, create and manage the *$daemon_group* group. (default: `true`)
-#
 # @param manage_user
 #    If true, create and manage the *$daemon_user* user. (default: `true`)
-#
 # @param package_ensure
 #    If true, manage the package(s) needed for Amavisd. (default: `true`)
-#
 # @param package_name
 #    The name of the Amavisd package to install. (default: `amavisd-new`)
-#
 # @param service_enable
 #    If true, enable the service on the system. (default: `true`)
-#
 # @param service_ensure
 #    Ensure that the service is in this state when Puppet runs. (default: `running`)
-#
 # @param service_name
 #    The name of the service that Puppet should start/stop. (default: OS-dependent)
-#
 # @param state_dir
 #    The directory in which Amavisd stores files when it runs. (default: OS-dependent)
-#
 # @param user_shell
 #    The shell to use for the user created if *$manage_user* is true.
 #    (default: nologin (path to nologin is OS-dependent)
-#
 # @param addr_extension_bad_header_maps
 #    Set the `addr_extension_bad_header_maps` Amavisd config variable
 # @param addr_extension_banned_maps
@@ -87,16 +71,8 @@
 #    Set the `bypass_virus_checks_maps` Amavisd config variable
 # @param clean_quarantine_method
 #    Set the `clean_quarantine_method` Amavisd config variable
-# @param config_dir
-#    Set the `config_dir` Amavisd config variable
-# @param config_file
-#    Set the `config_file` Amavisd config variable
 # @param daemon_chroot_dir
 #    Set the `daemon_chroot_dir` Amavisd config variable
-# @param daemon_group
-#    Set the `daemon_group` Amavisd config variable
-# @param daemon_user
-#    Set the `daemon_user` Amavisd config variable
 # @param db_home
 #    Set the `db_home` Amavisd config variable
 # @param decoders
@@ -163,12 +139,6 @@
 #    Set the `mailfrom_notify_spamadmin` Amavisd config variable
 # @param mailfrom_to_quarantine
 #    Set the `mailfrom_to_quarantine` Amavisd config variable
-# @param manage_epel
-#    Set the `manage_epel` Amavisd config variable
-# @param manage_group
-#    Set the `manage_group` Amavisd config variable
-# @param manage_user
-#    Set the `manage_user` Amavisd config variable
 # @param max_expansion_quota
 #    Set the `max_expansion_quota` Amavisd config variable
 # @param max_servers
@@ -193,10 +163,6 @@
 #    Set the `notify_method` Amavisd config variable
 # @param os_fingerprint_method
 #    Set the `os_fingerprint_method` Amavisd config variable
-# @param package_ensure
-#    Set the `package_ensure` Amavisd config variable
-# @param package_name
-#    Set the `package_name` Amavisd config variable
 # @param path
 #    Set the `path` Amavisd config variable
 # @param penpals_bonus_score
@@ -239,16 +205,8 @@
 #    Set the `sa_tag2_level_deflt` Amavisd config variable
 # @param sa_tag_level_deflt
 #    Set the `sa_tag_level_deflt` Amavisd config variable
-# @param service_enable
-#    Set the `service_enable` Amavisd config variable
-# @param service_ensure
-#    Set the `service_ensure` Amavisd config variable
-# @param service_name
-#    Set the `service_name` Amavisd config variable
 # @param spam_quarantine_to
 #    Set the `spam_quarantine_to` Amavisd config variable
-# @param state_dir
-#    Set the `state_dir` Amavisd config variable
 # @param storage_redis_dsn
 #    Set the `storage_redis_dsn` Amavisd config variable
 # @param storage_sql_dsn
@@ -279,23 +237,23 @@
 #    Set the `watch_clamav` Amavisd config variable
 #
 class amavisd (
+  String $daemon_group                                = 'amavis',
+  String $daemon_user                                 = 'amavis',
+  Enum['stopped', 'running'] $service_ensure          = 'running',
+  Boolean $manage_group                               = true,
+  Boolean $manage_user                                = true,
+  String $package_ensure                              = 'present',
+  String $package_name                                = 'amavisd-new',
+  Boolean $service_enable                             = true,
+  Boolean $watch_clamav                               = false,
   Optional[String] $clamd_service                     = undef,
   Optional[String] $config_dir                        = undef,
   Optional[String] $config_file                       = undef,
-  Optional[String] $daemon_group                      = 'amavis',
-  Optional[String] $daemon_user                       = 'amavis',
   Optional[Boolean] $include_score_sender_maps        = undef,
   Optional[Boolean] $manage_epel                      = undef,
-  Boolean $manage_group                               = true,
-  Boolean $manage_user                                = true,
-  Optional[String] $package_ensure                    = 'present',
-  Optional[String] $package_name                      = 'amavisd-new',
-  Boolean $service_enable                             = true,
-  Enum['stopped', 'running'] $service_ensure          = 'running',
   Optional[String] $service_name                      = undef,
   Optional[String] $state_dir                         = undef,
   Optional[String] $user_shell                        = undef,
-  Boolean  $watch_clamav                              = false,
   # Config file options
   Optional[Array] $addr_extension_bad_header_maps     = undef,
   Optional[Array] $addr_extension_banned_maps         = undef,
@@ -394,7 +352,7 @@ class amavisd (
   Optional[Integer] $warnbannedrecip                  = undef,
   Optional[Integer] $warnvirusrecip                   = undef,
 ) {
-  include ::amavisd::params
+  include amavisd::params
 
   # Service Settings
   $_clamd_service             = pick($clamd_service, $amavisd::params::clamd_service)

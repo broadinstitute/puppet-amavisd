@@ -1,8 +1,6 @@
 ---
 appveyor.yml:
   delete: true
-.devcontainer/devcontainer.json:
-  unmanaged: true
 .gitignore:
   required:
     - '/.librarian'
@@ -25,6 +23,13 @@ Rakefile:
   delete: true
 .yardopts:
   delete: true
+Gemfile:
+  optional:
+    ':development':
+      - gem: 'concurrent-ruby'
+        version: '< 1.2.0'
+      - gem: 'pdk'
+      - gem: 'puppet-lint-legacy_facts-check'
 spec/default_facts.yml:
   delete: true
 spec/spec_helper.rb:

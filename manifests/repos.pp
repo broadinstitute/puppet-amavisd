@@ -6,24 +6,23 @@
 #  * $amavisd::package_name
 #
 class amavisd::repos {
-
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
-      require ::apt
+      require apt
 
       Exec['apt_update'] -> Package[$amavisd::package_name]
     }
     'RedHat': {
-      if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
+      if ($facts['os']['name'] != 'Amazon') and ($facts['os']['name'] != 'Fedora') {
         if ($amavisd::_manage_epel == true) {
-          require ::epel
+          require epel
 
           Class['epel'] -> Package[$amavisd::package_name]
         }
       }
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily}")
+      fail("Unsupported osfamily: ${facts['os']['family']}")
     }
   }
 }

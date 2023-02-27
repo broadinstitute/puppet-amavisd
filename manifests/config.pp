@@ -2,7 +2,6 @@
 #     passed to the main *amavisd* class.
 #
 class amavisd::config {
-
   if ! defined(Class['amavisd']) {
     fail('You must include the amavisd base class before using any amavisd defined resources')
   }
@@ -11,7 +10,9 @@ class amavisd::config {
   $addr_extension_banned_maps       = $amavisd::_addr_extension_banned_maps
   $addr_extension_spam_maps         = $amavisd::_addr_extension_spam_maps
   $addr_extension_virus_maps        = $amavisd::_addr_extension_virus_maps
-  $amavis_conf                      = "${::amavisd::_config_dir}/${::amavisd::_config_file}"
+  # lint:ignore:variable_scope
+  $amavis_conf                      = "${amavisd::_config_dir}/${amavisd::_config_file}"
+  # lint:endignore
   $av_scanners                      = $amavisd::_av_scanners
   $av_scanners_backup               = $amavisd::_av_scanners_backup
   $bad_header_quarantine_method     = $amavisd::_bad_header_quarantine_method
@@ -111,34 +112,34 @@ class amavisd::config {
   concat { $amavis_conf:
     ensure => 'present',
     backup => false,
-    owner  => 'root',
     group  => $amavisd::params::root_group,
-    mode   => '0644'
+    mode   => '0644',
+    owner  => 'root',
   }
 
   concat::fragment { 'amavis_header':
-    target  => $amavis_conf,
     content => template('amavisd/header.conf.erb'),
-    order   => '01'
+    order   => '01',
+    target  => $amavis_conf,
   }
 
   concat::fragment { 'amavis_main':
-    target  => $amavis_conf,
     content => template('amavisd/main.conf.erb'),
-    order   => '05'
+    order   => '05',
+    target  => $amavis_conf,
   }
 
   if $include_score_sender_maps {
     concat::fragment { 'amavis_score_sender_maps':
-      target  => $amavis_conf,
       content => template('amavisd/score_sender_maps.conf.erb'),
-      order   => '30'
+      order   => '30',
+      target  => $amavis_conf,
     }
   }
 
   concat::fragment { 'amavis_footer':
-    target  => $amavis_conf,
     content => template('amavisd/footer.conf.erb'),
-    order   => '99'
+    order   => '99',
+    target  => $amavis_conf,
   }
 }

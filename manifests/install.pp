@@ -13,9 +13,8 @@
 #  * $amavisd::user_shell
 #
 class amavisd::install {
-
-  if $::osfamily == 'RedHat' {
-    if ($::operatingsystem != 'Amazon') and ($::operatingsystem != 'Fedora') {
+  if $facts['os']['family'] == 'RedHat' {
+    if ($facts['os']['name'] != 'Amazon') and ($facts['os']['name'] != 'Fedora') {
       if $amavisd::_manage_epel {
         $pkg_require = Class['epel']
       } else {
@@ -49,9 +48,9 @@ class amavisd::install {
       gid        => $amavisd::daemon_group,
       home       => $amavisd::_myhome,
       managehome => false,
+      require    => $group_require,
       shell      => $amavisd::user_shell,
       system     => true,
-      require    => $group_require,
     }
   } else {
     $user_require = undef
@@ -61,17 +60,17 @@ class amavisd::install {
 
   file { $amavisd::_myhome:
     ensure  => 'directory',
-    owner   => $amavisd::daemon_user,
+    before  => Package[$amavisd::package_name],
     group   => $amavisd::daemon_group,
     mode    => '0750',
-    before  => Package[$amavisd::package_name],
+    owner   => $amavisd::daemon_user,
     require => $file_require,
   }
 
   package { $amavisd::package_name:
     ensure  => $amavisd::package_ensure,
+    before  => Service['amavisd_service'],
     name    => $amavisd::package_name,
     require => $pkg_require,
-    before  => Service['amavisd_service']
   }
 }
