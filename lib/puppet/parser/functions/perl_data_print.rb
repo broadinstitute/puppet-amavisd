@@ -32,11 +32,11 @@ EOS
       return nil
     end
 
-    if function_is_string([data]) && data == 'undef'
+    if data.is_a?(String) && data == 'undef'
       return 'undef'
     end
 
-    if function_is_numeric([data])
+    if data.is_a?(Numeric)
       return data.to_s
     end
 
@@ -47,7 +47,7 @@ EOS
     is_math = true
 
     d.each do |num|
-      if function_is_numeric([num])
+      if num.is_a?(Numeric)
         ret << num
       else
         is_math = false
