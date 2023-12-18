@@ -9,7 +9,5 @@ name: 'test_build'
 jobs:
   test_build:
     uses: broadinstitute/shared-workflows/.github/workflows/puppet-build.yaml@v2.0.0
-  test_deploy:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-test-deploy-to-pypi.yaml@v2.0.0
     with:
       puppet_package_name: puppet-amavisd
