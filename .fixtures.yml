@@ -5,9 +5,11 @@ fixtures:
       repo: 'puppetlabs/apt'
     concat:
       repo: 'puppetlabs/concat'
-    epel: 'stahnma/epel'
+    epel:
+      repo: 'puppet/epel'
     stdlib:
       repo: 'puppetlabs/stdlib'
-    yumrepo_core: 'puppetlabs/yumrepo_core'
+    yumrepo_core:
+      repo: 'puppetlabs/yumrepo_core'
   symlinks:
     amavisd: "#{source_dir}"
