@@ -1,6 +1,14 @@
 # Changelog
 
-## [2.0.4](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.4) (2024-02-22)
+## [2.0.5](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.5) (2024-02-23)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-amavisd/compare/2.0.4...2.0.5)
+
+**Fixed bugs:**
+
+- fix: bug in detecting numbers [\#52](https://github.com/broadinstitute/puppet-amavisd/pull/52) ([coreone](https://github.com/coreone))
+
+## [2.0.4](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.4) (2024-02-23)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-amavisd/compare/2.0.3...2.0.4)
 
