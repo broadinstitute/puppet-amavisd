@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.4](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.4) (2024-02-22)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-amavisd/compare/2.0.3...2.0.4)
+
+**Implemented enhancements:**
+
+- chore: minor updates [\#50](https://github.com/broadinstitute/puppet-amavisd/pull/50) ([coreone](https://github.com/coreone))
+
 ## [2.0.3](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.3) (2023-02-27)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-amavisd/compare/2.0.2...2.0.3)
