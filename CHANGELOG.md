@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.6](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.6) (2024-02-23)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-amavisd/compare/2.0.5...2.0.6)
+
+**Fixed bugs:**
+
+- fix: another bug due to Ruby version [\#54](https://github.com/broadinstitute/puppet-amavisd/pull/54) ([coreone](https://github.com/coreone))
+
 ## [2.0.5](https://github.com/broadinstitute/puppet-amavisd/tree/2.0.5) (2024-02-23)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-amavisd/compare/2.0.4...2.0.5)
