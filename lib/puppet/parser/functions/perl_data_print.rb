@@ -38,6 +38,12 @@ EOS
 
     begin
       Float(data)
+    rescue ArgumentError  # rubocop:disable Lint/SuppressedException
+    else
+      return data.to_s
+    end
+
+    begin
       Integer(data)
     rescue ArgumentError  # rubocop:disable Lint/SuppressedException
     else
