@@ -36,7 +36,11 @@ EOS
       return 'undef'
     end
 
-    if data.is_a?(Numeric)
+    begin
+      Float(data)
+      Integer(data)
+    rescue ArgumentError  # rubocop:disable Lint/SuppressedException
+    else
       return data.to_s
     end
 
@@ -47,12 +51,13 @@ EOS
     is_math = true
 
     d.each do |num|
-      if num.is_a?(Numeric)
-        ret << num
-      else
-        is_math = false
-        break
-      end
+      Float(num)
+      Integer(num)
+    rescue ArgumentError
+      is_math = false
+      break
+    else
+      ret << num
     end
 
     if is_math
