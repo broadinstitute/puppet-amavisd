@@ -1,0 +1,20 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: puppet-amavisd
+  title: puppet-amavisd
+  description: "Puppet module for installing and configuring amavis-new"
+  tags:
+    - bits
+    - bits-tools
+    - amavisd
+    - puppet
+  annotations:
+    github.com/project-slug: broadinstitute/puppet-amavisd
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: bits-aviso
+  lifecycle: production
+  system: infrastructure
