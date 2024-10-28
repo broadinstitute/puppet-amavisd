@@ -17,4 +17,4 @@ spec:
   type: service
   owner: bits-aviso
   lifecycle: production
-  system: infrastructure
+  system: puppet
