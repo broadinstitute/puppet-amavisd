@@ -26,10 +26,7 @@ Rakefile:
 Gemfile:
   optional:
     ':development':
-      - gem: 'concurrent-ruby'
-        version: '< 1.2.0'
       - gem: 'pdk'
-        version: '~> 3.0.0'
 spec/default_facts.yml:
   delete: true
 spec/spec_helper.rb:
