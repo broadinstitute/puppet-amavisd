@@ -472,12 +472,13 @@ class amavisd (
   $_warnbannedrecip                  = pick_default($warnbannedrecip, $amavisd::params::warnbannedrecip)
   $_warnvirusrecip                   = pick_default($warnvirusrecip, $amavisd::params::warnvirusrecip)
 
-  anchor { 'amavisd::begin': }
+  contain 'amavisd::repos'
+  contain  'amavisd::install'
+  contain  'amavisd::config'
+  contain  'amavisd::service'
 
-  -> class { 'amavisd::repos': }
-  -> class { 'amavisd::install': }
-  -> class { 'amavisd::config': }
-  -> class { 'amavisd::service': }
-
-  -> anchor { 'amavisd::end': }
+  Class['amavisd::repos']
+  ->Class['amavisd::install']
+  ->Class['amavisd::config']
+  ->Class['amavisd::service']
 }
