@@ -6,260 +6,257 @@
 
 ### Classes
 
-* [`amavisd`](#amavisd): This is the base amavisd class that should orchestrate the installation of
-all the other pieces that make up the software.
-* [`amavisd::config`](#amavisdconfig): This class takes care of all necessary configuration files using options
-passed to the main *amavisd* class.
-* [`amavisd::install`](#amavisdinstall): This class takes care of all necessary package installations
-* [`amavisd::params`](#amavisdparams): The default parameters for the amavisd class
-* [`amavisd::repos`](#amavisdrepos): This class takes care of all necessary repository installations
-* [`amavisd::service`](#amavisdservice): This class takes care of all necessary services
+- [`amavisd`](#amavisd): This is the base amavisd class that should orchestrate
+  the installation of all the other pieces that make up the software.
+- [`amavisd::config`](#amavisd--config): This class takes care of all necessary
+  configuration files using options passed to the main _amavisd_ class.
+- [`amavisd::install`](#amavisd--install): This class takes care of all
+  necessary package installations
+- [`amavisd::params`](#amavisd--params): The default parameters for the amavisd
+  class
+- [`amavisd::repos`](#amavisd--repos): This class takes care of all necessary
+  repository installations
+- [`amavisd::service`](#amavisd--service): This class takes care of all
+  necessary services
 
 ### Functions
 
-* [`perl_data_print`](#perl_data_print): Print out a Perl array given a Puppet array.  This takes care of doing things related to the array, but calls perl_var_print to print individ
-* [`perl_var_print`](#perl_var_print): Print out a Puppet data type as a Perl data type.  This takes care of doing things like quoting strings, not quoting integer types, and will
+- [`perl_data_print`](#perl_data_print): Print out a Perl array given a Puppet
+  array. This takes care of doing things related to the array, but calls
+  perl_var_print to print individ
+- [`perl_var_print`](#perl_var_print): Print out a Puppet data type as a Perl
+  data type. This takes care of doing things like quoting strings, not quoting
+  integer types, and will
 
 ## Classes
 
 ### <a name="amavisd"></a>`amavisd`
 
-This is the base amavisd class that should orchestrate the installation of
-all the other pieces that make up the software.
+This is the base amavisd class that should orchestrate the installation of all
+the other pieces that make up the software.
 
 #### Parameters
 
 The following parameters are available in the `amavisd` class:
 
-* [`clamd_service`](#clamd_service)
-* [`config_dir`](#config_dir)
-* [`config_file`](#config_file)
-* [`daemon_group`](#daemon_group)
-* [`daemon_user`](#daemon_user)
-* [`include_score_sender_maps`](#include_score_sender_maps)
-* [`manage_epel`](#manage_epel)
-* [`manage_group`](#manage_group)
-* [`manage_user`](#manage_user)
-* [`package_ensure`](#package_ensure)
-* [`package_name`](#package_name)
-* [`service_enable`](#service_enable)
-* [`service_ensure`](#service_ensure)
-* [`service_name`](#service_name)
-* [`state_dir`](#state_dir)
-* [`user_shell`](#user_shell)
-* [`addr_extension_bad_header_maps`](#addr_extension_bad_header_maps)
-* [`addr_extension_banned_maps`](#addr_extension_banned_maps)
-* [`addr_extension_spam_maps`](#addr_extension_spam_maps)
-* [`addr_extension_virus_maps`](#addr_extension_virus_maps)
-* [`av_scanners`](#av_scanners)
-* [`av_scanners_backup`](#av_scanners_backup)
-* [`bad_header_quarantine_method`](#bad_header_quarantine_method)
-* [`bad_header_quarantine_to`](#bad_header_quarantine_to)
-* [`banned_filename_re`](#banned_filename_re)
-* [`banned_quarantine_to`](#banned_quarantine_to)
-* [`bounce_killer_score`](#bounce_killer_score)
-* [`bypass_decode_parts`](#bypass_decode_parts)
-* [`bypass_spam_checks_maps`](#bypass_spam_checks_maps)
-* [`bypass_virus_checks_maps`](#bypass_virus_checks_maps)
-* [`clean_quarantine_method`](#clean_quarantine_method)
-* [`config_dir`](#config_dir)
-* [`config_file`](#config_file)
-* [`daemon_chroot_dir`](#daemon_chroot_dir)
-* [`daemon_group`](#daemon_group)
-* [`daemon_user`](#daemon_user)
-* [`db_home`](#db_home)
-* [`decoders`](#decoders)
-* [`defang_bad_header`](#defang_bad_header)
-* [`defang_banned`](#defang_banned)
-* [`defang_by_ccat`](#defang_by_ccat)
-* [`defang_spam`](#defang_spam)
-* [`defang_undecipherable`](#defang_undecipherable)
-* [`defang_virus`](#defang_virus)
-* [`do_syslog`](#do_syslog)
-* [`dspam`](#dspam)
-* [`enable_db`](#enable_db)
-* [`enable_dkim_signing`](#enable_dkim_signing)
-* [`enable_dkim_verification`](#enable_dkim_verification)
-* [`enable_zmq`](#enable_zmq)
-* [`final_bad_header_destiny`](#final_bad_header_destiny)
-* [`final_banned_destiny`](#final_banned_destiny)
-* [`final_spam_destiny`](#final_spam_destiny)
-* [`final_virus_destiny`](#final_virus_destiny)
-* [`forward_method`](#forward_method)
-* [`helpers_home`](#helpers_home)
-* [`inet_socket_bind`](#inet_socket_bind)
-* [`inet_socket_port`](#inet_socket_port)
-* [`interface_policy`](#interface_policy)
-* [`keep_decoded_original_maps`](#keep_decoded_original_maps)
-* [`local_domains_maps`](#local_domains_maps)
-* [`lock_file`](#lock_file)
-* [`log_level`](#log_level)
-* [`log_recip_templ`](#log_recip_templ)
-* [`lookup_sql_dsn`](#lookup_sql_dsn)
-* [`mailfrom_notify_admin`](#mailfrom_notify_admin)
-* [`mailfrom_notify_recip`](#mailfrom_notify_recip)
-* [`mailfrom_notify_spamadmin`](#mailfrom_notify_spamadmin)
-* [`mailfrom_to_quarantine`](#mailfrom_to_quarantine)
-* [`manage_epel`](#manage_epel)
-* [`manage_group`](#manage_group)
-* [`manage_user`](#manage_user)
-* [`max_expansion_quota`](#max_expansion_quota)
-* [`max_servers`](#max_servers)
-* [`maxfiles`](#maxfiles)
-* [`maxlevels`](#maxlevels)
-* [`min_expansion_quota`](#min_expansion_quota)
-* [`mydomain`](#mydomain)
-* [`myhome`](#myhome)
-* [`myhostname`](#myhostname)
-* [`mynetworks`](#mynetworks)
-* [`nanny_details_level`](#nanny_details_level)
-* [`notify_method`](#notify_method)
-* [`os_fingerprint_method`](#os_fingerprint_method)
-* [`package_ensure`](#package_ensure)
-* [`package_name`](#package_name)
-* [`path`](#path)
-* [`penpals_bonus_score`](#penpals_bonus_score)
-* [`penpals_threshold_high`](#penpals_threshold_high)
-* [`pid_file`](#pid_file)
-* [`policy_bank`](#policy_bank)
-* [`quarantine_subdir_levels`](#quarantine_subdir_levels)
-* [`quarantinedir`](#quarantinedir)
-* [`recipient_delimiter`](#recipient_delimiter)
-* [`redis_logging_key`](#redis_logging_key)
-* [`redis_logging_queue_size_limit`](#redis_logging_queue_size_limit)
-* [`release_format`](#release_format)
-* [`report_format`](#report_format)
-* [`sa_crediblefrom_dsn_cutoff_level`](#sa_crediblefrom_dsn_cutoff_level)
-* [`sa_dsn_cutoff_level`](#sa_dsn_cutoff_level)
-* [`sa_kill_level_deflt`](#sa_kill_level_deflt)
-* [`sa_local_tests_only`](#sa_local_tests_only)
-* [`sa_mail_body_size_limit`](#sa_mail_body_size_limit)
-* [`sa_quarantine_cutoff_level`](#sa_quarantine_cutoff_level)
-* [`sa_spam_subject_tag`](#sa_spam_subject_tag)
-* [`sa_tag2_level_deflt`](#sa_tag2_level_deflt)
-* [`sa_tag_level_deflt`](#sa_tag_level_deflt)
-* [`service_enable`](#service_enable)
-* [`service_ensure`](#service_ensure)
-* [`service_name`](#service_name)
-* [`spam_quarantine_to`](#spam_quarantine_to)
-* [`state_dir`](#state_dir)
-* [`storage_redis_dsn`](#storage_redis_dsn)
-* [`storage_sql_dsn`](#storage_sql_dsn)
-* [`syslog_facility`](#syslog_facility)
-* [`tempbase`](#tempbase)
-* [`timestamp_fmt_mysql`](#timestamp_fmt_mysql)
-* [`tmpdir`](#tmpdir)
-* [`unix_socketname`](#unix_socketname)
-* [`virus_admin`](#virus_admin)
-* [`virus_quarantine_to`](#virus_quarantine_to)
-* [`warnbadhrecip`](#warnbadhrecip)
-* [`warnbadhsender`](#warnbadhsender)
-* [`warnbannedrecip`](#warnbannedrecip)
-* [`warnvirusrecip`](#warnvirusrecip)
-* [`watch_clamav`](#watch_clamav)
+- [`clamd_service`](#-amavisd--clamd_service)
+- [`config_dir`](#-amavisd--config_dir)
+- [`config_file`](#-amavisd--config_file)
+- [`daemon_group`](#-amavisd--daemon_group)
+- [`daemon_user`](#-amavisd--daemon_user)
+- [`include_score_sender_maps`](#-amavisd--include_score_sender_maps)
+- [`manage_epel`](#-amavisd--manage_epel)
+- [`manage_group`](#-amavisd--manage_group)
+- [`manage_user`](#-amavisd--manage_user)
+- [`package_ensure`](#-amavisd--package_ensure)
+- [`package_name`](#-amavisd--package_name)
+- [`service_enable`](#-amavisd--service_enable)
+- [`service_ensure`](#-amavisd--service_ensure)
+- [`service_name`](#-amavisd--service_name)
+- [`state_dir`](#-amavisd--state_dir)
+- [`user_shell`](#-amavisd--user_shell)
+- [`addr_extension_bad_header_maps`](#-amavisd--addr_extension_bad_header_maps)
+- [`addr_extension_banned_maps`](#-amavisd--addr_extension_banned_maps)
+- [`addr_extension_spam_maps`](#-amavisd--addr_extension_spam_maps)
+- [`addr_extension_virus_maps`](#-amavisd--addr_extension_virus_maps)
+- [`av_scanners`](#-amavisd--av_scanners)
+- [`av_scanners_backup`](#-amavisd--av_scanners_backup)
+- [`bad_header_quarantine_method`](#-amavisd--bad_header_quarantine_method)
+- [`bad_header_quarantine_to`](#-amavisd--bad_header_quarantine_to)
+- [`banned_filename_re`](#-amavisd--banned_filename_re)
+- [`banned_quarantine_to`](#-amavisd--banned_quarantine_to)
+- [`bounce_killer_score`](#-amavisd--bounce_killer_score)
+- [`bypass_decode_parts`](#-amavisd--bypass_decode_parts)
+- [`bypass_spam_checks_maps`](#-amavisd--bypass_spam_checks_maps)
+- [`bypass_virus_checks_maps`](#-amavisd--bypass_virus_checks_maps)
+- [`clean_quarantine_method`](#-amavisd--clean_quarantine_method)
+- [`daemon_chroot_dir`](#-amavisd--daemon_chroot_dir)
+- [`db_home`](#-amavisd--db_home)
+- [`decoders`](#-amavisd--decoders)
+- [`defang_bad_header`](#-amavisd--defang_bad_header)
+- [`defang_banned`](#-amavisd--defang_banned)
+- [`defang_by_ccat`](#-amavisd--defang_by_ccat)
+- [`defang_spam`](#-amavisd--defang_spam)
+- [`defang_undecipherable`](#-amavisd--defang_undecipherable)
+- [`defang_virus`](#-amavisd--defang_virus)
+- [`do_syslog`](#-amavisd--do_syslog)
+- [`dspam`](#-amavisd--dspam)
+- [`enable_db`](#-amavisd--enable_db)
+- [`enable_dkim_signing`](#-amavisd--enable_dkim_signing)
+- [`enable_dkim_verification`](#-amavisd--enable_dkim_verification)
+- [`enable_zmq`](#-amavisd--enable_zmq)
+- [`final_bad_header_destiny`](#-amavisd--final_bad_header_destiny)
+- [`final_banned_destiny`](#-amavisd--final_banned_destiny)
+- [`final_spam_destiny`](#-amavisd--final_spam_destiny)
+- [`final_virus_destiny`](#-amavisd--final_virus_destiny)
+- [`forward_method`](#-amavisd--forward_method)
+- [`helpers_home`](#-amavisd--helpers_home)
+- [`inet_socket_bind`](#-amavisd--inet_socket_bind)
+- [`inet_socket_port`](#-amavisd--inet_socket_port)
+- [`interface_policy`](#-amavisd--interface_policy)
+- [`keep_decoded_original_maps`](#-amavisd--keep_decoded_original_maps)
+- [`local_domains_maps`](#-amavisd--local_domains_maps)
+- [`lock_file`](#-amavisd--lock_file)
+- [`log_level`](#-amavisd--log_level)
+- [`log_recip_templ`](#-amavisd--log_recip_templ)
+- [`lookup_sql_dsn`](#-amavisd--lookup_sql_dsn)
+- [`mailfrom_notify_admin`](#-amavisd--mailfrom_notify_admin)
+- [`mailfrom_notify_recip`](#-amavisd--mailfrom_notify_recip)
+- [`mailfrom_notify_spamadmin`](#-amavisd--mailfrom_notify_spamadmin)
+- [`mailfrom_to_quarantine`](#-amavisd--mailfrom_to_quarantine)
+- [`max_expansion_quota`](#-amavisd--max_expansion_quota)
+- [`max_servers`](#-amavisd--max_servers)
+- [`maxfiles`](#-amavisd--maxfiles)
+- [`maxlevels`](#-amavisd--maxlevels)
+- [`min_expansion_quota`](#-amavisd--min_expansion_quota)
+- [`mydomain`](#-amavisd--mydomain)
+- [`myhome`](#-amavisd--myhome)
+- [`myhostname`](#-amavisd--myhostname)
+- [`mynetworks`](#-amavisd--mynetworks)
+- [`nanny_details_level`](#-amavisd--nanny_details_level)
+- [`notify_method`](#-amavisd--notify_method)
+- [`os_fingerprint_method`](#-amavisd--os_fingerprint_method)
+- [`path`](#-amavisd--path)
+- [`penpals_bonus_score`](#-amavisd--penpals_bonus_score)
+- [`penpals_threshold_high`](#-amavisd--penpals_threshold_high)
+- [`pid_file`](#-amavisd--pid_file)
+- [`policy_bank`](#-amavisd--policy_bank)
+- [`quarantine_subdir_levels`](#-amavisd--quarantine_subdir_levels)
+- [`quarantinedir`](#-amavisd--quarantinedir)
+- [`recipient_delimiter`](#-amavisd--recipient_delimiter)
+- [`redis_logging_key`](#-amavisd--redis_logging_key)
+- [`redis_logging_queue_size_limit`](#-amavisd--redis_logging_queue_size_limit)
+- [`release_format`](#-amavisd--release_format)
+- [`report_format`](#-amavisd--report_format)
+- [`sa_crediblefrom_dsn_cutoff_level`](#-amavisd--sa_crediblefrom_dsn_cutoff_level)
+- [`sa_dsn_cutoff_level`](#-amavisd--sa_dsn_cutoff_level)
+- [`sa_kill_level_deflt`](#-amavisd--sa_kill_level_deflt)
+- [`sa_local_tests_only`](#-amavisd--sa_local_tests_only)
+- [`sa_mail_body_size_limit`](#-amavisd--sa_mail_body_size_limit)
+- [`sa_quarantine_cutoff_level`](#-amavisd--sa_quarantine_cutoff_level)
+- [`sa_spam_subject_tag`](#-amavisd--sa_spam_subject_tag)
+- [`sa_tag2_level_deflt`](#-amavisd--sa_tag2_level_deflt)
+- [`sa_tag_level_deflt`](#-amavisd--sa_tag_level_deflt)
+- [`spam_quarantine_to`](#-amavisd--spam_quarantine_to)
+- [`storage_redis_dsn`](#-amavisd--storage_redis_dsn)
+- [`storage_sql_dsn`](#-amavisd--storage_sql_dsn)
+- [`syslog_facility`](#-amavisd--syslog_facility)
+- [`tempbase`](#-amavisd--tempbase)
+- [`timestamp_fmt_mysql`](#-amavisd--timestamp_fmt_mysql)
+- [`tmpdir`](#-amavisd--tmpdir)
+- [`unix_socketname`](#-amavisd--unix_socketname)
+- [`virus_admin`](#-amavisd--virus_admin)
+- [`virus_quarantine_to`](#-amavisd--virus_quarantine_to)
+- [`warnbadhrecip`](#-amavisd--warnbadhrecip)
+- [`warnbadhsender`](#-amavisd--warnbadhsender)
+- [`warnbannedrecip`](#-amavisd--warnbannedrecip)
+- [`warnvirusrecip`](#-amavisd--warnvirusrecip)
+- [`watch_clamav`](#-amavisd--watch_clamav)
 
-##### <a name="clamd_service"></a>`clamd_service`
+##### <a name="-amavisd--clamd_service"></a>`clamd_service`
 
 Data type: `Optional[String]`
 
 The name of the clamd service if Amavisd is being used in conjuction with Clamd.
 (default: OS-dependent)
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="config_dir"></a>`config_dir`
-
-Data type: `Optional[String]`
-
-The directory where the Amavisd configuration files live. (default: OS-dependent)
-
-Default value: ``undef``
-
-##### <a name="config_file"></a>`config_file`
+##### <a name="-amavisd--config_dir"></a>`config_dir`
 
 Data type: `Optional[String]`
 
-The name of the configuration file this module will write. (default: OS-dependent)
+The directory where the Amavisd configuration files live. (default:
+OS-dependent)
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="daemon_group"></a>`daemon_group`
+##### <a name="-amavisd--config_file"></a>`config_file`
 
 Data type: `Optional[String]`
+
+The name of the configuration file this module will write. (default:
+OS-dependent)
+
+Default value: `undef`
+
+##### <a name="-amavisd--daemon_group"></a>`daemon_group`
+
+Data type: `String`
 
 The group under which the Amavisd service will run. Note: This will also set the
-*daemon_group* setting in the Amavisd config. (default: `amavis`)
+_daemon_group_ setting in the Amavisd config. (default: `amavis`)
 
 Default value: `'amavis'`
 
-##### <a name="daemon_user"></a>`daemon_user`
+##### <a name="-amavisd--daemon_user"></a>`daemon_user`
 
-Data type: `Optional[String]`
+Data type: `String`
 
 The user under which the Amavisd service will run. Note: This will also set the
-*daemon_user* setting in the Amavisd config. (default: `amavis`)
+_daemon_user_ setting in the Amavisd config. (default: `amavis`)
 
 Default value: `'amavis'`
 
-##### <a name="include_score_sender_maps"></a>`include_score_sender_maps`
+##### <a name="-amavisd--include_score_sender_maps"></a>`include_score_sender_maps`
 
 Data type: `Optional[Boolean]`
 
-Determine whether to include the *sender_score_maps* template in the final config
-file. (default: OS-dependent)
+Determine whether to include the _sender_score_maps_ template in the final
+config file. (default: OS-dependent)
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="manage_epel"></a>`manage_epel`
+##### <a name="-amavisd--manage_epel"></a>`manage_epel`
 
 Data type: `Optional[Boolean]`
 
-Whether or not to include the `epel` class for package installations.
-(default: OS-dependent)
+Whether or not to include the `epel` class for package installations. (default:
+OS-dependent)
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="manage_group"></a>`manage_group`
-
-Data type: `Boolean`
-
-If true, create and manage the *$daemon_group* group. (default: `true`)
-
-Default value: ``true``
-
-##### <a name="manage_user"></a>`manage_user`
+##### <a name="-amavisd--manage_group"></a>`manage_group`
 
 Data type: `Boolean`
 
-If true, create and manage the *$daemon_user* user. (default: `true`)
+If true, create and manage the _$daemon_group_ group. (default: `true`)
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-amavisd--manage_user"></a>`manage_user`
 
-Data type: `Optional[String]`
+Data type: `Boolean`
+
+If true, create and manage the _$daemon_user_ user. (default: `true`)
+
+Default value: `true`
+
+##### <a name="-amavisd--package_ensure"></a>`package_ensure`
+
+Data type: `String`
 
 If true, manage the package(s) needed for Amavisd. (default: `true`)
 
 Default value: `'present'`
 
-##### <a name="package_name"></a>`package_name`
+##### <a name="-amavisd--package_name"></a>`package_name`
 
-Data type: `Optional[String]`
+Data type: `String`
 
 The name of the Amavisd package to install. (default: `amavisd-new`)
 
 Default value: `'amavisd-new'`
 
-##### <a name="service_enable"></a>`service_enable`
+##### <a name="-amavisd--service_enable"></a>`service_enable`
 
 Data type: `Boolean`
 
 If true, enable the service on the system. (default: `true`)
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="service_ensure"></a>`service_ensure`
+##### <a name="-amavisd--service_ensure"></a>`service_ensure`
 
 Data type: `Enum['stopped', 'running']`
 
@@ -267,924 +264,847 @@ Ensure that the service is in this state when Puppet runs. (default: `running`)
 
 Default value: `'running'`
 
-##### <a name="service_name"></a>`service_name`
+##### <a name="-amavisd--service_name"></a>`service_name`
 
 Data type: `Optional[String]`
 
 The name of the service that Puppet should start/stop. (default: OS-dependent)
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="state_dir"></a>`state_dir`
-
-Data type: `Optional[String]`
-
-The directory in which Amavisd stores files when it runs. (default: OS-dependent)
-
-Default value: ``undef``
-
-##### <a name="user_shell"></a>`user_shell`
+##### <a name="-amavisd--state_dir"></a>`state_dir`
 
 Data type: `Optional[String]`
 
-The shell to use for the user created if *$manage_user* is true.
-(default: nologin (path to nologin is OS-dependent)
+The directory in which Amavisd stores files when it runs. (default:
+OS-dependent)
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="addr_extension_bad_header_maps"></a>`addr_extension_bad_header_maps`
+##### <a name="-amavisd--user_shell"></a>`user_shell`
+
+Data type: `Optional[String]`
+
+The shell to use for the user created if _$manage_user_ is true. (default:
+nologin (path to nologin is OS-dependent)
+
+Default value: `undef`
+
+##### <a name="-amavisd--addr_extension_bad_header_maps"></a>`addr_extension_bad_header_maps`
 
 Data type: `Optional[Array]`
 
 Set the `addr_extension_bad_header_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="addr_extension_banned_maps"></a>`addr_extension_banned_maps`
+##### <a name="-amavisd--addr_extension_banned_maps"></a>`addr_extension_banned_maps`
 
 Data type: `Optional[Array]`
 
 Set the `addr_extension_banned_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="addr_extension_spam_maps"></a>`addr_extension_spam_maps`
+##### <a name="-amavisd--addr_extension_spam_maps"></a>`addr_extension_spam_maps`
 
 Data type: `Optional[Array]`
 
 Set the `addr_extension_spam_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="addr_extension_virus_maps"></a>`addr_extension_virus_maps`
+##### <a name="-amavisd--addr_extension_virus_maps"></a>`addr_extension_virus_maps`
 
 Data type: `Optional[Array]`
 
 Set the `addr_extension_virus_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="av_scanners"></a>`av_scanners`
+##### <a name="-amavisd--av_scanners"></a>`av_scanners`
 
 Data type: `Optional[Array]`
 
 Set the `av_scanners` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="av_scanners_backup"></a>`av_scanners_backup`
+##### <a name="-amavisd--av_scanners_backup"></a>`av_scanners_backup`
 
 Data type: `Optional[Array]`
 
 Set the `av_scanners_backup` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="bad_header_quarantine_method"></a>`bad_header_quarantine_method`
+##### <a name="-amavisd--bad_header_quarantine_method"></a>`bad_header_quarantine_method`
 
 Data type: `Optional[String]`
 
 Set the `bad_header_quarantine_method` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="bad_header_quarantine_to"></a>`bad_header_quarantine_to`
+##### <a name="-amavisd--bad_header_quarantine_to"></a>`bad_header_quarantine_to`
 
 Data type: `Optional[Array]`
 
 Set the `bad_header_quarantine_to` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="banned_filename_re"></a>`banned_filename_re`
+##### <a name="-amavisd--banned_filename_re"></a>`banned_filename_re`
 
 Data type: `Optional[Array]`
 
 Set the `banned_filename_re` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="banned_quarantine_to"></a>`banned_quarantine_to`
+##### <a name="-amavisd--banned_quarantine_to"></a>`banned_quarantine_to`
 
 Data type: `Optional[Array]`
 
 Set the `banned_quarantine_to` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="bounce_killer_score"></a>`bounce_killer_score`
+##### <a name="-amavisd--bounce_killer_score"></a>`bounce_killer_score`
 
 Data type: `Optional[Integer]`
 
 Set the `bounce_killer_score` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="bypass_decode_parts"></a>`bypass_decode_parts`
+##### <a name="-amavisd--bypass_decode_parts"></a>`bypass_decode_parts`
 
 Data type: `Optional[Integer]`
 
 Set the `bypass_decode_parts` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="bypass_spam_checks_maps"></a>`bypass_spam_checks_maps`
+##### <a name="-amavisd--bypass_spam_checks_maps"></a>`bypass_spam_checks_maps`
 
 Data type: `Optional[Array]`
 
 Set the `bypass_spam_checks_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="bypass_virus_checks_maps"></a>`bypass_virus_checks_maps`
+##### <a name="-amavisd--bypass_virus_checks_maps"></a>`bypass_virus_checks_maps`
 
 Data type: `Optional[Array]`
 
 Set the `bypass_virus_checks_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="clean_quarantine_method"></a>`clean_quarantine_method`
+##### <a name="-amavisd--clean_quarantine_method"></a>`clean_quarantine_method`
 
 Data type: `Optional[String]`
 
 Set the `clean_quarantine_method` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="config_dir"></a>`config_dir`
-
-Set the `config_dir` Amavisd config variable
-
-Default value: ``undef``
-
-##### <a name="config_file"></a>`config_file`
-
-Set the `config_file` Amavisd config variable
-
-Default value: ``undef``
-
-##### <a name="daemon_chroot_dir"></a>`daemon_chroot_dir`
+##### <a name="-amavisd--daemon_chroot_dir"></a>`daemon_chroot_dir`
 
 Data type: `Optional[String]`
 
 Set the `daemon_chroot_dir` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="daemon_group"></a>`daemon_group`
-
-Set the `daemon_group` Amavisd config variable
-
-Default value: `'amavis'`
-
-##### <a name="daemon_user"></a>`daemon_user`
-
-Set the `daemon_user` Amavisd config variable
-
-Default value: `'amavis'`
-
-##### <a name="db_home"></a>`db_home`
+##### <a name="-amavisd--db_home"></a>`db_home`
 
 Data type: `Optional[String]`
 
 Set the `db_home` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="decoders"></a>`decoders`
+##### <a name="-amavisd--decoders"></a>`decoders`
 
 Data type: `Optional[Array]`
 
 Set the `decoders` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="defang_bad_header"></a>`defang_bad_header`
+##### <a name="-amavisd--defang_bad_header"></a>`defang_bad_header`
 
 Data type: `Optional[Integer]`
 
 Set the `defang_bad_header` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="defang_banned"></a>`defang_banned`
+##### <a name="-amavisd--defang_banned"></a>`defang_banned`
 
 Data type: `Optional[Integer]`
 
 Set the `defang_banned` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="defang_by_ccat"></a>`defang_by_ccat`
+##### <a name="-amavisd--defang_by_ccat"></a>`defang_by_ccat`
 
 Data type: `Optional[Array]`
 
 Set the `defang_by_ccat` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="defang_spam"></a>`defang_spam`
+##### <a name="-amavisd--defang_spam"></a>`defang_spam`
 
 Data type: `Optional[Integer]`
 
 Set the `defang_spam` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="defang_undecipherable"></a>`defang_undecipherable`
+##### <a name="-amavisd--defang_undecipherable"></a>`defang_undecipherable`
 
 Data type: `Optional[Integer]`
 
 Set the `defang_undecipherable` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="defang_virus"></a>`defang_virus`
+##### <a name="-amavisd--defang_virus"></a>`defang_virus`
 
 Data type: `Optional[Integer]`
 
 Set the `defang_virus` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="do_syslog"></a>`do_syslog`
+##### <a name="-amavisd--do_syslog"></a>`do_syslog`
 
 Data type: `Optional[Integer]`
 
 Set the `do_syslog` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="dspam"></a>`dspam`
+##### <a name="-amavisd--dspam"></a>`dspam`
 
 Data type: `Optional[String]`
 
 Set the `dspam` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="enable_db"></a>`enable_db`
+##### <a name="-amavisd--enable_db"></a>`enable_db`
 
 Data type: `Optional[Integer]`
 
 Set the `enable_db` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="enable_dkim_signing"></a>`enable_dkim_signing`
+##### <a name="-amavisd--enable_dkim_signing"></a>`enable_dkim_signing`
 
 Data type: `Optional[Integer]`
 
 Set the `enable_dkim_signing` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="enable_dkim_verification"></a>`enable_dkim_verification`
+##### <a name="-amavisd--enable_dkim_verification"></a>`enable_dkim_verification`
 
 Data type: `Optional[Integer]`
 
 Set the `enable_dkim_verification` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="enable_zmq"></a>`enable_zmq`
+##### <a name="-amavisd--enable_zmq"></a>`enable_zmq`
 
 Data type: `Optional[Integer]`
 
 Set the `enable_zmq` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="final_bad_header_destiny"></a>`final_bad_header_destiny`
+##### <a name="-amavisd--final_bad_header_destiny"></a>`final_bad_header_destiny`
 
 Data type: `Optional[String]`
 
 Set the `final_bad_header_destiny` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="final_banned_destiny"></a>`final_banned_destiny`
+##### <a name="-amavisd--final_banned_destiny"></a>`final_banned_destiny`
 
 Data type: `Optional[String]`
 
 Set the `final_banned_destiny` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="final_spam_destiny"></a>`final_spam_destiny`
+##### <a name="-amavisd--final_spam_destiny"></a>`final_spam_destiny`
 
 Data type: `Optional[String]`
 
 Set the `final_spam_destiny` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="final_virus_destiny"></a>`final_virus_destiny`
+##### <a name="-amavisd--final_virus_destiny"></a>`final_virus_destiny`
 
 Data type: `Optional[String]`
 
 Set the `final_virus_destiny` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="forward_method"></a>`forward_method`
+##### <a name="-amavisd--forward_method"></a>`forward_method`
 
 Data type: `Optional[String]`
 
 Set the `forward_method` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="helpers_home"></a>`helpers_home`
+##### <a name="-amavisd--helpers_home"></a>`helpers_home`
 
 Data type: `Optional[String]`
 
 Set the `helpers_home` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="inet_socket_bind"></a>`inet_socket_bind`
+##### <a name="-amavisd--inet_socket_bind"></a>`inet_socket_bind`
 
 Data type: `Optional[String]`
 
 Set the `inet_socket_bind` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="inet_socket_port"></a>`inet_socket_port`
+##### <a name="-amavisd--inet_socket_port"></a>`inet_socket_port`
 
 Data type: `Optional[Integer]`
 
 Set the `inet_socket_port` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="interface_policy"></a>`interface_policy`
+##### <a name="-amavisd--interface_policy"></a>`interface_policy`
 
 Data type: `Optional[Hash]`
 
 Set the `interface_policy` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="keep_decoded_original_maps"></a>`keep_decoded_original_maps`
+##### <a name="-amavisd--keep_decoded_original_maps"></a>`keep_decoded_original_maps`
 
 Data type: `Optional[Array]`
 
 Set the `keep_decoded_original_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="local_domains_maps"></a>`local_domains_maps`
+##### <a name="-amavisd--local_domains_maps"></a>`local_domains_maps`
 
 Data type: `Optional[Array]`
 
 Set the `local_domains_maps` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="lock_file"></a>`lock_file`
+##### <a name="-amavisd--lock_file"></a>`lock_file`
 
 Data type: `Optional[String]`
 
 Set the `lock_file` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="log_level"></a>`log_level`
+##### <a name="-amavisd--log_level"></a>`log_level`
 
 Data type: `Optional[Integer]`
 
 Set the `log_level` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="log_recip_templ"></a>`log_recip_templ`
+##### <a name="-amavisd--log_recip_templ"></a>`log_recip_templ`
 
 Data type: `Optional[String]`
 
 Set the `log_recip_templ` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="lookup_sql_dsn"></a>`lookup_sql_dsn`
+##### <a name="-amavisd--lookup_sql_dsn"></a>`lookup_sql_dsn`
 
 Data type: `Optional[Array]`
 
 Set the `lookup_sql_dsn` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mailfrom_notify_admin"></a>`mailfrom_notify_admin`
+##### <a name="-amavisd--mailfrom_notify_admin"></a>`mailfrom_notify_admin`
 
 Data type: `Optional[String]`
 
 Set the `mailfrom_notify_admin` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mailfrom_notify_recip"></a>`mailfrom_notify_recip`
+##### <a name="-amavisd--mailfrom_notify_recip"></a>`mailfrom_notify_recip`
 
 Data type: `Optional[String]`
 
 Set the `mailfrom_notify_recip` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mailfrom_notify_spamadmin"></a>`mailfrom_notify_spamadmin`
+##### <a name="-amavisd--mailfrom_notify_spamadmin"></a>`mailfrom_notify_spamadmin`
 
 Data type: `Optional[String]`
 
 Set the `mailfrom_notify_spamadmin` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mailfrom_to_quarantine"></a>`mailfrom_to_quarantine`
+##### <a name="-amavisd--mailfrom_to_quarantine"></a>`mailfrom_to_quarantine`
 
 Data type: `Optional[String]`
 
 Set the `mailfrom_to_quarantine` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="manage_epel"></a>`manage_epel`
-
-Set the `manage_epel` Amavisd config variable
-
-Default value: ``undef``
-
-##### <a name="manage_group"></a>`manage_group`
-
-Set the `manage_group` Amavisd config variable
-
-Default value: ``true``
-
-##### <a name="manage_user"></a>`manage_user`
-
-Set the `manage_user` Amavisd config variable
-
-Default value: ``true``
-
-##### <a name="max_expansion_quota"></a>`max_expansion_quota`
+##### <a name="-amavisd--max_expansion_quota"></a>`max_expansion_quota`
 
 Data type: `Optional[String]`
 
 Set the `max_expansion_quota` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="max_servers"></a>`max_servers`
+##### <a name="-amavisd--max_servers"></a>`max_servers`
 
 Data type: `Optional[Integer]`
 
 Set the `max_servers` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="maxfiles"></a>`maxfiles`
+##### <a name="-amavisd--maxfiles"></a>`maxfiles`
 
 Data type: `Optional[Integer]`
 
 Set the `maxfiles` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="maxlevels"></a>`maxlevels`
+##### <a name="-amavisd--maxlevels"></a>`maxlevels`
 
 Data type: `Optional[Integer]`
 
 Set the `maxlevels` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="min_expansion_quota"></a>`min_expansion_quota`
+##### <a name="-amavisd--min_expansion_quota"></a>`min_expansion_quota`
 
 Data type: `Optional[Integer]`
 
 Set the `min_expansion_quota` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mydomain"></a>`mydomain`
+##### <a name="-amavisd--mydomain"></a>`mydomain`
 
 Data type: `Optional[String]`
 
 Set the `mydomain` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="myhome"></a>`myhome`
+##### <a name="-amavisd--myhome"></a>`myhome`
 
 Data type: `Optional[String]`
 
 Set the `myhome` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="myhostname"></a>`myhostname`
+##### <a name="-amavisd--myhostname"></a>`myhostname`
 
 Data type: `Optional[String]`
 
 Set the `myhostname` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mynetworks"></a>`mynetworks`
+##### <a name="-amavisd--mynetworks"></a>`mynetworks`
 
 Data type: `Optional[Array]`
 
 Set the `mynetworks` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="nanny_details_level"></a>`nanny_details_level`
+##### <a name="-amavisd--nanny_details_level"></a>`nanny_details_level`
 
 Data type: `Optional[Integer]`
 
 Set the `nanny_details_level` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="notify_method"></a>`notify_method`
+##### <a name="-amavisd--notify_method"></a>`notify_method`
 
 Data type: `Optional[String]`
 
 Set the `notify_method` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="os_fingerprint_method"></a>`os_fingerprint_method`
+##### <a name="-amavisd--os_fingerprint_method"></a>`os_fingerprint_method`
 
 Data type: `Optional[String]`
 
 Set the `os_fingerprint_method` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="package_ensure"></a>`package_ensure`
-
-Set the `package_ensure` Amavisd config variable
-
-Default value: `'present'`
-
-##### <a name="package_name"></a>`package_name`
-
-Set the `package_name` Amavisd config variable
-
-Default value: `'amavisd-new'`
-
-##### <a name="path"></a>`path`
+##### <a name="-amavisd--path"></a>`path`
 
 Data type: `Optional[String]`
 
 Set the `path` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="penpals_bonus_score"></a>`penpals_bonus_score`
+##### <a name="-amavisd--penpals_bonus_score"></a>`penpals_bonus_score`
 
 Data type: `Optional[String]`
 
 Set the `penpals_bonus_score` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="penpals_threshold_high"></a>`penpals_threshold_high`
+##### <a name="-amavisd--penpals_threshold_high"></a>`penpals_threshold_high`
 
 Data type: `Optional[String]`
 
 Set the `penpals_threshold_high` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="pid_file"></a>`pid_file`
+##### <a name="-amavisd--pid_file"></a>`pid_file`
 
 Data type: `Optional[String]`
 
 Set the `pid_file` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="policy_bank"></a>`policy_bank`
+##### <a name="-amavisd--policy_bank"></a>`policy_bank`
 
 Data type: `Optional[Hash]`
 
 Set the `policy_bank` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="quarantine_subdir_levels"></a>`quarantine_subdir_levels`
+##### <a name="-amavisd--quarantine_subdir_levels"></a>`quarantine_subdir_levels`
 
 Data type: `Optional[Integer]`
 
 Set the `quarantine_subdir_levels` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="quarantinedir"></a>`quarantinedir`
+##### <a name="-amavisd--quarantinedir"></a>`quarantinedir`
 
 Data type: `Optional[String]`
 
 Set the `quarantinedir` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="recipient_delimiter"></a>`recipient_delimiter`
+##### <a name="-amavisd--recipient_delimiter"></a>`recipient_delimiter`
 
 Data type: `Optional[String]`
 
 Set the `recipient_delimiter` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="redis_logging_key"></a>`redis_logging_key`
+##### <a name="-amavisd--redis_logging_key"></a>`redis_logging_key`
 
 Data type: `Optional[String]`
 
 Set the `redis_logging_key` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="redis_logging_queue_size_limit"></a>`redis_logging_queue_size_limit`
+##### <a name="-amavisd--redis_logging_queue_size_limit"></a>`redis_logging_queue_size_limit`
 
 Data type: `Optional[Integer]`
 
 Set the `redis_logging_queue_size_limit` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="release_format"></a>`release_format`
+##### <a name="-amavisd--release_format"></a>`release_format`
 
 Data type: `Optional[String]`
 
 Set the `release_format` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="report_format"></a>`report_format`
+##### <a name="-amavisd--report_format"></a>`report_format`
 
 Data type: `Optional[String]`
 
 Set the `report_format` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_crediblefrom_dsn_cutoff_level"></a>`sa_crediblefrom_dsn_cutoff_level`
+##### <a name="-amavisd--sa_crediblefrom_dsn_cutoff_level"></a>`sa_crediblefrom_dsn_cutoff_level`
 
 Data type: `Optional[Integer]`
 
 Set the `sa_crediblefrom_dsn_cutoff_level` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_dsn_cutoff_level"></a>`sa_dsn_cutoff_level`
+##### <a name="-amavisd--sa_dsn_cutoff_level"></a>`sa_dsn_cutoff_level`
 
 Data type: `Optional[Integer]`
 
 Set the `sa_dsn_cutoff_level` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_kill_level_deflt"></a>`sa_kill_level_deflt`
+##### <a name="-amavisd--sa_kill_level_deflt"></a>`sa_kill_level_deflt`
 
 Data type: `Optional[String]`
 
 Set the `sa_kill_level_deflt` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_local_tests_only"></a>`sa_local_tests_only`
+##### <a name="-amavisd--sa_local_tests_only"></a>`sa_local_tests_only`
 
 Data type: `Optional[Integer]`
 
 Set the `sa_local_tests_only` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_mail_body_size_limit"></a>`sa_mail_body_size_limit`
+##### <a name="-amavisd--sa_mail_body_size_limit"></a>`sa_mail_body_size_limit`
 
 Data type: `Optional[Integer]`
 
 Set the `sa_mail_body_size_limit` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_quarantine_cutoff_level"></a>`sa_quarantine_cutoff_level`
+##### <a name="-amavisd--sa_quarantine_cutoff_level"></a>`sa_quarantine_cutoff_level`
 
 Data type: `Optional[String]`
 
 Set the `sa_quarantine_cutoff_level` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_spam_subject_tag"></a>`sa_spam_subject_tag`
+##### <a name="-amavisd--sa_spam_subject_tag"></a>`sa_spam_subject_tag`
 
 Data type: `Optional[String]`
 
 Set the `sa_spam_subject_tag` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_tag2_level_deflt"></a>`sa_tag2_level_deflt`
+##### <a name="-amavisd--sa_tag2_level_deflt"></a>`sa_tag2_level_deflt`
 
 Data type: `Optional[String]`
 
 Set the `sa_tag2_level_deflt` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sa_tag_level_deflt"></a>`sa_tag_level_deflt`
+##### <a name="-amavisd--sa_tag_level_deflt"></a>`sa_tag_level_deflt`
 
 Data type: `Optional[String]`
 
 Set the `sa_tag_level_deflt` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="service_enable"></a>`service_enable`
-
-Set the `service_enable` Amavisd config variable
-
-Default value: ``true``
-
-##### <a name="service_ensure"></a>`service_ensure`
-
-Set the `service_ensure` Amavisd config variable
-
-Default value: `'running'`
-
-##### <a name="service_name"></a>`service_name`
-
-Set the `service_name` Amavisd config variable
-
-Default value: ``undef``
-
-##### <a name="spam_quarantine_to"></a>`spam_quarantine_to`
+##### <a name="-amavisd--spam_quarantine_to"></a>`spam_quarantine_to`
 
 Data type: `Optional[String]`
 
 Set the `spam_quarantine_to` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="state_dir"></a>`state_dir`
-
-Set the `state_dir` Amavisd config variable
-
-Default value: ``undef``
-
-##### <a name="storage_redis_dsn"></a>`storage_redis_dsn`
+##### <a name="-amavisd--storage_redis_dsn"></a>`storage_redis_dsn`
 
 Data type: `Optional[String]`
 
 Set the `storage_redis_dsn` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="storage_sql_dsn"></a>`storage_sql_dsn`
+##### <a name="-amavisd--storage_sql_dsn"></a>`storage_sql_dsn`
 
 Data type: `Optional[String]`
 
 Set the `storage_sql_dsn` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="syslog_facility"></a>`syslog_facility`
+##### <a name="-amavisd--syslog_facility"></a>`syslog_facility`
 
 Data type: `Optional[String]`
 
 Set the `syslog_facility` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="tempbase"></a>`tempbase`
+##### <a name="-amavisd--tempbase"></a>`tempbase`
 
 Data type: `Optional[String]`
 
 Set the `tempbase` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="timestamp_fmt_mysql"></a>`timestamp_fmt_mysql`
+##### <a name="-amavisd--timestamp_fmt_mysql"></a>`timestamp_fmt_mysql`
 
 Data type: `Optional[String]`
 
 Set the `timestamp_fmt_mysql` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="tmpdir"></a>`tmpdir`
+##### <a name="-amavisd--tmpdir"></a>`tmpdir`
 
 Data type: `Optional[String]`
 
 Set the `tmpdir` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="unix_socketname"></a>`unix_socketname`
+##### <a name="-amavisd--unix_socketname"></a>`unix_socketname`
 
 Data type: `Optional[String]`
 
 Set the `unix_socketname` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="virus_admin"></a>`virus_admin`
+##### <a name="-amavisd--virus_admin"></a>`virus_admin`
 
 Data type: `Optional[String]`
 
 Set the `virus_admin` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="virus_quarantine_to"></a>`virus_quarantine_to`
+##### <a name="-amavisd--virus_quarantine_to"></a>`virus_quarantine_to`
 
 Data type: `Optional[String]`
 
 Set the `virus_quarantine_to` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="warnbadhrecip"></a>`warnbadhrecip`
+##### <a name="-amavisd--warnbadhrecip"></a>`warnbadhrecip`
 
 Data type: `Optional[Integer]`
 
 Set the `warnbadhrecip` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="warnbadhsender"></a>`warnbadhsender`
+##### <a name="-amavisd--warnbadhsender"></a>`warnbadhsender`
 
 Data type: `Optional[Integer]`
 
 Set the `warnbadhsender` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="warnbannedrecip"></a>`warnbannedrecip`
+##### <a name="-amavisd--warnbannedrecip"></a>`warnbannedrecip`
 
 Data type: `Optional[Integer]`
 
 Set the `warnbannedrecip` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="warnvirusrecip"></a>`warnvirusrecip`
+##### <a name="-amavisd--warnvirusrecip"></a>`warnvirusrecip`
 
 Data type: `Optional[Integer]`
 
 Set the `warnvirusrecip` Amavisd config variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="watch_clamav"></a>`watch_clamav`
+##### <a name="-amavisd--watch_clamav"></a>`watch_clamav`
 
 Data type: `Boolean`
 
 Set the `watch_clamav` Amavisd config variable
 
-Default value: ``false``
+Default value: `false`
 
-### <a name="amavisdconfig"></a>`amavisd::config`
+### <a name="amavisd--config"></a>`amavisd::config`
 
-This class takes care of all necessary configuration files using options
-passed to the main *amavisd* class.
+This class takes care of all necessary configuration files using options passed
+to the main _amavisd_ class.
 
-### <a name="amavisdinstall"></a>`amavisd::install`
+### <a name="amavisd--install"></a>`amavisd::install`
 
 Variables used by this class:
 
- * $amavisd::daemon_group
- * $amavisd::daemon_user
- * $amavisd::_manage_epel
- * $amavisd::manage_group
- * $amavisd::manage_user
- * $amavisd::_myhome
- * $amavisd::package_ensure
- * $amavisd::package_name
- * $amavisd::user_shell
+- $amavisd::daemon_group
+- $amavisd::daemon_user
+- $amavisd::\_manage_epel
+- $amavisd::manage_group
+- $amavisd::manage_user
+- $amavisd::\_myhome
+- $amavisd::package_ensure
+- $amavisd::package_name
+- $amavisd::user_shell
 
-### <a name="amavisdparams"></a>`amavisd::params`
+### <a name="amavisd--params"></a>`amavisd::params`
 
 The default parameters for the amavisd class
 
-### <a name="amavisdrepos"></a>`amavisd::repos`
+### <a name="amavisd--repos"></a>`amavisd::repos`
 
 Variables used by this class:
 
- * $amavisd::_manage_epel
- * $amavisd::package_name
+- $amavisd::\_manage_epel
+- $amavisd::package_name
 
-### <a name="amavisdservice"></a>`amavisd::service`
+### <a name="amavisd--service"></a>`amavisd::service`
 
 Variables used by this class:
 
- * $amavisd::_clamd_service
- * $amavisd::service_enable
- * $amavisd::service_ensure
- * $amavisd::_service_name
- * $amavisd::watch_clamav
+- $amavisd::\_clamd_service
+- $amavisd::service_enable
+- $amavisd::service_ensure
+- $amavisd::\_service_name
+- $amavisd::watch_clamav
 
 ## Functions
 
@@ -1192,9 +1112,8 @@ Variables used by this class:
 
 Type: Ruby 3.x API
 
-Print out a Perl array given a Puppet array.  This takes care of doing
-things related to the array, but calls perl_var_print to print individual
-data types.
+Print out a Perl array given a Puppet array. This takes care of doing things
+related to the array, but calls perl_var_print to print individual data types.
 
 Given a nil value (undef), perl_varprint will return 'undef'.
 
@@ -1216,9 +1135,8 @@ Example:
 
 #### `perl_data_print()`
 
-Print out a Perl array given a Puppet array.  This takes care of doing
-things related to the array, but calls perl_var_print to print individual
-data types.
+Print out a Perl array given a Puppet array. This takes care of doing things
+related to the array, but calls perl_var_print to print individual data types.
 
 Given a nil value (undef), perl_varprint will return 'undef'.
 
@@ -1244,52 +1162,58 @@ Returns: `Any`
 
 Type: Ruby 3.x API
 
-Print out a Puppet data type as a Perl data type.  This takes care of doing
+Print out a Puppet data type as a Perl data type. This takes care of doing
 things like quoting strings, not quoting integer types, and will hopefully one
 day correctly (recursively) print out arrays and hashes, with sub arrays and
 hashes printed in correct Perl format.
 
-Given a nil value (undef), perl_varprint will return 'undef'.  If given a string
+Given a nil value (undef), perl_varprint will return 'undef'. If given a string
 that exactly equals 'undef', the 'undef' Perl keyword will be returned.
 
-Examples:
-  $var1 = 10
-  $var2 = 'hello'
-  $var3 = undef
-  $var4 = 'undef'
+Examples: $var1 = 10 $var2 = 'hello' $var3 = undef $var4 = 'undef'
 
-  perl_var_print(["$var1", 10])
-  # => $var1 = 10;
-  perl_var_print(["$var2", 'hello'])
-  # => $var2 = "hello";
-  perl_var_print(["$var3"])
-  # => nil
-  perl_var_print(["$var4", "undef")
-  # => $var4 = undef;
+perl_var_print(["$var1", 10])
+
+# => $var1 = 10;
+
+perl_var_print(["$var2", 'hello'])
+
+# => $var2 = "hello";
+
+perl_var_print(["$var3"])
+
+# => nil
+
+perl_var_print(["$var4", "undef")
+
+# => $var4 = undef;
 
 #### `perl_var_print()`
 
-Print out a Puppet data type as a Perl data type.  This takes care of doing
+Print out a Puppet data type as a Perl data type. This takes care of doing
 things like quoting strings, not quoting integer types, and will hopefully one
 day correctly (recursively) print out arrays and hashes, with sub arrays and
 hashes printed in correct Perl format.
 
-Given a nil value (undef), perl_varprint will return 'undef'.  If given a string
+Given a nil value (undef), perl_varprint will return 'undef'. If given a string
 that exactly equals 'undef', the 'undef' Perl keyword will be returned.
 
-Examples:
-  $var1 = 10
-  $var2 = 'hello'
-  $var3 = undef
-  $var4 = 'undef'
+Examples: $var1 = 10 $var2 = 'hello' $var3 = undef $var4 = 'undef'
 
-  perl_var_print(["$var1", 10])
-  # => $var1 = 10;
-  perl_var_print(["$var2", 'hello'])
-  # => $var2 = "hello";
-  perl_var_print(["$var3"])
-  # => nil
-  perl_var_print(["$var4", "undef")
-  # => $var4 = undef;
+perl_var_print(["$var1", 10])
+
+# => $var1 = 10;
+
+perl_var_print(["$var2", 'hello'])
+
+# => $var2 = "hello";
+
+perl_var_print(["$var3"])
+
+# => nil
+
+perl_var_print(["$var4", "undef")
+
+# => $var4 = undef;
 
 Returns: `Any`
