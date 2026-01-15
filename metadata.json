@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">= 1.8.0 < 10.0.0"
+      "version_requirement": ">= 1.8.0 < 12.0.0"
     },
     {
       "name": "puppetlabs/concat",
@@ -29,7 +29,6 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -37,7 +36,6 @@
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -45,26 +43,27 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10",
         "11",
-        "12"
+        "12",
+        "13"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "20.04",
-        "22.04"
+        "22.04",
+        "24.04"
       ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">=3.0.0 < 8.0.0"
+      "version_requirement": ">=3.0.0 < 9.0.0"
     }
   ],
   "pdk-version": "3.4.0",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#3.4.0.3",
-  "template-ref": "tags/3.4.0.3-0-g8fb22fc"
+  "template-url": "https://github.com/puppetlabs/pdk-templates#3.6.1",
+  "template-ref": "tags/3.6.1-0-gb9426e5"
 }

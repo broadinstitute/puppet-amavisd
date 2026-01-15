@@ -1,0 +1,10 @@
+---
+site_name: Puppet Amavisd Module
+
+nav:
+  - Home: README.md
+  - "AV Scanners": av_scanners.md
+  - Reference: ../REFERENCE.md
+
+plugins:
+  - techdocs-core

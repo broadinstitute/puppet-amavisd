@@ -4,4 +4,4 @@
 :hierarchy:
   - global
 :yaml:
-  ':datadir': /etc/puppetlabs/code/hieradata
+  ":datadir": /etc/puppetlabs/code/hieradata

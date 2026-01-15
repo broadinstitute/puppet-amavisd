@@ -2,14 +2,14 @@
 fixtures:
   forge_modules:
     apt:
-      repo: 'puppetlabs/apt'
+      repo: puppetlabs/apt
     concat:
-      repo: 'puppetlabs/concat'
+      repo: puppetlabs/concat
     epel:
-      repo: 'puppet/epel'
+      repo: puppet/epel
     stdlib:
-      repo: 'puppetlabs/stdlib'
+      repo: puppetlabs/stdlib
     yumrepo_core:
-      repo: 'puppetlabs/yumrepo_core'
+      repo: puppetlabs/yumrepo_core
   symlinks:
     amavisd: "#{source_dir}"
