@@ -26,13 +26,9 @@ $av_scanners = [ "['Sophos-SSSP'", "\\&ask_daemon", "[\"{}\",
 
 ## http://www.clamav.net/
 
-$av_scanners = [
-  "['ClamAV-clamd'",
-  "\\&ask_daemon",
-  "[\"CONTSCAN {}\\n\", '/var/run/clamd.amavisd/clamd.sock']",
-  "qr/\\bOK$/m,
-qr/\\bFOUND$/m",
-  "qr/^.*?: (?!Infected Archive)(.*) FOUND$/m ]" ]
+$av_scanners = [ "['ClamAV-clamd'", "\\&ask_daemon", "[\"CONTSCAN {}\\n\",
+'/var/run/clamd.amavisd/clamd.sock']", "qr/\\bOK$/m, qr/\\bFOUND$/m", "qr/^._?:
+(?!Infected Archive)(._) FOUND$/m ]" ]
 
 ## Multiple scanners
 
